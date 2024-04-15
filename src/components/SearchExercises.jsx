@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { FaSearch } from "react-icons/fa";
+import { fetchData,exerciseOptions } from "../utils/fetchData";
 
 const SearchExercises = () => {
     const [search, setSearch] = useState('')
 
     const submitHandler = async(e) => {
         e.preventDefault()
-        console.log(search)
-        setSearch('')
+        if(search) {
+            const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+            console.log(exercisesData)
+            const searchedExercises = exercisesData.filter(
+                (item) => item.name.toLowerCase().includes(search)
+                       || item.target.toLowerCase().includes(search)
+                       || item.equipment.toLowerCase().includes(search)
+                       || item.bodyPart.toLowerCase().includes(search),
+              );
+              window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
+              setSearch('')
+        }
+        
     }
   return (
     <div className="flex flex-col items-center mt-[37px] justify-center p-5">
