@@ -8,7 +8,7 @@ import { GoogleLogin } from '@react-oauth/google';
 
 
 const Signup = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
