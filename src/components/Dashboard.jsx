@@ -28,7 +28,7 @@ const handleChange = (e) => {
   return (
     <div className="max-w-4xl px-4 mx-auto py-8 mt-20">
     <h1 className="text-3xl font-bold mb-4">Workout tracking</h1>
-    <form className="mb-8">
+    <form className="mb-8" onSubmit={submitHandler}>
         <div className="mb-4">
         <label className="block text-gray-700">Exercise:</label>
           <input

@@ -1,17 +1,74 @@
-import React from 'react'
+import React from "react";
+import styles from "../style";
 import logo from "../assets/logo (2).jpeg"
+import { footerLinks, socialMedia } from "../constants";
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
-  return (
-    <div className="mt-20 bg-gray-900">
-        <div className="flex flex-col items-center px-10 pt-6">
-            <img src={logo} alt="logo" className="w-52 h-auto" />
-        </div>
-        <p className="text-lg lg:text-4xl xs:text-lg text-center mt-10 pb-10 text-white">
-            Begin your fitness journey today
-        </p>
-    </div>
-  )
-}
+    const navigate = useNavigate(false);
 
-export default Footer
+    const linkHandler = (link) => {
+        navigate(link);
+    };
+  return (
+    <section className={`${styles.flexCenter} ${styles.paddingY} flex-col bg-gray-800`}>
+      <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
+        <div className="flex flex-1 flex-col justify-start mr-10">
+          <img
+            className="w-[266px] h-[72px] object-contain"
+            src={logo}
+            alt="logo"
+          />
+          <p className={`${styles.paragraph} mt-4 max-w-[312px] text-white`}>
+           Start your fitness journey today.
+          </p>
+        </div>
+        <div className="flex-[1.5] flex flex-row w-full justify-between flex-wrap md:mt-0 mt-10">
+          {footerLinks.map((link) => (
+            <div 
+            className="flex flex-col ss:my-0 my-4 min-w-[150px]"
+            key={link.title}>
+                   <h4 className="font-poppins font-medium text-[18px] leading-[27px] text-white">
+              {link.title}
+            </h4>
+            <ul className="list-none mt-4">
+              {link.links.map((card, index) => (
+                <li
+                className={`font-poppins font-normal text-[16px] leading-[24px] text-white hover:text-secondary cursor-pointer ${
+                  index !== link.links.length - 1 ? "mb-4" : "mb-0"
+                }`}
+                  key={card.name}
+                  onClick={() => linkHandler(card.link)}
+                >
+               {card.name}
+                </li>
+              ))}
+            </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 border-t-[1px] border-t-[#3F3E45]">
+      <p className="font-poppins font-normal text-center text-[18px] leading-[27px] text-white">
+      &copy; {new Date().getFullYear()} My Fitness
+      </p>
+      <div className="flex flex-row md:mt-0 mt-6">
+      {socialMedia.map((social, index) => {
+            const Icon = social.icon; // Get the icon component
+            return (
+               <Icon
+                  className={`text-white w-[21px] h-[21px] object-contain cursor-pointer ${
+                     index !== socialMedia.length - 1 ? "mr-6" : "mr-0"
+                  }`}
+                  key={social.id}
+                  onClick={() => window.open(social.link)}
+               />
+            );
+         })}      
+      </div>
+      </div>
+    </section>
+  );
+};
+
+export default Footer;
