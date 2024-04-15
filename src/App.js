@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup, Login,Navbar } from "./components";
+import { Signup, Login,Navbar, Dashboard } from "./components";
 
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "sonner";
@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
    </div>
   );

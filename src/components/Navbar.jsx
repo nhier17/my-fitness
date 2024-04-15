@@ -29,7 +29,7 @@ const Navbar = () => {
         <NavLink to="/about" text="About" />
       </ul>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <Link className="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
+        <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
       </div>
     </nav>
     {isMenuOpen && (
@@ -51,8 +51,9 @@ const Navbar = () => {
               <Link to="/community" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Nutrition</Link>
               <Link to="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</Link>
             </div>
-            <div className="py-6">
+            <div className="py-6"  onClick={closeMenu}>
               <Link to="/login" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</Link>
+              <Link to="/dashboard" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Dashboard</Link>
             </div>
           </div>
         </div>
