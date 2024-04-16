@@ -54,7 +54,7 @@ const Footer = () => {
       </p>
       <div className="flex flex-row md:mt-0 mt-6">
       {socialMedia.map((social, index) => {
-            const Icon = social.icon; // Get the icon component
+            const Icon = social.icon;
             return (
                <Icon
                   className={`text-white w-[21px] h-[21px] object-contain cursor-pointer ${
