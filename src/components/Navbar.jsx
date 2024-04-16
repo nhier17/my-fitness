@@ -11,7 +11,7 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }
     return (
-  <div className="absolute inset-x-0 top-0 z-50">
+  <div className="inset-x-0 top-0 z-50 sticky">
     <nav className="bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
       <div className="flex lg:flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
@@ -47,8 +47,8 @@ const Navbar = () => {
             <div className="space-y-2 py-6" onClick={closeMenu}>
               <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</Link>
               <Link to="/workouts" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Workouts</Link>
-              <Link to="nutrition" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community</Link>
-              <Link to="/community" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Nutrition</Link>
+              <Link to="/community" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community</Link>
+              <Link to="/nutrition" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Nutrition</Link>
               <Link to="/about" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</Link>
             </div>
             <div className="py-6"  onClick={closeMenu}>

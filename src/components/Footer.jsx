@@ -11,8 +11,8 @@ const Footer = () => {
         navigate(link);
     };
   return (
-    <section className={`${styles.flexCenter} ${styles.paddingY} flex-col bg-gray-800`}>
-      <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
+    <section className={`${styles.flexCenter} ${styles.paddingY} flex-col bg-gray-800 bottom-0 mt-14`}>
+      <div className={`${styles.flexStart} md:flex-row flex-col w-full`}>
         <div className="flex flex-1 flex-col justify-start mr-10">
           <img
             className="w-[266px] h-[72px] object-contain"
