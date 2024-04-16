@@ -20,12 +20,6 @@ body {
   padding: 0 20px;
 }
 
-.services-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px; 
-}
-
 .service-item {
   flex: 1;
   text-align: center;
@@ -42,23 +36,6 @@ body {
   transform: scale(1.05);
 }
 
-.service-content {
-  padding: 2rem;
-  text-align: center;
-}
 
-.service-icon {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin: 0 auto;
-}
 
-h3 {
-color: whitesmoke;
-}
-
-p {
-  color: #ccc;
-}
 
