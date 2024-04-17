@@ -4,10 +4,10 @@ import MealList from './MealList';
 
 const MealPlan = () => {
     const [mealData, setMealData] = useState(null)
-    const [calories, setCalories] = useState(2000)
+    const [calories, setCalories] = useState('')
 
 const fetchMealData = async () => {
-    const response = await axios.get(`https://api.spoonacular.com/mealplanner/generate?apiKey=${process.env.REACT_APP_API_KEY}&timeFrame=day&targetCalories=${calories}`)
+    const response = await axios.get(`https://api.spoonacular.com/mealplanner/generate?apiKey=95612bbc24f8444fbf1ae6029b539a4f&timeFrame=day&targetCalories=${calories}`)
       console.log(response.data)  
     setMealData(response.data)
     }
@@ -17,22 +17,22 @@ const fetchMealData = async () => {
     }
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <section className="bg-white shadow-lg rounded-lg p-4">
-        <h2 className="text-2xl font-semibold mb-4">Today's Meal Plan</h2>
+    <div className="flex items-center flex-col mt-10">
+      <section className="mx-auto text-center">
+        <h2 className="text-2xl font-semibold mb-4 text-[#ccc]">Today's Meal Plan</h2>
         <div className="mb-4">
-          <label htmlFor="calories" className="block font-semibold mb-2">Target Calories:</label>
+          <label htmlFor="calories" className="block font-semibold mb-2 text-white">Target Calories:</label>
           <input
             id="calories"
             type="number"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
             placeholder="Enter target calories (e.g., 2000)"
             value={calories}
             onChange={handleChange}
           />
         </div>
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          className="py-2 px-4 bg-purple-600 text-white border-none font-sans font-normal text-base transition duration-300 ease-in-out hover:bg-purple-700"
           onClick={fetchMealData}
         >
           Get Daily Meal Plan

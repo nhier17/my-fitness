@@ -7,24 +7,22 @@ const Meal = ({ meal }) => {
 
     useEffect(() => {
         const fetchImageUrl = async () => {
-          const response = await axios.get(`https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&includeNutrition=false`)
+          const response = await axios.get(`https://api.spoonacular.com/recipes/${meal.id}/information?apiKey=95612bbc24f8444fbf1ae6029b539a4f&includeNutrition=false`)
           setImageUrl(response.data.image)
         }
        fetchImageUrl()
     }, [meal.id])
 
   return (
-    <article className="max-w-xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <Link to={'/recipe' + meal.id}>
-      <div className="relative pb-2/3">
-      {imageUrl && <img className="absolute h-full w-full object-cover" src={imageUrl} alt="recipe" />}
-    </div>
+    <article className="flex flex-col p-8 mx-4 max-w-[300px] shadow-md overflow-hidden">
+      <Link to={'/recipe/' + meal.id}>
+       <img className="w-full mb-3" src={imageUrl} alt="recipe" />
       </Link>
     <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-2">{meal.title}</h1>
-      <ul className="mb-2">
-        <li><strong>Preparation time:</strong> {meal.readyInMinutes} minutes</li>
-        <li><strong>Number of servings:</strong> {meal.servings}</li>
+      <h1 className="text-2xl font-semibold mb-2 text-white">{meal.title}</h1>
+      <ul className="mb-2 list-none text-white">
+        <li>reparation time: {meal.readyInMinutes} minutes</li>
+        <li>Number of servings: {meal.servings}</li>
       </ul>
     </div>
   </article>

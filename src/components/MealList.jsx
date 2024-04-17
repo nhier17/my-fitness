@@ -1,18 +1,31 @@
 import React from 'react'
 import Meal from './Meal';
+import { FaCheese, FaFire, FaDrumstickBite, FaCarrot } from "react-icons/fa";
 
 const MealList = ({ mealData }) => {
   const nutrients = mealData.nutrients;
 
   return (
-    <div className="max-w-xl mx-auto">
-      <section className="bg-white shadow-lg rounded-lg p-4 mb-4">
-        <h1 className="text-center text-teal-400 text-2xl font-semibold mb-4">Eat Train Sleep</h1>
-        <ul className="mb-4">
-          <li><strong>Calories:</strong> {nutrients.calories.toFixed(0)}</li>
-          <li><strong>Carbohydrates:</strong> {nutrients.carbohydrates.toFixed(0)}</li>
-          <li><strong>Fat:</strong> {nutrients.fat.toFixed(0)}</li>
-          <li><strong>Protein:</strong> {nutrients.protein.toFixed(0)}</li>
+    <div className="flex flex-col items-center">
+      <section className="my-8">
+        <h1 className="text-center text-2xl font-bold mb-4 text-white">Macros</h1>
+        <ul className="mb-4 flex flex-wrap justify-center gap-4 text-white md:text-xl text-lg max-lg:3xl">
+          <li className="flex items-center">
+            <FaFire className="text-red-500 mr-2" />
+            Calories: {nutrients.calories.toFixed(0)}
+            </li>
+          <li className="flex items-center">
+            <FaCarrot className="text-orange-500 mr-2" />
+            Carbohydrates: {nutrients.carbohydrates.toFixed(0)}
+            </li>
+          <li className="flex items-center">
+            <FaCheese className="text-yellow-500 mr-2" />
+            Fat: {nutrients.fat.toFixed(0)}
+            </li>
+          <li className="flex items-center">
+            <FaDrumstickBite className="text-green-500 mr-2" />
+            Protein: {nutrients.protein.toFixed(0)}
+            </li>
         </ul>
       </section>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
