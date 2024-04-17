@@ -196,7 +196,7 @@ export const footerLinks = [
       id: 3,
       title: 'Gotta Get big',
       author: 'RonieColeman',
-      content: 'Yeah buddy, light weight!Gotta get big!',
+      content: 'Yeah buddy, light weight!Gotta get big! The hardest choices require the strongest wills.',
       date: 'April 15, 2024'
     }
 ];
