@@ -5,6 +5,7 @@ import nutrition from '../assets/nutrition.png';
 import run from '../assets/run.png';
 import lotus from '../assets/lotus.png';
 import barbell from '../assets/barbell.png';
+import { cm, cm1, cm2, cm3, cm4, cm5, cm6, cm7, cm8,cm9, cm10, cm11 } from '../assets';
 
 export const footerLinks = [
     {
@@ -113,3 +114,89 @@ export const footerLinks = [
       alt: 'Lotus Icon'
     }
   ];
+  export const images = [
+    {
+      id: 1,
+      src: cm,
+      alt: 'Image 1'
+    },
+    {
+      id: 2,
+      src: cm1,
+      alt: 'Image 2'
+    },
+    {
+      id: 3,
+      src: cm2,
+      alt: 'Image 3'
+    },
+    {
+      id: 4,
+      src: cm3,
+      alt: 'Image 4'
+    },
+      {
+      id: 5,
+      src: cm4,
+      alt: 'Image 5'
+    },
+    {
+      id: 6,
+      src: cm5,
+      alt: 'Image 6'
+    },
+    {
+      id: 7,
+      src: cm6,
+      alt: 'Image 7'
+    },
+    {
+      id: 8,
+      src: cm7,
+      alt: 'Image 8'
+    },
+    {
+      id: 9,
+      src: cm8,
+      alt: 'Image 9'
+    },
+    {
+      id: 10,
+      src: cm9,
+      alt: 'Image 10'
+    },
+    {
+      id: 11,
+      src: cm10,
+      alt: 'Image 11'
+    },
+    {
+      id: 12,
+      src: cm11,
+      alt: 'Image 12'
+    }
+  ];
+
+  export const posts = [
+    {
+        id: 1,
+        title: 'My Weekly Workout Routine',
+        author: 'FitnessFanatic123',
+        content: 'Check out my weekly workout routine! I do a mix of strength training, cardio, and flexibility exercises to stay fit and healthy. Let me know what you think!',
+        date: 'April 15, 2024'
+    },
+    {
+        id: 2,
+        title: 'Favorite Healthy Recipes',
+        author: 'HealthyEater99',
+        content: 'I love cooking healthy meals at home. Here are some of my favorite recipes for breakfast, lunch, and dinner. Enjoy!',
+        date: 'April 14, 2024'
+    },
+    {
+      id: 3,
+      title: 'Gotta Get big',
+      author: 'RonieColeman',
+      content: 'Yeah buddy, light weight!Gotta get big!',
+      date: 'April 15, 2024'
+    }
+];

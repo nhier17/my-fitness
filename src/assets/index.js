@@ -1,0 +1,12 @@
+export { default as cm } from './cm.jpeg';
+export { default as cm1 } from './cm1.jpeg';
+export { default as cm2 } from './cm2.jpeg';
+export { default as cm3 } from './cm3.jpeg';
+export { default as cm4 } from './cm4.jpeg';
+export { default as cm5 } from './cm5.jpeg';
+export { default as cm6 } from './cm6.jpeg';
+export { default as cm7 } from './cm7.jpeg';
+export { default as cm8 } from './cm8.jpeg';
+export { default as cm9 } from './cm9.jpeg';
+export { default as cm10 } from './cm10.jpeg';
+export { default as cm11 } from './cm11.jpeg';

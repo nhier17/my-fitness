@@ -4,6 +4,7 @@ import Nutrition from './Nutrition'
 import {  Signup, Login, Dashboard} from '../components'
 import Home from './Home';
 import Recipe from "./Recipe"
+import Community from './Community';
 
 const Pages = () => {
   return (
@@ -15,6 +16,7 @@ const Pages = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/nutrition" element={<Nutrition />} />
       <Route path="/recipe/:name" element={<Recipe/>} />
+      <Route path="/community" element={<Community/>} />
       </Routes>
     </div>
   )
