@@ -7,7 +7,10 @@ import lotus from '../assets/lotus.png';
 import barbell from '../assets/barbell.png';
 import { cm, cm1, cm2, cm3, cm4, cm5, cm6, cm7, cm8,cm9, cm10, cm11 } from '../assets';
 import { chest, legs, abs, boxing, back, shoulder,arms, hiit } from '../assets';
+import { client, client1, client2 } from '../assets';
+import { FaStar } from 'react-icons/fa'
 
+//footer links
 export const footerLinks = [
     {
       title: "Useful Links",
@@ -60,7 +63,8 @@ export const footerLinks = [
       ],
     }
   ];
-  
+
+  //social media
   export const socialMedia = [
     {
       id: "social-media-1",
@@ -83,6 +87,8 @@ export const footerLinks = [
       link: "https://www.linkedin.com/",
     },
   ];
+
+  //services ofered
   export const services = [
     {
       title: 'Strength Training',
@@ -115,6 +121,7 @@ export const footerLinks = [
       alt: 'Lotus Icon'
     }
   ];
+  //community images
   export const images = [
     {
       id: 1,
@@ -177,7 +184,7 @@ export const footerLinks = [
       alt: 'Image 12'
     }
   ];
-
+//posts by clients
   export const posts = [
     {
         id: 1,
@@ -202,6 +209,7 @@ export const footerLinks = [
     }
 ];
 
+//exercises
 export const exercises = [
   {
     id: 1,
@@ -260,5 +268,37 @@ export const exercises = [
     alt: 'boxing'
    } 
 ];
+
+//clients
+export const clients = [
+  {
+    id: 1,
+    name: 'Natasha Romanov',
+    img: client,
+    alt: 'Client 1',
+    stars: FaStar,
+    starsCount: 5,
+    feedback: 'Provided exceptional service! Their attention to detail and expertise made working with them a pleasure. I highly recommend their services.'
+  },
+  {
+    id: 2,
+    name: 'John Smith',
+    img: client1,
+    alt: 'Client 2',
+    stars: FaStar,
+    starsCount: 5,
+    feedback: 'Exceeded my expectations! Their professionalism and efficiency ensured that our project was completed on time and within budget. Im incredibly satisfied with their work.'
+  },
+  {
+    id: 3,
+    name: 'Jane Doe',
+    img: client2,
+    alt: 'Client 3',
+    stars: FaStar,
+    starsCount: 5,
+    feedback: 'Simply amazing! Their creativity and problem-solving skills were instrumental in achieving our goals. I would definitely work with them again in the future.'
+  }
+];
+
 
     

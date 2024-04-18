@@ -19,3 +19,6 @@ export { default as hiit } from './hiit.jpeg';
 export { default as boxing } from './boxing.jpeg';
 export { default as chest } from './chest.jpeg';
 export { default as trainer } from './trainer.jpeg';
+export { default as client } from './client.jpeg';
+export { default as client1 } from './client1.jpeg';
+export { default as client2 } from './client2.jpeg';
