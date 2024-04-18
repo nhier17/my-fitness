@@ -17,7 +17,7 @@ const fetchMealData = async () => {
     }
 
   return (
-    <div className="flex items-center flex-col mt-10">
+    <div className="flex items-center justify-center py-8 mt-10">
       <section className="mx-auto text-center">
         <h2 className="text-2xl font-semibold mb-4 text-[#ccc]">Today's Meal Plan</h2>
         <div className="mb-4">
@@ -25,14 +25,14 @@ const fetchMealData = async () => {
           <input
             id="calories"
             type="number"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+            className="w-2/3 px-3 py-2 border rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500"
             placeholder="Enter target calories (e.g., 2000)"
             value={calories}
             onChange={handleChange}
           />
         </div>
         <button
-          className="py-2 px-4 bg-purple-600 text-white border-none font-sans font-normal text-base transition duration-300 ease-in-out hover:bg-purple-700"
+          className=" py-2 px-4 bg-purple-600 text-white border-none font-sans font-normal text-base transition duration-300 ease-in-out hover:bg-purple-700 rounded-md"
           onClick={fetchMealData}
         >
           Get Daily Meal Plan

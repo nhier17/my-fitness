@@ -1,5 +1,6 @@
 import React from 'react'
 import { services } from '../constants';
+import { photoAnim } from '../animation';
 
 
 const Explore = () => {

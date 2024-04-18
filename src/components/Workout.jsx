@@ -4,8 +4,8 @@ import { exercises } from '../constants';
 const Workout = () => {
   return (
     <div className="mt-20">
-      <h2 className="text-3xl text-purple-700 text-center p-4">Our Training Programs</h2>
-      <div className="flex overflow-x-auto" style={{'scrollbarWidth': 'none', '-ms-overflow-style': 'none', '::-webkit-scrollbar': { 'display': 'none' }}}>
+      <h2 className="text-3xl text-purple-700 text-center p-4 uppercase">Our Training Programs</h2>
+      <div className="flex overflow-x-auto" style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>
       {exercises.map((exercise) =>(
         <div className="flex-shrink-0 mx-4" key={exercise.id}>
         <div className="rounded-md overflow-hidden shadow-md text-center" style={{ width: '300px', height: '300px' }}>
