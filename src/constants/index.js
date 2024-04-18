@@ -6,6 +6,7 @@ import run from '../assets/run.png';
 import lotus from '../assets/lotus.png';
 import barbell from '../assets/barbell.png';
 import { cm, cm1, cm2, cm3, cm4, cm5, cm6, cm7, cm8,cm9, cm10, cm11 } from '../assets';
+import { chest, legs, abs, boxing, back, shoulder,arms, hiit } from '../assets';
 
 export const footerLinks = [
     {
@@ -200,3 +201,64 @@ export const footerLinks = [
       date: 'April 15, 2024'
     }
 ];
+
+export const exercises = [
+  {
+    id: 1,
+    img: legs,
+    title: 'Leg Day Workout',
+    description: 'strengthen and tone the quadriceps, hamstrings, glutes, and calves.',
+    alt: 'squats'
+  },
+  {
+    id: 2,
+    title: 'Chest Workout',
+    description: 'target  pectoralis major and minor chest aesthetics.',
+    img: chest,
+    alt: 'chest'
+  },
+  {
+    id: 3,
+    title: 'Back Workout',
+    description: 'Focus on muscles of the upper and lower back and enhance overall back aesthetics.',
+    img: back,
+    alt: 'back'
+  },
+  {
+    id: 4,
+    title: 'HIIT Workout',
+    description: 'alternating between intense bursts of activity and short periods of rest to maximize calorie burn.',
+    img: hiit,
+    alt:'shoulder'
+  },
+  {
+    id: 5,
+    title: 'Abs Workout',
+    description: 'strengthen and define the core  rectus abdominis, obliques, and transverse abdominis.',
+    img: abs,
+    alt: 'abs'
+  },
+  {
+    id: 6,
+    title: 'Shoulder Workout',
+    description: 'Target the deltoid muscles for definition and enhance shoulder aesthetics.',
+    img: shoulder,
+    alt:'shoulder'
+  },
+   {
+    id: 7,
+    title: 'Arms Workout',
+    description: 'strengthen and sculpt your biceps, triceps, and forearms.',
+    img: arms,
+    alt: 'arms'
+   },
+   {
+    id: 8,
+    title: 'Boxing Workout',
+    description: 'Improve cardiovascular health, agility, and overall fitness.',
+    img: boxing,
+    alt: 'boxing'
+   } 
+];
+
+    
