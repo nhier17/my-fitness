@@ -4,14 +4,25 @@ import { fetchData,exerciseOptions } from "../utils/fetchData";
 
 const SearchExercises = () => {
     const [search, setSearch] = useState('')
+    const [exercises, setExercises] = useState([])
 
     const submitHandler = async(e) => {
         e.preventDefault()
         if(search) {
             const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
-            console.log(exercisesData)
+            console.log('Search query:', search);
+            console.log('Exercise data:', exercisesData);
+            const searchedExercises = exercisesData.filter(
+              (exercise) =>
+                  exercise.name.toLowerCase().includes(search) ||
+                  exercise.target.toLowerCase().includes(search) ||
+                  exercise.equipment.toLowerCase().includes(search) ||
+                  exercise.bodyPart.toLowerCase().includes(search)
+          );
+            console.log(searchedExercises)
               window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
               setSearch('')
+              setExercises(searchedExercises);
         }
         
     }
@@ -25,12 +36,21 @@ const SearchExercises = () => {
             <FaSearch className="text-2xl text-white mr-4" />
             <input 
             className="w-full bg-transparent focus:outline-none"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
             value={search}
             type="text" 
             placeholder="search for exercises" />                
         </form>
-  
+      <div className="">
+      {exercises.map((exercise) => (
+        <div key={exercise.id} >
+          <img src={exercise.gifUrl} alt="exercise" />
+          <button>{exercise.bodyPart}</button>
+          <button>{exercise.target}</button>
+          <p className="text-white">{exercise.name}</p>
+          </div>
+      ))}
+     </div>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { exercises } from '../constants';
+import { Exercise } from '../components';
 
 const Workout = () => {
   return (
@@ -18,6 +19,8 @@ const Workout = () => {
         </div>
       ))}
       </div>
+      <h2 className="text-3xl text-purple-700 text-center p-4 uppercase">time to grind</h2>
+      <Exercise />
     </div>
   )
 }

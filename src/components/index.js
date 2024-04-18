@@ -7,4 +7,5 @@ export { default as Dashboard } from './Dashboard';
 export { default as Footer } from './Footer';
 export { default as Explore } from './Explore';
 export { default as MealPlan } from './MealPlan';
-export { default as Workout } from './Workout';
+export { default as Exercise } from './Exercise';
+export { default as Membership } from './Membership';

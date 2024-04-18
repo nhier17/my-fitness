@@ -1,11 +1,12 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Nutrition from './Nutrition'
-import {  Signup, Login, Dashboard, Workout } from '../components'
+import {  Signup, Login, Dashboard } from '../components'
 import Home from './Home';
 import Recipe from "./Recipe"
 import Community from './Community';
 import { AnimatePresence } from 'framer-motion';
+import Workout from './Workout';
 
 const Pages = () => {
   const location = useLocation();

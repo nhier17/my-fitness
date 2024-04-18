@@ -5,7 +5,7 @@ import { photoAnim } from '../animation';
 
 const Explore = () => {
   return (
-    <div className="explore-container mt-10">
+    <div className="explore-container mt-20">
     <h2 className="mb-8 md:text-[5rem] text-4xl text-center text-white">Programs for <span className="text-red-700">You</span></h2>
     <div className="flex flex-wrap md:gap-4 gap-1">
       {services.map((service, index) => (

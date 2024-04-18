@@ -1,5 +1,5 @@
 import React from 'react'
-import { Hero, SearchExercises, Explore } from "../components";
+import { Hero, Explore, Membership } from "../components";
 import { motion } from 'framer-motion';
 
 const Home = () => {
@@ -11,8 +11,8 @@ const Home = () => {
     transition={{duration: 0.75}}
     >
       <Hero />
-      <SearchExercises />
       <Explore />
+      <Membership />
     </motion.div>
   )
 }
