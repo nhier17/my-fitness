@@ -18,3 +18,4 @@ export { default as shoulder } from './shoulder.jpeg';
 export { default as hiit } from './hiit.jpeg';
 export { default as boxing } from './boxing.jpeg';
 export { default as chest } from './chest.jpeg';
+export { default as trainer } from './trainer.jpeg';

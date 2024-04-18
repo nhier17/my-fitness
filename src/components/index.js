@@ -9,3 +9,4 @@ export { default as Explore } from './Explore';
 export { default as MealPlan } from './MealPlan';
 export { default as Exercise } from './Exercise';
 export { default as Membership } from './Membership';
+export { default as Trainers } from './Trainers';

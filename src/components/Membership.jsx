@@ -3,9 +3,7 @@ import React from 'react'
 const Membership = () => {
   return (
     <div className="mx-auto px-4 py-8">
-            <header className="text-center mb-8">
-                <h1 className="text-4xl font-bold text-purple-800">Choose Your Membership Plan</h1>
-            </header>
+                <h1 className="text-4xl font-bold text-purple-800 text-center mb-8">Choose Your Membership Plan</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="bg-gray-400 p-6 shadow-md rounded-lg">
                     <h2 className="text-xl font-semibold mb-2 text-purple-800">Basic</h2>
@@ -24,7 +22,7 @@ const Membership = () => {
                 <div className="bg-gray-400 p-6 shadow-md rounded-lg">
                     <h2 className="text-xl font-semibold mb-2 text-purple-800">Premium</h2>
                     <ul>
-                        <li className="text-gray-800">Basic training plans</li>
+                        <li className="text-gray-200">Basic training plans</li>
                         <li className="text-gray-200">Personalized meal plans</li>
                         <li className="text-gray-200">Monthly newsletter</li>
                         <li className="text-gray-200">Exclusive fitness challenges</li>
