@@ -8,9 +8,9 @@ const Workout = () => {
       <div className="flex overflow-x-auto" style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>
       {exercises.map((exercise) =>(
         <div className="flex-shrink-0 mx-4" key={exercise.id}>
-        <div className="rounded-md overflow-hidden shadow-md text-center" style={{ width: '300px', height: '300px' }}>
+        <div className="rounded-md overflow-hidden shadow-md text-center transition duration-300 transform hover:scale-105" style={{ width: '300px', height: '300px' }}>
           <img className="w-full h-[200px] object-cover" src={exercise.img} alt={exercise.alt} />
-          <div className="bg-gray-400 text-white p-4">
+          <div className="bg-gray-800 text-white p-4">
           <h3 className="text-white text-lg font-semibold">{exercise.title}</h3>
           <p className="text-white p-2">{exercise.description}</p>  
           </div>

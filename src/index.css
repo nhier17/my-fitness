@@ -21,7 +21,6 @@ body {
 
 } 
 
-
 .service-item {
   flex: 1;
   text-align: center;
@@ -36,6 +35,10 @@ body {
 
 .service-item:hover {
   transform: scale(1.05);
+}
+
+.clip-triangle {
+  clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }
 
 @media (max-width: 768px) {

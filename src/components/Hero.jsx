@@ -1,37 +1,41 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import hero from "../assets/hero2.jpg";
+import db from "../assets/db.jpeg";
 
 const Hero = () => {
   return (
-    <div className="relative overflow-hidden bg-gray-900 h-screen">
-      <img
-        src={hero}
-        alt="hero"
-        className="absolute inset-0 h-full w-full object-cover z-0"
-      />
-      <div className="absolute inset-0 flex flex-col justify-end z-10">
-        <div className="mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
-            Yeah <span className="text-purple-700">Buddy!</span>
-          </h2>
-        </div>
-        <p className="text-white font-medium text-lg md:text-xl mb-8 text-center">
-          Either you run the day or <br />
-          The day runs you!
-        </p>
-        <div className="mt-4 mb-10 mx-auto flex flex-col md:flex-row gap-2 justify-center">
-        <Link to="signup">
-        <button className="bg-purple-700 text-white font-semibold text-lg uppercase w-48 h-16 rounded-lg border-none cursor-pointer overflow-hidden shadow-md mb-2 md:mb-0">
-            Sign up
-          </button>
-        </Link>
-        <button className="bg-purple-700 text-white font-semibold text-lg uppercase w-48 h-16 rounded-lg border-none cursor-pointer overflow-hidden shadow-md mb-2 md:mb-0">
-            EXplore
-          </button>
+    <div className="relative overflow-hidden">
+    <div
+      className="absolute inset-0 bg-cover bg-center z-0 w-full"
+      style={{
+        backgroundImage: `url(${db})`,
+        opacity: 0.9
+        }}
+    ></div>
+    <div className="relative z-20 mx-auto px-4 py-8 flex items-center">
+      <div className="flex-1 md:pr-8">
+        <h2 className="text-3xl md:text-4xl lg:text-7xl font-bold text-white leading-tight mb-4 shadow-md">
+          Yeah <span className="text-purple-700">Buddy!</span>
+        </h2>
+        <p className="text-white font-medium text-lg md:text-2xl mb-8">
+          Either you run the day <br />
+          Or The day runs you!
+        </p> 
+        <div className="flex gap-2">
+          <Link to="/signup" className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
+            Signup
+          </Link>
+          <Link className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
+            Explore
+          </Link>
         </div>
       </div>
+      <div className="clip-triangle flex-1 pl-8 overflow-hidden">
+        <img src={hero} alt="Hero" className="w-full h-[300px] md:h-[500px] lg:h-[600px] object-contain md:object-cover rounded-md overflow-hidden transition duration-300 transform hover:scale-105" />
       </div>
+    </div>
+  </div>
   );
 };
 

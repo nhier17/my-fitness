@@ -73,7 +73,7 @@ const Navbar = () => {
             <Link to={to} className="text-white hover:text-gray-300">
               {text}
               <motion.div
-                className="h-1 bg-red-500 w-0 absolute bottom-[-80%] left-1/2 transform -translate-x-1/2 transition-all duration-750"
+                className="h-1 bg-purple-700 w-0 absolute bottom-[-80%] left-1/2 transform -translate-x-1/2 transition-all duration-750"
                 transition={{ duration: 0.75 }}
                 initial={{ width: "0%" }}
                 animate={{ width: pathname === to ? "50%" : "0%" }}

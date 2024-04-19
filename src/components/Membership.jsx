@@ -5,7 +5,7 @@ const Membership = () => {
     <div className="mx-auto px-4 py-8">
                 <h1 className="text-3xl md:text-5xl font-bold text-purple-700 text-center mb-8">Choose Your Membership Plan</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="bg-gray-800 p-6 shadow-md rounded-lg">
+                <div className="bg-gray-800 p-6 shadow-md rounded-lg transition duration-300 transform hover:scale-105">
                     <h2 className="text-xl font-semibold mb-2 text-purple-700">Basic</h2>
                     <ul>
                         <li className="text-gray-200">Basic Training plans</li>
@@ -19,7 +19,7 @@ const Membership = () => {
                     <p className="text-purple-600 font-bold">$9.99/month</p>
                     <button className="mt-4 w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 ease-in-out">Select Plan</button>
                 </div>
-                <div className="bg-gray-800 p-6 shadow-md rounded-lg">
+                <div className="bg-gray-800 p-6 shadow-md rounded-lg transition duration-300 transform hover:scale-105">
                     <h2 className="text-xl font-semibold mb-2 text-purple-700">Premium</h2>
                     <ul>
                         <li className="text-[#ccc]">Basic training plans</li>
@@ -33,7 +33,7 @@ const Membership = () => {
                     <p className="text-purple-600 font-bold">$19.99/month</p>
                     <button className="mt-4 w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 ease-in-out">Select Plan</button>
                 </div>
-                <div className="bg-gray-800 p-6 shadow-md rounded-lg">
+                <div className="bg-gray-800 p-6 shadow-md rounded-lg transition duration-300 transform hover:scale-105">
                     <h2 className="text-xl font-semibold mb-2 text-purple-700">Elite</h2>
                     <ul>
                         <li className="text-gray-200">Basic training plans</li>
