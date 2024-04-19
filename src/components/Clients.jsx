@@ -4,7 +4,7 @@ import { clients } from '../constants'
 const Clients = () => {
   return (
     <div className=" mx-auto px-4 py-8 mt-20 bg-gray-800">
-      <h2 className="text-center text-xl font-semibold text-purple-700 p-6">Don't listen to us, listen to our clients</h2>
+      <h2 className="text-centertext-lg md:xl font-semibold text-purple-700 p-6">Don't listen to us, listen to our clients</h2>
       <div className="flex md:overflow-x-auto overflow-y-hidden" style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>
       {clients.map((client) =>(
         <div className="flex-shrink-0 mx-4" key={client.id}>

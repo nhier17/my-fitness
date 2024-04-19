@@ -3,7 +3,7 @@ import React from 'react'
 const Membership = () => {
   return (
     <div className="mx-auto px-4 py-8">
-                <h1 className="text-3xl md:text-5xl font-bold text-purple-700 text-center mb-8">Choose Your Membership Plan</h1>
+                <h1 className="text-2xl md:text-5xl font-bold text-purple-700 text-center mb-8">Choose Your Membership Plan</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="bg-gray-800 p-6 shadow-md rounded-lg transition duration-300 transform hover:scale-105">
                     <h2 className="text-xl font-semibold mb-2 text-purple-700">Basic</h2>
