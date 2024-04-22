@@ -11,3 +11,4 @@ export { default as Exercise } from './Exercise';
 export { default as Membership } from './Membership';
 export { default as Trainers } from './Trainers';
 export { default as Clients } from './Clients';
+export { default as ScrollTop } from './ScrollTop';
