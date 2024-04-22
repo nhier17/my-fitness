@@ -8,7 +8,7 @@ useTitleAnime();
 useCardAnime();
   return (
     <div className="explore-container mt-20">
-    <h2 id="title" className="mb-8 md:text-[5rem] text-4xl text-center text-gray-50 opacity-0 translate-y-20">Programs for <span className="text-purple-700">You</span></h2>
+    <h2 id="title" className="md:mb-8 mb-4 md:text-[5rem] text-4xl md:text-center text-start text-gray-50 opacity-0 translate-y-20">Programs for <span className="text-purple-700">You</span></h2>
     <div id="workout" className="flex flex-wrap justify-center md:gap-4 gap-1">
       {services.map((service, index) => (
         <div key={index} className="service-item bg-gray-800">
