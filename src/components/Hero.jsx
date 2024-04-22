@@ -1,11 +1,20 @@
 import React from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { Link } from "react-router-dom";
 import hero from "../assets/hero2.jpg";
 import db from "../assets/db.jpeg";
 
+
 const Hero = () => {
+  useGSAP(() => {
+    gsap.to('#hero', {
+      delay: 1.5,
+      opacity: 1,
+    })
+  }, [])
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative w-full  overflow-hidden">
     <div
       className="absolute inset-0 bg-cover bg-center z-0 w-full"
       style={{
@@ -15,7 +24,7 @@ const Hero = () => {
     ></div>
     <div className="relative z-20 mx-auto px-4 py-8 flex items-center">
       <div className="flex-1 md:pr-8">
-        <h2 className="text-3xl md:text-4xl lg:text-7xl font-bold text-white leading-tight mb-4 shadow-md">
+        <h2 id="hero" className="hero-title text-3xl md:text-4xl lg:text-7xl font-bold leading-tight mb-4 ">
           Yeah <span className="text-purple-700">Buddy!</span>
         </h2>
         <p className="text-white font-medium text-lg md:text-2xl mb-8">

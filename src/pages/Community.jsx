@@ -1,12 +1,14 @@
 import React from 'react'
 import { images, posts } from '../constants'
 import { Link }  from 'react-router-dom'
+import { useTitleAnime } from '../animation'
 
 const Community = () => {
+    useTitleAnime()
   return (
     <div className="mx-auto px-4 py-8">
     <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-purple-800">Fitness Community</h1>
+        <h1 id="title" className="text-4xl font-bold text-purple-800 opacity-0 translate-y-20">Fitness Community</h1>
         <p className="text-lg text-[#ccc] mt-2">Connect with other fitness enthusiasts, share tips, and stay motivated!</p>
     </header>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

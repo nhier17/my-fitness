@@ -1,12 +1,14 @@
 import React from 'react';
 import { MealPlan } from '../components';
 import { FaUtensils, FaChartPie, FaAppleAlt } from 'react-icons/fa';
+import { useTitleAnime } from '../animation'
 
 const Nutrition = () => {
+    useTitleAnime();
   return (
     <div className="mx-auto px-4 py-8 mt-10">
     <header className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-purple-800">Your Nutrition Plan</h1>
+        <h1 id="title" className="text-4xl font-bold text-purple-800 opacity-0 translate-y-20">Your Nutrition Plan</h1>
         <p className="text-lg text-white mt-2">Plan your meals for a healthier lifestyle</p>
     </header>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

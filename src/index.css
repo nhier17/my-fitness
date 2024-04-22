@@ -6,13 +6,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  user-select: none;
 }
 body {
   font-family: "Montserrat", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #000000f8;
+  color: white;
+  width: 100dvw;
+  overflow-x: hidden;
+  height: 100%;
+  background: #000;
+  border-color: #3b3b3b;
+  user-select: none;
 
 }
 
@@ -40,6 +45,12 @@ body {
 .clip-triangle {
   clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }
+
+.hero-title {
+  @apply  font-semibold  text-gray-100 opacity-0 max-md:mb-10
+}
+
+
 
 @media (max-width: 768px) {
   .explore-container {

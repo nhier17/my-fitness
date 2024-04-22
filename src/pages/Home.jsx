@@ -15,6 +15,7 @@ const Home = () => {
       <Trainers />
       <Membership />
       <Clients />
+    
     </motion.div>
   )
 }

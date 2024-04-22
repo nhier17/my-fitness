@@ -4,6 +4,7 @@ import logo from "../assets/logo (2).jpeg"
 import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,8 +12,8 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }
     return (
-  <div className="inset-x-0 top-0 z-50 sticky">
-    <nav className="bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
+  <div className="w-full inset-x-0 top-0 z-50 sticky">
+    <nav className="w-full bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
       <div className="flex lg:flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
           <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="" />
@@ -29,7 +30,7 @@ const Navbar = () => {
         <NavLink to="/about" text="About" />
       </ul>
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
+        <FaSearch className="text-xl" />
       </div>
     </nav>
     {isMenuOpen && (
