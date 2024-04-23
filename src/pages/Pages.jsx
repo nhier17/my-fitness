@@ -5,13 +5,13 @@ import {  Signup, Login, Dashboard } from '../components'
 import Home from './Home';
 import Recipe from "./Recipe"
 import Community from './Community';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Workout from './Workout';
 
 const Pages = () => {
   const location = useLocation();
   return (
-    <div>
+    <motion.div>
       <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
       <Route path="/" element={<Home />} />
@@ -24,7 +24,7 @@ const Pages = () => {
       <Route path="/workouts" element={<Workout/>} />
       </Routes>
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }
 

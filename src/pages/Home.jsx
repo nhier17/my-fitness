@@ -1,8 +1,10 @@
 import React from 'react'
 import { Hero, Explore, Membership, Trainers, Clients } from "../components";
 import { motion } from 'framer-motion';
+import { useScrollAnime } from '../animation'
 
 const Home = () => {
+  useScrollAnime();
   return (
     <motion.div
     animate={{opacity: 1}}
@@ -15,7 +17,6 @@ const Home = () => {
       <Trainers />
       <Membership />
       <Clients />
-    
     </motion.div>
   )
 }

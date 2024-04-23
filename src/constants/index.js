@@ -210,24 +210,24 @@ export const footerLinks = [
 ];
 
 //exercises
-export const exercises = [
+export const categories = [
   {
     id: 1,
     img: legs,
-    title: 'Leg Day Workout',
+    title: 'legs',
     description: 'strengthen and tone the quadriceps, hamstrings, glutes, and calves.',
     alt: 'squats'
   },
   {
     id: 2,
-    title: 'Chest Workout',
+    title: 'chest',
     description: 'target  pectoralis major and minor chest aesthetics.',
     img: chest,
     alt: 'chest'
   },
   {
     id: 3,
-    title: 'Back Workout',
+    title: 'back',
     description: 'Focus on muscles of the upper and lower back and enhance overall back aesthetics.',
     img: back,
     alt: 'back'
@@ -241,21 +241,21 @@ export const exercises = [
   },
   {
     id: 5,
-    title: 'Abs Workout',
+    title: 'abs',
     description: 'strengthen and define the core  rectus abdominis, obliques, and transverse abdominis.',
     img: abs,
     alt: 'abs'
   },
   {
     id: 6,
-    title: 'Shoulder Workout',
+    title: 'shoulder',
     description: 'Target the deltoid muscles for definition and enhance shoulder aesthetics.',
     img: shoulder,
     alt:'shoulder'
   },
    {
     id: 7,
-    title: 'Arms Workout',
+    title: 'arms',
     description: 'strengthen and sculpt your biceps, triceps, and forearms.',
     img: arms,
     alt: 'arms'

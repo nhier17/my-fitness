@@ -49,7 +49,9 @@ body {
 .hero-title {
   @apply  font-semibold  text-gray-100 opacity-0 max-md:mb-10
 }
-
+.active {
+  background: #7E22CE;
+}
 
 
 @media (max-width: 768px) {
