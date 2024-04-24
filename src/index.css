@@ -7,6 +7,17 @@
   margin: 0;
   padding: 0;
 }
+html{
+  &::-webkit-scrollbar{
+      width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb{
+      background-color: grey;
+  }
+  &::-webkit-scrollbar-track {
+background: grey;
+}
+}
 body {
   font-family: "Montserrat", serif;
   -webkit-font-smoothing: antialiased;

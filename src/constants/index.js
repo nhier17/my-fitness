@@ -234,7 +234,7 @@ export const categories = [
   },
   {
     id: 4,
-    title: 'HIIT Workout',
+    title: 'HIIT',
     description: 'alternating between intense bursts of activity and short periods of rest to maximize calorie burn.',
     img: hiit,
     alt:'shoulder'

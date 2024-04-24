@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { Exercise } from '../components';
 import { categories } from '../constants';
-import { useTitleAnime, useCardAnime, useCategoryAnime } from '../animation';
+import { useTitleAnime, useCardAnime, useCategoryAnime, useScrollAnime } from '../animation';
 
 const Workout = () => {
   const [selectedCategory, setSelectedCategory] = useState('legs');
@@ -10,18 +10,18 @@ const Workout = () => {
   useTitleAnime();
   useCardAnime();
   useCategoryAnime(containerRef, selectedCategory);
-
+  useScrollAnime();
 
   return (
     <div className="md:mt-20 mt-10">
       <h2 id="title" className="text-3xl md:text-4xl text-purple-700 text-start md:text-center p-2 md:p-4 opacity-0 translate-y-20 font-semibold">
         Our Training Programs
         </h2>
-      <div  id="workout" className="flex overflow-x-auto overflow-y-hidden  opacity-0"
+      <div  id="workout" className="flex overflow-x-auto overflow-y-hidden  opacity-0 cursor-pointer"
       ref={containerRef}
        style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>
       {categories.map((category) =>(
-        <div  className={`flex-shrink-0 mx-4 `} key={category.id} onClick={() => setSelectedCategory(category.title)}>
+        <div  className="flex-shrink-0 mx-4" key={category.id} onClick={() => setSelectedCategory(category.title)}>
         <div className="rounded-md overflow-hidden shadow-md text-center transition duration-300 transform hover:scale-105" 
         style={{ width: '300px', height: '400px' }}>
           <img className="w-full h-[200px] object-cover" src={category.img} alt={category.alt} />

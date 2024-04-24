@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { FaSearch } from "react-icons/fa";
-import { fetchData,exerciseOptions } from "../utils/fetchData";
 
 const SearchExercises = () => {
     const [search, setSearch] = useState('')
@@ -9,7 +8,7 @@ const SearchExercises = () => {
     const submitHandler = async(e) => {
         e.preventDefault()
         if(search) {
-            const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+            const exercisesData = await('https://exercisedb.p.rapidapi.com/exercises');
             console.log('Search query:', search);
             console.log('Exercise data:', exercisesData);
             const searchedExercises = exercisesData.filter(
