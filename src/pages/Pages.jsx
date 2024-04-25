@@ -5,6 +5,7 @@ import {  Signup, Login, Dashboard } from '../components'
 import Home from './Home';
 import Recipe from "./Recipe"
 import Community from './Community';
+import StartWorkout from './StartWorkout';
 import { motion, AnimatePresence } from 'framer-motion';
 import Workout from './Workout';
 
@@ -22,6 +23,7 @@ const Pages = () => {
       <Route path="/recipe/:name" element={<Recipe/>} />
       <Route path="/community" element={<Community/>} />
       <Route path="/workouts" element={<Workout/>} />
+      <Route path="/start-workout" element={<StartWorkout location={location}/>} />
       </Routes>
       </AnimatePresence>
     </motion.div>
