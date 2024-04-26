@@ -22,3 +22,4 @@ export { default as trainer } from './trainer.jpeg';
 export { default as client } from './client.jpeg';
 export { default as client1 } from './client1.jpeg';
 export { default as client2 } from './client2.jpeg';
+export { default as login } from './login.webp';
