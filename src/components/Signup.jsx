@@ -7,10 +7,12 @@ import { toast } from 'sonner';
 import { GoogleLogin } from '@react-oauth/google';
 import { login } from '../assets'
 import { useTitleAnime } from '../animation'
+import { base_url } from '../utils/api'
 
 const Signup = () => {
     const navigate = useNavigate();
     useTitleAnime()
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,14 +22,14 @@ const Signup = () => {
 const submitHandler = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post('http://localhost:5000/api/auth/register', formData)
+    const response = await axios.post(`${base_url}/api/auth/register`, formData)
     if(response.data) {
-      const userNAme = response.data.user.name;
-      toast.success(`Welcome, ${userNAme}`)
+      const userName = response.data.user.name;
+      toast.success(`Welcome, ${userName}`)
       navigate('/')
     }
   } catch (error) {
-    toast.error(error.response.data.msg)
+    toast.error(error.response.data.message)
   }
 
 }
@@ -37,6 +39,14 @@ setFormData({ ...formData,
   [e.target.name]: e.target.value})
 }
 
+//google login success
+const handleSuccess = (credentialResponse) => {
+navigate('/')
+}
+
+const handleError = () => {
+console.log('Failed to login')
+}
   return (
     <div className="m-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] p-8"
     style={{ backgroundImage: `url(${login})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
@@ -86,12 +96,8 @@ setFormData({ ...formData,
       </div>
         <div className="w-1/2 m-auto mt-3  px-12 py-4">
         <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
+  onSuccess={handleSuccess}
+  onError={handleError}
 />
         </div>
     </div>

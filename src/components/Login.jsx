@@ -6,6 +6,7 @@ import axios from "axios"
 import { toast } from 'sonner';
 import { GoogleLogin } from '@react-oauth/google';
 import { login } from '../assets'
+import { base_url } from '../utils/api'
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Login = () => {
       const submitHandler = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post('http://localhost:5000/api/auth/login', formData)  
+          const response = await axios.post(`${base_url}/api/auth/login`, formData)  
           if(response.data) {
             const userName = response.data.user.name;
             localStorage.setItem('token', userName);
@@ -44,6 +45,15 @@ const Login = () => {
           [e.target.name]: e.target.value
         })
       }
+
+      //google login success
+const handleSuccess = (credentialResponse) => {
+  navigate('/')
+  }
+  
+  const handleError = () => {
+  console.log('Failed to login')
+  }
 
   return (
 <div
@@ -93,12 +103,8 @@ const Login = () => {
       </div>
         <div className="w-1/2 m-auto mt-3  px-12 py-4">
         <GoogleLogin
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
+  onSuccess={handleSuccess}
+  onError={handleError}
 />
  </div>
 </div>
