@@ -3,7 +3,7 @@ import { trainer } from '../assets';
 
 const Trainers = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 mt-10">
       <div className="bg-gray-800 rounded-md overflow-hidden shadow-lg m-auto">
         <div className="p-8">
           <h2 className="text-2xl md:text-4xl font-semibold text-purple-700 mb-4">Meet Our Trainers</h2>

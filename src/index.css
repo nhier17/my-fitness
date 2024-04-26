@@ -31,28 +31,7 @@ body {
   user-select: none;
 
 }
-
-.explore-container {
-  padding: 0 20px;
-
-} 
-
-.service-item {
-  flex: 1;
-  text-align: center;
-  min-width: 300px; 
-  margin-top: 20px;
-  margin-bottom: 3rem;
-  margin-right: 3rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: transform 450ms;
-}
-
-.service-item:hover {
-  transform: scale(1.05);
-}
-
+ 
 .clip-triangle {
   clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }
