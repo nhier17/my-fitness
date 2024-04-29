@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react'
+import { messages } from '../constants'
 
 const Timer = ({ exerciseId, onLogExercise }) => {
     const [seconds, setSeconds] = useState(0)
     const [isActive, setIsactive] = useState(false);
+    const [motivation, setMotivation] = useState("");
 
     useEffect(() => {
         let interval = null;
         if (isActive) {
             interval = setInterval(() => {
-                setSeconds(seconds => seconds + 1);
+                setSeconds(seconds => seconds + 1); 
             }, 1000);
         } else {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
     }, [isActive]);
+
+    useEffect(() => {
+     const intervalId = setInterval(() => {
+        const currentMessage = messages.find(msg => seconds >= msg.time && seconds < msg.time + 1);
+        if (currentMessage) {
+            setMotivation(currentMessage.message);
+        }
+     }, 1000)
+     return () => clearInterval(intervalId);
+    },[seconds])
+
+       
 
     const toggleTimer = () => {
         setIsactive((prevIsActive) => !prevIsActive);
@@ -23,6 +37,7 @@ const Timer = ({ exerciseId, onLogExercise }) => {
     const resetTimer = () => {
         setSeconds(0);
         setIsactive(false);
+        setMotivation("");
     };
 
     const logExercise = () => {
@@ -41,6 +56,9 @@ const Timer = ({ exerciseId, onLogExercise }) => {
                 <div className="progress-bar-inner" style={{ width: `${(seconds / 60) * 100}%` }}></div>
             </div>
             <div className="text-4xl font-bold">{formatTime(seconds)}</div>
+            {motivation && (
+                <p className="text-sm mt-2 text-gray-500">{motivation}</p>
+            )}
             <div className="mt-4">
             <button
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2"

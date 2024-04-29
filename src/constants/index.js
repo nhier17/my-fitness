@@ -300,5 +300,14 @@ export const clients = [
   }
 ];
 
+export const messages = [
+ { time:15,  message: "Keep going! You're doing great!" },
+ { time: 30, message: "You're halfway there! Keep pushing!" },
+ { time: 45, message: "Believe in yourself. You can do it!" },
+ { time: 60, message: "You're stronger than you think. Keep moving forward!" },
+ { time: 75, message: "Success is just one more rep away. Keep going!" },
+ { time: 120, message: "Focus on your goals and push through the challenges!" }
+];
+
 
     
