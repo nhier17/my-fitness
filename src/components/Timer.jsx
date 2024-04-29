@@ -33,6 +33,9 @@ const Timer = () => {
     return (
         <div className="bg-gray-200 rounded p-4 text-center mt-5">
             <h2 className="text-black text-lg font-semibold mb-2">Begin Workout</h2>
+            <div className="progress-bar">
+                <div className="progress-bar-inner" style={{ width: `${(seconds / 60) * 100}%` }}></div>
+            </div>
             <div className="text-4xl font-bold">{formatTime(seconds)}</div>
             <div className="mt-4">
             <button

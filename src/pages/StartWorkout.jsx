@@ -11,7 +11,8 @@ const StartWorkout = ({ location }) => {
   //weight, reps and sets for each exercise
   const [weight, setWeight] = useState({})
   const [reps, setReps] = useState({})
-    const [sets, setSets] = useState({})
+  const [sets, setSets] = useState({})
+  const [exerciseLogs, setExerciseLogs] = useState({})  
     
     const handleWeightChange = (exerciseId, value) => {
         setWeight((prevWeight) => ({prevWeight, [exerciseId]: value}))
@@ -27,6 +28,9 @@ const StartWorkout = ({ location }) => {
     return (
         <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Start Workout</h1>
+        <div className="flex flex-col mb-4">
+            <div className="time-elasped"><Timer/></div>
+        </div>
         {selectedExercises.length > 0 ? (
             <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -67,7 +71,7 @@ const StartWorkout = ({ location }) => {
         ) : (
             <p>No exercises selected for the workout.</p>
         )}
-        <Timer />
+        
     </div>
     );
 };
