@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { base_url } from '../utils/api';
 import { useScrollAnime } from '../animation'
 import { Timer, ExerciseLog } from '../components';
+import WorkoutSummary from './WorkoutSummary'
 
 const StartWorkout = ({ location }) => {
     useScrollAnime();
@@ -87,7 +88,7 @@ const StartWorkout = ({ location }) => {
                             Start Workout
                         </button>
                     )}
-         
+                {workoutCompleted && <WorkoutSummary exerciseLogs={exerciseLogs} />}
             </div>
         ) : (
             <p>No exercises selected for the workout.</p>

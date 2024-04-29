@@ -1,8 +1,6 @@
 import React from 'react'
 import {
-    EmailShareButton,
     FacebookShareButton,
-    InstapaperShareButton,
     LinkedinShareButton,
     PinterestShareButton,
     RedditShareButton,
