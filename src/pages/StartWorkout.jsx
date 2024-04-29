@@ -13,21 +13,23 @@ const StartWorkout = ({ location }) => {
   const [reps, setReps] = useState({})
   const [sets, setSets] = useState({})
   const [exerciseLogs, setExerciseLogs] = useState([])  
-    console.log("Exercise logs",exerciseLogs)
-    const handleWeightChange = (exerciseId, value) => {
-        setWeight((prevWeight) => ({...prevWeight, [exerciseId]: value}))
-    };
+   const [workoutStarted, setWorkoutStarted] = useState(false)
+   const [workoutCompleted, setWorkoutCompleted] = useState(false)
 
-    const handleRepsChange = (exerciseId, value) => {
-        setReps((prevReps) => ({ ...prevReps, [exerciseId]: value}))
-    };
-
-    const handleSetsChange = (exerciseId, value) => {
-        setSets((prevSets) => ({ ...prevSets, [exerciseId]: value}))
+    const inputHandler = (exerciseId, setter) => (e) => {
+        setter((prev) => ({ ...prev, [exerciseId]: e.target.value}))
     };
 
     const exerciseLogHandler = (exerciseLog) => {
-        setExerciseLogs((prevLogs) => [...prevLogs, exerciseLog])
+        setExerciseLogs((prev) => [...prev, exerciseLog])
+    }
+
+    const startWorkoutHandler = () => {
+        setWorkoutStarted(true)
+    };
+
+   const workoutCompletedHandler = (exerciseId) => {
+    setWorkoutCompleted((prev) => ({ ...prev, [exerciseId]: !prev[exerciseId]}))
     };
 
     return (
@@ -46,34 +48,45 @@ const StartWorkout = ({ location }) => {
                                  value={weight[exercise._id] || ''}   
                                  type="number"
                                  placeholder="Weight"
-                                 onChange={(e) => handleWeightChange(exercise._id, e.target.value)} 
+                                 onChange={inputHandler(exercise._id, setWeight)} 
                                  />
                                 <input
                                 className=" w-1/2 border rounded py-2 px-3 text-black"
                                  value={sets[exercise._id] || ''}   
                                  type="number"
                                  placeholder="Sets"
-                                 onChange={(e) => handleSetsChange(exercise._id, e.target.value)} 
+                                 onChange={inputHandler(exercise._id, setSets)} 
                                  />
                                   <input
                                 className="w-1/2 border rounded py-2 px-3 text-black"
                                  value={reps[exercise._id] || ''}   
                                  type="number"
                                  placeholder="Reps"
-                                 onChange={(e) => handleRepsChange(exercise._id, e.target.value)} 
+                                 onChange={inputHandler(exercise._id, setReps)} 
                                  />
                             </div>
+                            <label className="flex items-center mt-4">
+                                <input
+                                 type="checkbox" 
+                                 checked={workoutCompleted[exercise._id] || false}
+                                 className="form-checkbox h-5 w-5 text-purple-600" 
+                                 onChange={() => workoutCompletedHandler(exercise._id)} />
+                                <span className="ml-2 text-sm">Completed</span>
+                            </label>
                         </div>
                     ))}
                 </div>
-                <div className="flex flex-col mb-4">
-            <div className="time-elasped">
-                <Timer onLogExercise={exerciseLogHandler} exerciseId={selectedExercises.map((exercise) =>  exercise._id)} />
-                </div>
-        </div>
-                <button className="mt-4 bg-purple-700 hover:bg-[#F5622B] text-white font-bold py-2 px-4 rounded">
-                    Start Workout
-                </button>
+                {workoutStarted ? (
+                        <div className="flex flex-col mb-4">
+                            <div className="time-elasped">
+                                <Timer onLogExercise={exerciseLogHandler} exerciseId={selectedExercises.map((exercise) => exercise._id)} />
+                            </div>
+                        </div>
+                    ) : (
+                        <button className="mt-4 bg-purple-700 hover:bg-[#F5622B] text-white font-bold py-2 px-4 rounded" onClick={startWorkoutHandler}>
+                            Start Workout
+                        </button>
+                    )}
          
             </div>
         ) : (
