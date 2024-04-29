@@ -13,3 +13,4 @@ export { default as Trainers } from './Trainers';
 export { default as Clients } from './Clients';
 export { default as ScrollTop } from './ScrollTop';
 export { default as Timer } from './Timer';
+export { default as ExerciseLog } from './ExerciseLog';

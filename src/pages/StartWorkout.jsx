@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { base_url } from '../utils/api';
 import { useScrollAnime } from '../animation'
-import { Timer } from '../components';
+import { Timer, ExerciseLog } from '../components';
 
 const StartWorkout = ({ location }) => {
     useScrollAnime();
@@ -12,25 +12,27 @@ const StartWorkout = ({ location }) => {
   const [weight, setWeight] = useState({})
   const [reps, setReps] = useState({})
   const [sets, setSets] = useState({})
-  const [exerciseLogs, setExerciseLogs] = useState({})  
-    
+  const [exerciseLogs, setExerciseLogs] = useState([])  
+    console.log("Exercise logs",exerciseLogs)
     const handleWeightChange = (exerciseId, value) => {
-        setWeight((prevWeight) => ({prevWeight, [exerciseId]: value}))
+        setWeight((prevWeight) => ({...prevWeight, [exerciseId]: value}))
     };
 
     const handleRepsChange = (exerciseId, value) => {
         setReps((prevReps) => ({ ...prevReps, [exerciseId]: value}))
     };
+
     const handleSetsChange = (exerciseId, value) => {
         setSets((prevSets) => ({ ...prevSets, [exerciseId]: value}))
+    };
+
+    const exerciseLogHandler = (exerciseLog) => {
+        setExerciseLogs((prevLogs) => [...prevLogs, exerciseLog])
     };
 
     return (
         <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-4">Start Workout</h1>
-        <div className="flex flex-col mb-4">
-            <div className="time-elasped"><Timer/></div>
-        </div>
         {selectedExercises.length > 0 ? (
             <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -64,14 +66,20 @@ const StartWorkout = ({ location }) => {
                         </div>
                     ))}
                 </div>
+                <div className="flex flex-col mb-4">
+            <div className="time-elasped">
+                <Timer onLogExercise={exerciseLogHandler} exerciseId={selectedExercises.map((exercise) =>  exercise._id)} />
+                </div>
+        </div>
                 <button className="mt-4 bg-purple-700 hover:bg-[#F5622B] text-white font-bold py-2 px-4 rounded">
                     Start Workout
                 </button>
+         
             </div>
         ) : (
             <p>No exercises selected for the workout.</p>
         )}
-        
+       <ExerciseLog exerciseLogs={exerciseLogs} />
     </div>
     );
 };

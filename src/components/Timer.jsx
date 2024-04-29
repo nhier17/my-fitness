@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Timer = () => {
+const Timer = ({ exerciseId, onLogExercise }) => {
     const [seconds, setSeconds] = useState(0)
     const [isActive, setIsactive] = useState(false);
 
@@ -23,6 +23,10 @@ const Timer = () => {
     const resetTimer = () => {
         setSeconds(0);
         setIsactive(false);
+    };
+
+    const logExercise = () => {
+        onLogExercise({ exerciseId, time: seconds})
     }
 
     const formatTime = (time) => {
@@ -44,7 +48,11 @@ const Timer = () => {
                 {isActive? 'Pause' : 'Start'}
                 </button>
             <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={resetTimer}>
-                Reset</button>
+                Reset
+                </button>
+                <button className="bg-green-500 text-white px-4 py-2 rounded ml-2" onClick={logExercise}>
+                    Log Exercise
+                </button>
             </div>
         </div>
     );
