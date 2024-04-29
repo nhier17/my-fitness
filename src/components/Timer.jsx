@@ -31,11 +31,18 @@ const Timer = () => {
         return `${mins < 10  ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
     return (
-        <div>
-            <h2>Workout Timer</h2>
-            <div className="">{formatTime(seconds)}</div>
-            <button onClick={toggleTimer}>{isActive? 'Pause' : 'Start'}</button>
-            <button onClick={resetTimer}>Reset</button>
+        <div className="bg-gray-200 rounded p-4 text-center mt-5">
+            <h2 className="text-black text-lg font-semibold mb-2">Begin Workout</h2>
+            <div className="text-4xl font-bold">{formatTime(seconds)}</div>
+            <div className="mt-4">
+            <button
+            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+             onClick={toggleTimer}>
+                {isActive? 'Pause' : 'Start'}
+                </button>
+            <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={resetTimer}>
+                Reset</button>
+            </div>
         </div>
     );
 };
