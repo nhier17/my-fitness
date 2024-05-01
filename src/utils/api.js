@@ -38,7 +38,16 @@ export const proceedToWorkoutData = async (selectedExercises) => {
         }
     } catch (error) {
         console.error('Error starting workout:', error);
-        throw error; // Rethrow the error to handle it in the component
     }
 };
-
+// start the workout
+export const startWorkoutData = async (selectedExercises) => {
+    try {
+        const response = await axios.post(`http://localhost:5000/api/workout/start-workout`, selectedExercises);
+        console.log('Response status:', response.status);
+        console.log('Response data:', response.data);
+        return response.data
+    } catch (error) {
+        console.error('Error starting workout:', error);
+    }
+}

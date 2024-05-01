@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { messages } from '../constants'
 
-const Timer = ({ exerciseId, onLogExercise }) => {
-    const [seconds, setSeconds] = useState(0)
-    const [isActive, setIsactive] = useState(false);
+const Timer = ({ isActive,seconds, setSeconds, setIsActive }) => {
     const [motivation, setMotivation] = useState("");
 
     useEffect(() => {
         let interval = null;
         if (isActive) {
             interval = setInterval(() => {
-                setSeconds(seconds => seconds + 1); 
+                setSeconds(prevSeconds => {
+                    // Stop the timer when 1 minute is over
+                    if (prevSeconds >= 60) {
+                        setIsActive(false);
+                        clearInterval(interval);
+                        return 0; 
+                    }
+                    return prevSeconds + 1;
+                }); 
             }, 1000);
         } else {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [isActive]);
+    }, [isActive,setSeconds, setIsActive]);
 
     useEffect(() => {
      const intervalId = setInterval(() => {
@@ -28,21 +34,6 @@ const Timer = ({ exerciseId, onLogExercise }) => {
      return () => clearInterval(intervalId);
     },[seconds])
 
-       
-
-    const toggleTimer = () => {
-        setIsactive((prevIsActive) => !prevIsActive);
-    };
-
-    const resetTimer = () => {
-        setSeconds(0);
-        setIsactive(false);
-        setMotivation("");
-    };
-
-    const logExercise = () => {
-        onLogExercise({ exerciseId, time: seconds})
-    }
 
     const formatTime = (time) => {
         const mins = Math.floor(time / 60)
@@ -50,28 +41,18 @@ const Timer = ({ exerciseId, onLogExercise }) => {
         return `${mins < 10  ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
     return (
-        <div className="bg-gray-200 rounded p-4 text-center mt-5">
+        <div className="mt-5">
             <h2 className="text-black text-lg font-semibold mb-2">Begin Workout</h2>
             <div className="progress-bar">
-                <div className="progress-bar-inner" style={{ width: `${(seconds / 60) * 100}%` }}></div>
-            </div>
-            <div className="text-4xl font-bold">{formatTime(seconds)}</div>
+            <svg className="circular-progress" viewBox="0 0 100 100">
+                <circle className="progress-background" cx="50" cy="50" r="40" />
+                <circle className="progress-bar-inner" cx="50" cy="50" r="40" style={{ strokeDasharray: `${(seconds % 60) * 4}, 251` }} />
+                <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" className="font-bold">{formatTime(seconds)}</text>
+            </svg>
+        </div>
             {motivation && (
                 <p className="text-sm mt-2 text-gray-500">{motivation}</p>
             )}
-            <div className="mt-4">
-            <button
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-             onClick={toggleTimer}>
-                {isActive? 'Pause' : 'Start'}
-                </button>
-            <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={resetTimer}>
-                Reset
-                </button>
-                <button className="bg-green-500 text-white px-4 py-2 rounded ml-2" onClick={logExercise}>
-                    Log Exercise
-                </button>
-            </div>
         </div>
     );
 };
