@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { messages } from '../constants'
+import React, {  useEffect } from 'react'
 
 const Timer = ({ isActive,seconds, setSeconds, setIsActive }) => {
-    const [motivation, setMotivation] = useState("");
 
     useEffect(() => {
         let interval = null;
@@ -24,16 +22,6 @@ const Timer = ({ isActive,seconds, setSeconds, setIsActive }) => {
         return () => clearInterval(interval);
     }, [isActive,setSeconds, setIsActive]);
 
-    useEffect(() => {
-     const intervalId = setInterval(() => {
-        const currentMessage = messages.find(msg => seconds >= msg.time && seconds < msg.time + 1);
-        if (currentMessage) {
-            setMotivation(currentMessage.message);
-        }
-     }, 1000)
-     return () => clearInterval(intervalId);
-    },[seconds])
-
 
     const formatTime = (time) => {
         const mins = Math.floor(time / 60)
@@ -50,9 +38,6 @@ const Timer = ({ isActive,seconds, setSeconds, setIsActive }) => {
                 <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" className="font-bold">{formatTime(seconds)}</text>
             </svg>
         </div>
-            {motivation && (
-                <p className="text-sm mt-2 text-gray-500">{motivation}</p>
-            )}
         </div>
     );
 };
