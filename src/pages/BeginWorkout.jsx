@@ -18,9 +18,6 @@ const BeginWorkout = ({ location }) => {
   const [isActive, setIsActive] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
-  console.log(exerciseLogs)
-
-
   const moveToNextExercise = () => {
   if (
         weights[selectedExercises[currentExerciseIndex]._id]?.trim() !== "" &&

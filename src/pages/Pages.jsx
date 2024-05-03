@@ -7,6 +7,7 @@ import Recipe from "./Recipe"
 import Community from './Community';
 import StartWorkout from './StartWorkout';
 import BeginWorkout from './BeginWorkout';
+import About from './About';
 import { motion, AnimatePresence } from 'framer-motion';
 import Workout from './Workout';
 
@@ -18,7 +19,8 @@ const Pages = () => {
       <Routes location={location} key={location.pathname}>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />
-       <Route path="/login" element={<Login />} />   
+       <Route path="/login" element={<Login />} />  
+       <Route path="/about" element={<About/>} /> 
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/nutrition" element={<Nutrition />} />
       <Route path="/recipe/:name" element={<Recipe/>} />
