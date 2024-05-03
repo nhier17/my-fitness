@@ -68,7 +68,7 @@ const About = () => {
           community of fitness enthusiasts from around the world.
         </p>
         </div>
-          <div className="mx-auto overflow-hidden">
+          <div className="mx-auto overflow-hidden max-w-[300px] md:max-w-full">
             <Splide options={splideOptions}>
             {images.map((image, i) => (
               <SplideSlide key={i}>
