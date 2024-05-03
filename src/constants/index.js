@@ -7,7 +7,7 @@ import lotus from '../assets/lotus.png';
 import barbell from '../assets/barbell.png';
 import { cm, cm1, cm2, cm3, cm4, cm5, cm6, cm7, cm8,cm9, cm10, cm11 } from '../assets';
 import { chest, legs, abs, boxing, back, shoulder,arms, hiit } from '../assets';
-import { client, client1, client2 } from '../assets';
+import { client, client1, client2, fitness2,user, user1 } from '../assets';
 import { FaStar,FaUser, FaHeart, FaDumbbell } from 'react-icons/fa'
 
 //footer links
@@ -329,7 +329,27 @@ export const aboutContents = [
   icon: FaUser,
   alt: 'heart'
 }
-]
+];
+export const testimonials = [
+  {
+    id: 1,
+    name: "Iris West",
+    quote: "FitFusion has completely changed the way I approach fitness. The personalized workouts and nutrition guidance have helped me achieve my fitness goals faster than I ever thought possible.",
+    image: user, 
+  },
+  {
+    id: 2,
+    name: "Clark Kent",
+    quote: "I've tried many fitness apps before, but FitFusion stands out from the rest. The variety of exercises keeps my workouts exciting, and the expert guidance ensures I'm making progress safely.",
+    image: fitness2,
+  },
+  {
+    id: 3,
+    name: "Barry Allen",
+    quote: "Joining the FitFusion community was the best decision I've made for my fitness journey. The support from other members and the motivation from the trainers keep me going even on tough days.",
+    image: user1,
+  }
+];
 
 
     

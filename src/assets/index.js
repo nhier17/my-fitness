@@ -31,3 +31,6 @@ export { default as fitness2 } from './fitness2.jpeg';
 export { default as fitness3 } from './fitness3.jpeg';
 export { default as fitness4 } from './fitness4.jpeg';
 export { default as fitness5 } from './fitness5.jpeg';
+export { default as quotes } from './quotes.svg';
+export { default as user } from './user.jpeg';
+export { default as user1 } from './user1.jpeg';

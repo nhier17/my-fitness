@@ -5,7 +5,7 @@ import { apple, google, fitness2, fitness, fitness1,fitness3, fitness4, fitness5
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/skyblue';
 import { useTitleAnime } from '../animation';
-
+import { Testimonials } from '../components';
 
 const About = () => {
   useTitleAnime();
@@ -76,6 +76,12 @@ const About = () => {
                 </SplideSlide>
             ))}
             </Splide>
+          </div>
+          <div className="mx-auto my-8">
+            <h2 className="text-2xl font-bold">Testimonials</h2>
+            <div>
+              <Testimonials />
+            </div>
           </div>
         <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
         <p className="text-lg leading-relaxed mb-8">
