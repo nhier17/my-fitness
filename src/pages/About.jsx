@@ -65,12 +65,12 @@ const About = () => {
         <h2 className="text-2xl font-bold mb-4">
           Join the FitFusion Community
         </h2>
-        <p className="text-lg leading-relaxed mb-8">
+        <p className="md:text-lg text-base leading-relaxed mb-8">
           Fitness is more fun when you do it together. Join our vibrant
           community of fitness enthusiasts from around the world.
         </p>
         </div>
-          <div className="mx-auto overflow-hidden">
+          <div className="mx-auto overflow-x-hidden">
             <Splide options={splideOptions}>
             {images.map((image, i) => (
               <SplideSlide key={i}>
@@ -88,7 +88,7 @@ const About = () => {
             </div>
           </div>
         <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
-        <p className="text-lg leading-relaxed mb-8">
+        <p className="md:text-lg text-base leading-relaxed mb-8">
           It's time to take the first step towards a healthier, happier you.
           Download the FitFusion app today and start your fitness journey with
           us.
