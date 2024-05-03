@@ -8,7 +8,7 @@ import barbell from '../assets/barbell.png';
 import { cm, cm1, cm2, cm3, cm4, cm5, cm6, cm7, cm8,cm9, cm10, cm11 } from '../assets';
 import { chest, legs, abs, boxing, back, shoulder,arms, hiit } from '../assets';
 import { client, client1, client2 } from '../assets';
-import { FaStar } from 'react-icons/fa'
+import { FaStar,FaUser, FaHeart, FaDumbbell } from 'react-icons/fa'
 
 //footer links
 export const footerLinks = [
@@ -300,6 +300,36 @@ export const clients = [
   }
 ];
 
+export const aboutContents = [
+{
+  id: 1,
+  title: 'Personalized Workouts',
+  description: 'Say goodbye to one-size-fits-all routines. With FitFusion, youll get access to personalized workout plans tailored to your fitness level, goals, and preferences.',
+  icon: FaDumbbell,
+  alt: 'dumbell'
+},
+{
+  id: 2,
+  title: 'Nutrition Guidance',
+  description: 'Unlock your full potential with expert nutrition guidance, personalized meal plans, and sustainable lifestyle changes for optimal health and performance.',
+  icon: FaHeart,
+  alt: 'heart'
+},
+{
+  id: 3,
+  title: 'Variety of Exercises',
+  description: 'Boredom is the enemy of progress. Thats why we offer a wide range of exercises, from traditional strength training and cardio to yoga and pilates.',
+  icon: FaHeart,
+  alt: 'heart'
+},
+{
+  id: 4,
+  title: 'Expert Guidance',
+  description: 'Our team of certified fitness trainers and nutritionists is here to support you every step of the way.',
+  icon: FaUser,
+  alt: 'heart'
+}
+]
 
 
     
