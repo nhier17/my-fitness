@@ -74,8 +74,8 @@ const About = () => {
             <Splide options={splideOptions}>
             {images.map((image, i) => (
               <SplideSlide key={i}>
-                <div className="flex items-center justify-center">
-                <img src={image} alt="fitnessfusion" className="w-[400px] h-[400px] rounded-lg object-cover mb-8" />
+                <div className="flex items-center justify-center overflow-hidden">
+                <img src={image} alt="fitnessfusion" className="w-[400px] h-[400px] rounded-lg object-cover mb-8 overflow-hidden" />
                 </div>
                 </SplideSlide>
             ))}
