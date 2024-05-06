@@ -18,10 +18,9 @@ const About = () => {
     pauseOnHover: true,
     resetProgress: false,
     arrows: false,
-    pagination: false,
-    drag: 'free',
     perPage: 3, 
-    gap: 20, 
+    gap: '1rem', 
+    focus: 'center',
     breakpoints: {
       640: {
         perPage: 1, 
@@ -70,13 +69,11 @@ const About = () => {
           community of fitness enthusiasts from around the world.
         </p>
         </div>
-          <div className="mx-auto overflow-x-hidden">
+          <div className="animate-on-scroll">
             <Splide options={splideOptions}>
             {images.map((image, i) => (
               <SplideSlide key={i}>
-                <div className="flex items-center justify-center overflow-hidden">
                 <img src={image} alt="fitnessfusion" className="w-[400px] h-[400px] rounded-lg object-cover mb-8 overflow-hidden" />
-                </div>
                 </SplideSlide>
             ))}
             </Splide>
