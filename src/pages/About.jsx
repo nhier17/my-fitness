@@ -2,7 +2,6 @@ import React from 'react'
 import { aboutContents } from '../constants';
 import { FaUser, FaHeart, FaDumbbell } from 'react-icons/fa';
 import { apple, google, fitness2, fitness, fitness1,fitness3, fitness4, fitness5 } from '../assets';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/skyblue';
 import { useTitleAnime, useScrollAnime } from '../animation';
 import { Testimonials } from '../components';
@@ -11,22 +10,6 @@ const About = () => {
   useTitleAnime();
   useScrollAnime();
 
-  const splideOptions = {
-    type: 'loop',
-    autoplay: true,
-    interval: 4000, 
-    pauseOnHover: true,
-    resetProgress: false,
-    arrows: false,
-    perPage: 3, 
-    gap: '1rem', 
-    focus: 'center',
-    breakpoints: {
-      640: {
-        perPage: 1, 
-      },
-    },
-  };
   
   const images = [fitness2, fitness, fitness1,fitness3, fitness4, fitness5];
 
@@ -69,14 +52,15 @@ const About = () => {
           community of fitness enthusiasts from around the world.
         </p>
         </div>
-          <div className="animate-on-scroll">
-            <Splide options={splideOptions}>
+          <div
+           className="flex overflow-x-auto overflow-y-hidden animate-on-scroll"
+           style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}
+          >
             {images.map((image, i) => (
-              <SplideSlide key={i}>
+              <div className="flex-shrink-0 mx-4" key={i}>
                 <img src={image} alt="fitnessfusion" className="w-[400px] h-[400px] rounded-lg object-cover mb-8 overflow-hidden" />
-                </SplideSlide>
+              </div>
             ))}
-            </Splide>
           </div>
           <div className="mx-auto my-8 animate-on-scroll">
             <h2 className="text-2xl font-bold">Testimonials</h2>
