@@ -25,7 +25,14 @@ const Exercise = ({ selectedCategory}) => {
     const addToWorkout = (exercise) => {
         setSelectedExercises((prevSelectedExercises) => [...prevSelectedExercises, exercise])
         toast.success(`${exercise.name} added to workout`)
-    }
+    };
+
+    //remove from workout
+    const removeFromWorkout = (exercise) => {
+        setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((e) => e._id!== exercise._id))
+        toast.success(`${exercise.name} removed from workout`)
+    };
+
     //proceed to workout
     const proceedToWorkout = async () => {
        try {
@@ -48,7 +55,12 @@ const Exercise = ({ selectedCategory}) => {
     <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredExercises.map((exercise) => (
-              <ExerciseCard key={exercise._id} exercise={exercise} addToWorkout={addToWorkout} />
+              <ExerciseCard 
+              key={exercise._id} 
+              exercise={exercise} 
+              addToWorkout={addToWorkout}
+              removeFromWorkout={removeFromWorkout}
+               />
                 ))}
             </div>
             {selectedExercises.length > 0 && (
