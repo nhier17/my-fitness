@@ -2,6 +2,7 @@ import React from 'react'
 import { aboutContents } from '../constants';
 import { FaUser, FaHeart, FaDumbbell } from 'react-icons/fa';
 import { apple, google, fitness2, fitness, fitness1,fitness3, fitness4, fitness5 } from '../assets';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/skyblue';
 import { useTitleAnime, useScrollAnime } from '../animation';
 import { Testimonials } from '../components';
@@ -10,11 +11,27 @@ const About = () => {
   useTitleAnime();
   useScrollAnime();
 
+  const splideOptions = {
+    type: 'loop',
+    autoplay: true,
+    interval: 4000, 
+    pauseOnHover: true,
+    resetProgress: false,
+    arrows: false,
+    perPage: 3, 
+    gap: '1rem', 
+    focus: 'center',
+    breakpoints: {
+      640: {
+        perPage: 1, 
+      },
+    },
+  };
   
   const images = [fitness2, fitness, fitness1,fitness3, fitness4, fitness5];
 
   return (
-    <div className="container mx-auto px-4 py-8 animate-on-scroll">
+    <div className="container mx-auto px-4 py-8 animate-on-scroll overflow-x-hidden">
       <h1 id="title" className="md:text-3xl text-2xl font-bold mb-8 md:text-center text-start text-purple-700 opacity-0 translate-y-20">
         Welcome to FitFusion: <br /> Your Ultimate Fitness Companion
       </h1>
@@ -52,15 +69,14 @@ const About = () => {
           community of fitness enthusiasts from around the world.
         </p>
         </div>
-          <div
-           className="flex overflow-x-auto overflow-y-hidden animate-on-scroll"
-           style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}
-          >
+          <div className="animate-on-scroll">
+            <Splide options={splideOptions}>
             {images.map((image, i) => (
-              <div className="flex-shrink-0 mx-4" key={i}>
+              <SplideSlide key={i}>
                 <img src={image} alt="fitnessfusion" className="w-[400px] h-[400px] rounded-lg object-cover mb-8 overflow-hidden" />
-              </div>
+                </SplideSlide>
             ))}
+            </Splide>
           </div>
           <div className="mx-auto my-8 animate-on-scroll">
             <h2 className="text-2xl font-bold">Testimonials</h2>
