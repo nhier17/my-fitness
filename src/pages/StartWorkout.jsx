@@ -17,14 +17,14 @@ const StartWorkout = ({ location }) => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Start Workout</h1>
+        <h1 className="text-3xl font-bold mb-4">Workouts of the day</h1>
         {selectedExercises.length > 0 ? (
             <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {selectedExercises.map((exercise, index) => (
-                        <div id="image" key={index} className="border rounded overflow-hidden shadow-lg p-4 m-2 animate-on-scroll">
-                            <h3 className="font-bold text-lg mb-2">{exercise.name}</h3>
-                            <img id="image" className="w-full" src={base_url + exercise.image} alt={exercise.name} />
+                        <div key={index} className="border rounded overflow-hidden shadow-lg animate-on-scroll">
+                            <img className="w-full transition duration-300 transform hover:scale-105" src={base_url + exercise.image} alt={exercise.name} />
+                            <h3 className="font-bold text-lg mb-2 text-center px-6 py-4">{exercise.name}</h3>
                         </div>
                     ))}
                 </div> 
