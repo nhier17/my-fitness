@@ -19,12 +19,16 @@ const BeginWorkout = ({ location }) => {
   const [seconds, setSeconds] = useState(0);
 
   const moveToNextExercise = () => {
-  if (
+    if (selectedExercises.length > 0 && currentExerciseIndex < selectedExercises.length - 1) {
+      if (
         weights[selectedExercises[currentExerciseIndex]._id]?.trim() !== "" &&
         reps[selectedExercises[currentExerciseIndex]._id]?.trim() !== ""
-      )  {
-      setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
-      setSeconds(0);
+      ) {
+        setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
+        setSeconds(0);
+      } else {
+        setWorkoutCompleted(true);
+      }
     } else {
       setWorkoutCompleted(true);
     }
@@ -116,11 +120,11 @@ const BeginWorkout = ({ location }) => {
             </button>
           </div>
           <img
-            src={base_url + selectedExercises[currentExerciseIndex].image}
-            alt=""
+            src={base_url + selectedExercises[currentExerciseIndex]?.image}
+            alt="workout"
           />
           <h2 className="text-black text-xl md:text-2xl">
-            {selectedExercises[currentExerciseIndex].name}
+            {selectedExercises[currentExerciseIndex]?.name}
           </h2>
 
           <div className="flex items-center justify-center">

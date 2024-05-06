@@ -11,7 +11,7 @@ const ExerciseCard = ({ addToWorkout,removeFromWorkout,  exercise }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="relative cursor-zoom-in w-auto overflow-hidden transition-all duration-500 ease-in-out">
-         <img className="w-full transition duration-300 transform hover:scale-105" src={base_url+exercise.image} alt={exercise.name} />
+         <img className="w-full" src={base_url+exercise.image} alt={exercise.name} />
          {isHovered && (
           <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50">
             <div className="flex items-center justify-between">
