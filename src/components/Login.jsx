@@ -19,11 +19,14 @@ const Login = () => {
       const submitHandler = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post(`${base_url}/api/auth/login`, formData)  
+          const response = await axios.post(`${base_url}/api/auth/login`, formData) 
+          console.log(response.data); 
           if(response.data) {
+            const token = response.data.user.userId;
+            console.log(token);
             const userName = response.data.user.name;
-            localStorage.setItem('token', userName);
-            navigate('/');
+            localStorage.setItem('token', token);
+            navigate('/user-profile');
             toast.success(`Eat,Train Sleep! ${userName}`);
             setFormData({ email: '', password: '', showPassword: false });
           }
