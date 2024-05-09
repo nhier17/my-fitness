@@ -4,19 +4,25 @@ import logo from "../assets/logo (2).jpeg"
 import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
+import { base_url } from "../utils/api"
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = () => {
     setIsMenuOpen(false);
   }
+
+  const userName = localStorage.getItem('userName');
+  const profilePic = localStorage.getItem('profilePicture');
+  
+
     return (
   <div className="w-full inset-x-0 top-0 z-50 sticky">
     <nav className="w-full bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
-      <div className="flex lg:flex-1">
+      <div className=" flex flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
-          <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="" />
+          <img className="w-16 h-16 rounded-full object-cover" src={logo} alt="" />
         </Link>
       </div>
       <div className="flex lg:hidden">
@@ -29,19 +35,27 @@ const Navbar = () => {
         <NavLink to="/community" text="Community" />
         <NavLink to="/about" text="About" />
       </ul>
+      <Link to="/user-profile">
       <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <FaSearch className="text-xl" />
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
+          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
+        </div>
       </div>
+      </Link>
     </nav>
     {isMenuOpen && (
     <div className="lg:hidden" role="dialog" aria-modal="true">
       <div className="fixed inset-0 z-50"></div>
       <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div className="flex items-center justify-between">
-          <Link to="/" className="-m-1.5 p-1.5">
-            <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="" />
-          </Link>
-            <MdClose className="h-6 w-6 cursor-pointer" onClick={() => setIsMenuOpen(false)} />
+        <Link to="/user-profile">
+      <div className="flex lg:flex-1 lg:justify-end">
+        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
+          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
+        </div>
+      </div>
+      </Link>
+            <MdClose className="h-6 w-6 cursor-pointer text-black" onClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="mt-6 flow-root">
           <div className="-my-6 divide-y divide-gray-500/10">

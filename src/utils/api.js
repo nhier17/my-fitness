@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const base_url = 'https://my-fitness-api.onrender.com';
-//get data
+//get exercise data
 export const getExerciseData = async (category) => {
     try {
       const response = await axios.get(`${base_url}/api/exercise`, {
@@ -49,5 +49,16 @@ export const startWorkoutData = async (selectedExercises) => {
         return response.data
     } catch (error) {
         console.error('Error starting workout:', error);
+    }
+};
+
+//fetch user data
+export const fetchUserData = async () => {
+    try {
+        const userId = localStorage.getItem('token')
+        const response = await axios.get(`${base_url}/api/user/${userId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching user data', error);
     }
 }

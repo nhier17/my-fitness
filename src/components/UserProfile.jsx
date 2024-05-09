@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'sonner';
-import { base_url } from '../utils/api';
+import { fetchUserData, base_url } from '../utils/api';
+import { MdOutlineCloudUpload } from "react-icons/md";
 
 const UserProfile = () => {
   const [profilePic, setProfilePic] = useState(null)
-  const [profilePicUrl, setProfilePicUrl] = useState(null);
-  console.log(profilePicUrl)
-
+  const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        const userId = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:5000/api/user/${userId}`);
-        const userInfo = response.data;
-        console.log(userInfo)
-        setProfilePicUrl(userInfo.user.profilePicture);
+       const userData = await fetchUserData();
+       setUserInfo(userData.user);
+        localStorage.setItem('profilePicture', userData.user.profilePicture);
       } catch (error) {
         console.error(error);
         toast.error('Error fetching user data');
       }
     }
-    fetchUserData();
-  }, [])
+    fetchData();
+  }, []);
 
   const inputHandler = (e) => {
     setProfilePic(e.target.files[0]);
@@ -34,7 +31,7 @@ const UserProfile = () => {
       const formData = new FormData();
       formData.append("profilePicture", profilePic);
       formData.append("userId", userId);
-      await axios.post('http://localhost:5000/api/auth/profile', formData, {
+      await axios.post(`${base_url}/api/auth/profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -46,14 +43,45 @@ const UserProfile = () => {
       toast.error('Error updating profile picture');
     }
   };
+
+  const randomImg = 'https://source.unsplash.com/1600x900/?fitness';
+  
   return (
-    <div>
-      <h2>Profile</h2>
-      {profilePicUrl && (
-        <img className="rounded-full w-12 h-12" src={`http://localhost:5000/${profilePicUrl}`} alt="username"/>
-      )}
-      <input type="file" accept="image/*" onChange={inputHandler} />
-      <button onClick={uploadImage}>Upload Profile Picture</button>
+    <div className="container relative pb-2 w-full justify-center items-center">
+      <div className="flex flex-col pb-5">
+        <div className="relative flex flex-col mb-7">
+          <div className="flex flex-col justify-center items-center">
+        <img 
+            className="w-full h-370 2xl:h-510 shadow-lg object-cover"
+            src={randomImg} 
+            alt="user_pic" />
+            {userInfo && (
+         <img
+              className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
+              src={`${base_url}/${userInfo?.profilePicture}`}
+              alt={userInfo?.name}
+            />    
+          )}
+          <h2 className="font-bold text-3xl text-center mt-3">
+            {userInfo.name}
+          </h2>
+          </div>
+        </div>
+          <div className="text-center mb-7">
+            <input
+              type="file"
+              accept="image/*"
+              className=""
+              onChange={inputHandler}
+            />
+            <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+            onClick={uploadImage}
+            >
+              <MdOutlineCloudUpload />
+            </button>
+          </div>
+      </div>
     </div>
   )
 }
