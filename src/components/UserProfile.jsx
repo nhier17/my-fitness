@@ -1,29 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { fetchUserData, base_url } from '../utils/api';
+import {  base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
+import { useStateContext } from '../contexts/ContextProvider';
 
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const [profilePic, setProfilePic] = useState(null)
-  const [userInfo, setUserInfo] = useState({});
+  const { userInfo,profilePic, setProfilePic,fetchData } = useStateContext();
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-       const userData = await fetchUserData();
-       setUserInfo(userData.user);
-        localStorage.setItem('profilePicture', userData.user.profilePicture);
-      } catch (error) {
-        console.error(error);
-        toast.error('Error fetching user data');
-      }
-    }
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const inputHandler = (e) => {
     setProfilePic(e.target.files[0]);

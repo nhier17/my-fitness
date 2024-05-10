@@ -1,17 +1,45 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useMemo } from 'react';
+import { fetchUserData } from '../utils/api';
+import { toast } from 'sonner';
 
 const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
-    const [profilePic, setProfilePic] = useState(null)
+    //userprofile
+  const [profilePic, setProfilePic] = useState(null)
   const [userInfo, setUserInfo] = useState({});
+  //signup and login
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  //navbar 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  //fetch user information
+  const fetchData = useMemo(() => async () => {
+    try {
+     const userData = await fetchUserData();
+     setUserInfo(userData.user);
+      localStorage.setItem('profilePicture', userData.user.profilePicture);
+    } catch (error) {
+      console.error(error);
+      toast.error('Error fetching user data');
+    }
+  },[]);
 
   return (
     <StateContext.Provider value={{
          profilePic, 
          setProfilePic, 
          userInfo, 
-         setUserInfo
+         setUserInfo,
+         formData, 
+         setFormData,
+         isMenuOpen, 
+         setIsMenuOpen,
+         fetchData,
           }}>
       {children}
     </StateContext.Provider>

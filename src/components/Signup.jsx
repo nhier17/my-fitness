@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React from 'react'
 import { MdEmail } from 'react-icons/md'
 import { FaLock, FaUser } from 'react-icons/fa'
 import { Link,useNavigate } from 'react-router-dom'
@@ -8,16 +8,14 @@ import { GoogleLogin } from '@react-oauth/google';
 import { login } from '../assets'
 import { useTitleAnime } from '../animation'
 import { base_url } from '../utils/api'
+import { useStateContext } from '../contexts/ContextProvider';
 
 const Signup = () => {
     const navigate = useNavigate();
     useTitleAnime()
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  })
+  const {formData, setFormData } = useStateContext()
+ 
 //register user
 const submitHandler = async (e) => {
   e.preventDefault();

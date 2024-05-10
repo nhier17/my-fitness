@@ -1,21 +1,21 @@
-import React, { useState }  from 'react'
+import React from 'react'
 import { Link, useLocation } from "react-router-dom"
 import logo from "../assets/logo (2).jpeg"
 import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
+import { FaUser } from 'react-icons/fa';
 import { MdClose } from "react-icons/md";
 import { base_url } from "../utils/api"
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useStateContext } from '../contexts/ContextProvider';
 
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen, userInfo } = useStateContext();
+  console.log(userInfo);
   const closeMenu = () => {
     setIsMenuOpen(false);
   }
-
-  const userName = localStorage.getItem('userName');
-  const profilePic = localStorage.getItem('profilePicture');
   
 
     return (
@@ -39,12 +39,16 @@ const Navbar = () => {
       <Link to="/user-profile">
       <div className="hidden lg:flex gap-2 lg:flex-1 lg:justify-end">
         <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white">
-          <img className="w-8 h-8 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
+          {userInfo ? (
+          <img className="w-8 h-8 rounded-full object-cover"  src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
+          ) : (
+            <FaUser className="w-8 h-8" />
+          )}
         </div>
         <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
               <span className="text-gray-400 font-bold ml-1 text-14">
-                {userName}
+                {userInfo?.name}
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
@@ -59,7 +63,11 @@ const Navbar = () => {
         <Link to="/user-profile">
       <div className="flex lg:flex-1 lg:justify-end">
         <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
-          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
+          {userInfo ? (
+          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
+          ) : (
+            <FaUser className="w-16 h-16" />
+          )}
         </div>
       </div>
       </Link>
