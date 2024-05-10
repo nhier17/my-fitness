@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { fetchUserData, base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
+import { CiLogout } from "react-icons/ci";
+
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   const [profilePic, setProfilePic] = useState(null)
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
@@ -44,6 +48,16 @@ const UserProfile = () => {
     }
   };
 
+  //logout the user
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('profilePicture');
+    localStorage.removeItem('userName');
+    toast.success('Logged out successfully');
+    navigate('/login');
+    window.location.reload();
+  }
+
   const randomImg = 'https://source.unsplash.com/1600x900/?fitness';
   
   return (
@@ -81,6 +95,14 @@ const UserProfile = () => {
               <MdOutlineCloudUpload />
             </button>
           </div>
+      </div>
+      <div className="mt-5">
+          <button
+           onClick={logout}
+           className="flex items-center justify-center gap-2">
+          <CiLogout />
+          <span>Log out</span>
+          </button>
       </div>
     </div>
   )
