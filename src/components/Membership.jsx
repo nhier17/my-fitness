@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css/skyblue';
+
 
 
 const Membership = () => {
@@ -31,6 +31,7 @@ const Membership = () => {
     pauseOnHover: true,
     resetProgress: false,
     arrows: false,
+    pagination: false,
     drag: 'free',
   };
   return (

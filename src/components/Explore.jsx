@@ -15,6 +15,7 @@ const splideOptions = {
   pauseOnHover: true,
   resetProgress: false,
   arrows: false,
+  pagination: false,
   drag: 'free',
   perPage: 3, 
   gap: 20, 

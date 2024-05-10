@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
 import { MdClose } from "react-icons/md";
 import { base_url } from "../utils/api"
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 
 const Navbar = () => {
@@ -22,7 +23,7 @@ const Navbar = () => {
     <nav className="w-full bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
       <div className=" flex flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
-          <img className="w-16 h-16 rounded-full object-cover" src={logo} alt="" />
+          <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="" />
         </Link>
       </div>
       <div className="flex lg:hidden">
@@ -36,10 +37,17 @@ const Navbar = () => {
         <NavLink to="/about" text="About" />
       </ul>
       <Link to="/user-profile">
-      <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
-          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
+      <div className="hidden lg:flex gap-2 lg:flex-1 lg:justify-end">
+        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white">
+          <img className="w-8 h-8 rounded-full object-cover" src={`${base_url}/${profilePic}`} alt={userName} />
         </div>
+        <p>
+              <span className="text-gray-400 text-14">Hi,</span>{' '}
+              <span className="text-gray-400 font-bold ml-1 text-14">
+                {userName}
+              </span>
+            </p>
+            <MdKeyboardArrowDown className="text-gray-400 text-14" />
       </div>
       </Link>
     </nav>
