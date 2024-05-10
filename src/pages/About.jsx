@@ -55,13 +55,13 @@ const About = () => {
       ))}
       </div>
       <div className="animate-on-scroll mt-8">
-        <h2 className="text-2xl font-bold mb-4">Meet the Team</h2>
+        <h2 className="text-2xl font-bold mb-4 text-purple-700">Meet the Team</h2>
         <p className="text-lg leading-relaxed mb-8">
           At FitFusion, we're passionate about health and fitness. Our team is
           comprised of dedicated professionals who are committed to helping you
           reach your full potential.
         </p>
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-2xl font-bold mb-4 text-purple-700">
           Join the FitFusion Community
         </h2>
         <p className="md:text-lg text-base leading-relaxed mb-8">
@@ -79,12 +79,12 @@ const About = () => {
             </Splide>
           </div>
           <div className="mx-auto my-8 animate-on-scroll">
-            <h2 className="text-2xl font-bold">Testimonials</h2>
+            <h2 className="text-2xl font-bold text-purple-700">Testimonials</h2>
             <div>
               <Testimonials />
             </div>
           </div>
-        <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
+        <h2 className="text-2xl font-bold mb-4 text-purple-700">Ready to Get Started?</h2>
         <p className="md:text-lg text-base leading-relaxed mb-8">
           It's time to take the first step towards a healthier, happier you.
           Download the FitFusion app today and start your fitness journey with

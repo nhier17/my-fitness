@@ -42,8 +42,6 @@ const UserProfile = () => {
   //logout the user
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('profilePicture');
-    localStorage.removeItem('userName');
     toast.success('Logged out successfully');
     navigate('/login');
     window.location.reload();

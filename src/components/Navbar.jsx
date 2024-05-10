@@ -38,9 +38,9 @@ const Navbar = () => {
       </ul>
       <Link to="/user-profile">
       <div className="hidden lg:flex gap-2 lg:flex-1 lg:justify-end">
-        <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white">
           {userInfo ? (
-          <img className="w-8 h-8 rounded-full object-cover"  src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
+          <img className="w-12 h-12 rounded-full object-cover"  src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
           ) : (
             <FaUser className="w-8 h-8" />
           )}
@@ -69,6 +69,13 @@ const Navbar = () => {
             <FaUser className="w-16 h-16" />
           )}
         </div>
+        <p>
+              <span className="text-gray-400 text-14">Hi,</span>{' '}
+              <span className="text-gray-400 font-bold ml-1 text-14">
+                {userInfo?.name}
+              </span>
+            </p>
+            <MdKeyboardArrowDown className="text-gray-400 text-14" />
       </div>
       </Link>
             <MdClose className="h-6 w-6 cursor-pointer text-black" onClick={() => setIsMenuOpen(false)} />
