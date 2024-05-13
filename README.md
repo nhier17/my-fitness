@@ -52,11 +52,30 @@ Authentication compromises a sign up, login profile and edit profile function th
 My fitness is designed to be intuitive and user-friendly. Here are some common tasks you can perform:
 
 Creating a Workout: 
+
   Navigate to the "Workouts" section, click on plus button to add an erercise to workout.Then click proceed to workout button to view your selected exercises for the day. On the startworkout page click start workout button to begin workout and follow the prompts to add weights, sets, and reps.
 
 Generating a Meal Plan:
+
 Go to the "Nutrition" tab, specify your calories intake for the day  and click on "Generate Plan" to receive a customized meal plan.
 
+### Author: ABRAHAM NHIER
+
+### Contact Information
+        Email: abrahamnhier97@gmail.com
+        Phone: +254716903151
+        
+### Technology used
+    React 
+    JavaScript 
+    Tailwind
+    NodeJs
+    MongoDB
+
+ ### Frameworks Used
+     Git
+
+ ## LICENSE:  MIT License.    
 
 
 
