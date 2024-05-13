@@ -42,3 +42,21 @@ Open your browser and visit http://localhost:3000 to access the app
 
 ## BDD
 ### API
+   My fitness utilizes various APIs for functionality such as exercise database, meal planning, and authentication. For meal planning i used spoonacular api which provides users with a wide variert of free meal recipes.
+
+ ### User Authemtication
+
+Authentication compromises a sign up, login profile and edit profile function that includes the option to edit your profile picture.
+
+### Usage
+My fitness is designed to be intuitive and user-friendly. Here are some common tasks you can perform:
+
+Creating a Workout: 
+  Navigate to the "Workouts" section, click on plus button to add an erercise to workout.Then click proceed to workout button to view your selected exercises for the day. On the startworkout page click start workout button to begin workout and follow the prompts to add weights, sets, and reps.
+
+Generating a Meal Plan:
+Go to the "Nutrition" tab, specify your calories intake for the day  and click on "Generate Plan" to receive a customized meal plan.
+
+
+
+
