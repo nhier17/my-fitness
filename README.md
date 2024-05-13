@@ -75,7 +75,7 @@ Go to the "Nutrition" tab, specify your calories intake for the day  and click o
  ### Frameworks Used
      Git
 
- ## LICENSE:  [MIT License.]    
+ ## LICENSE:  [MIT License].    
 
 
 
