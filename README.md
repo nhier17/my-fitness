@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+# My Fitness
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+My fitness is a comprehensive fitness application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It provides users with tools for planning and tracking their workouts, accessing meal plans, and connecting with other fitness enthusiasts.
 
-## Available Scripts
+## Getting Started
+To get started with my fitness, you can visit our website to sign up and create an account. Once registered, you'll have access to all the features our app has to offer
+. Additionally, you can also clone the repository from GitHub and set up the app locally for development or testing purposes.
 
-In the project directory, you can run:
+## Features
+### 1. Workouts
+    Create custom workout plans tailored to your fitness goals.
+    Track your progress and performance over time.
+    Access a library of exercises with detailed instructions and videos.
+    
+### 2. Meal Plan
+    Generate personalized meal plans based on dietary preferences and fitness goals.
+    Browse recipes and nutritional information for each meal.
+    Track your daily calorie intake and macronutrient distribution.
+### 3. Fitness Community
+    Connect with other users, share workout routines, and exchange tips and advice.
+    Participate in challenges and competitions to stay motivated.
+    Join groups based on specific interests or fitness levels.
+    
 
-### `npm start`
+### Installation
+To install and run my fitness locally, follow these steps:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the GitHub repository:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    git clone https://github.com/your-username/your-repo.git
+Navigate to the project directory:
 
-### `npm test`
+    cd your-repo
+Install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+    npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm start
+Open your browser and visit http://localhost:3000 to access the app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## BDD
+### API
+   My fitness utilizes various APIs for functionality such as exercise database, meal planning, and authentication. For meal planning i used spoonacular api which provides users with a wide variert of free meal recipes.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ ### User Authemtication
 
-### `npm run eject`
+Authentication compromises a sign up, login profile and edit profile function that includes the option to edit your profile picture.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Usage
+My fitness is designed to be intuitive and user-friendly. Here are some common tasks you can perform:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Creating a Workout: 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  Navigate to the "Workouts" section, click on plus button to add an erercise to workout.Then click proceed to workout button to view your selected exercises for the day. On the startworkout page click start workout button to begin workout and follow the prompts to add weights, sets, and reps.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Generating a Meal Plan:
 
-## Learn More
+Go to the "Nutrition" tab, specify your calories intake for the day  and click on "Generate Plan" to receive a customized meal plan.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Author: ABRAHAM NHIER
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Contact Information
+        Email: abrahamnhier97@gmail.com
+        Phone: +254716903151
+        
+### Technology used
+    React 
+    JavaScript 
+    Tailwind
+    NodeJs
+    MongoDB
 
-### Code Splitting
+ ### Frameworks Used
+     Git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+ ## LICENSE: [MIT License](link-to-license-file). 
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
