@@ -56,7 +56,11 @@ export const startWorkoutData = async (selectedExercises) => {
 export const fetchUserData = async () => {
     try {
         const userId = localStorage.getItem('token')
-        const response = await axios.get(`${base_url}/api/user/${userId}`);
+        const response = await axios.get(`${base_url}/api/user/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching user data', error);

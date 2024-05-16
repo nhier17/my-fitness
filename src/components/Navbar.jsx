@@ -12,7 +12,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 const Navbar = () => {
   const { isMenuOpen, setIsMenuOpen, userInfo } = useStateContext();
-  console.log(userInfo);
+
   const closeMenu = () => {
     setIsMenuOpen(false);
   }
@@ -42,7 +42,7 @@ const Navbar = () => {
           {userInfo ? (
           <img className="w-12 h-12 rounded-full object-cover"  src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
           ) : (
-            <FaUser className="w-8 h-8" />
+            <FaUser className="w-8 h-8 text-black" />
           )}
         </div>
         <p>

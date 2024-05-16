@@ -22,7 +22,6 @@ export const ContextProvider = ({ children }) => {
     try {
      const userData = await fetchUserData();
      setUserInfo(userData.user);
-      localStorage.setItem('profilePicture', userData.user.profilePicture);
     } catch (error) {
       console.error(error);
       toast.error('Error fetching user data');

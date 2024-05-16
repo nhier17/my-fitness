@@ -6,6 +6,7 @@ import {  base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useStateContext } from '../contexts/ContextProvider';
+import Dashboard from '../pages/Dashboard';
 
 
 const UserProfile = () => {
@@ -21,7 +22,7 @@ const UserProfile = () => {
   }
   //upload image 
   const uploadImage = async () => {
-    const userId = localStorage.getItem('token')
+    const userId = userInfo._id
     try {
       const formData = new FormData();
       formData.append("profilePicture", profilePic);
@@ -29,10 +30,12 @@ const UserProfile = () => {
       await axios.post(`${base_url}/api/auth/profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${userInfo._id}`
         },
       })
       toast.success("Profile picture updated successfully");
+      // fetch updated profile
+      fetchData();
     } catch (error) {
       console.error(error);
       toast.error('Error updating profile picture');
@@ -40,8 +43,9 @@ const UserProfile = () => {
   };
 
   //logout the user
-  const logout = () => {
-    localStorage.removeItem('token');
+  const logout = async () => {
+    const response = await axios.get(`${base_url}/api/auth/logout`) 
+    console.log(response)
     toast.success('Logged out successfully');
     navigate('/login');
     window.location.reload();
@@ -85,12 +89,14 @@ const UserProfile = () => {
             </button>
           </div>
       </div>
-      <div className="mt-5">
-          <button
-           onClick={logout}
-           className="flex items-center justify-center gap-2">
-          <CiLogout />
-          <span>Log out</span>
+      <Dashboard />
+      <div className="flex items-center justify-center">
+
+      <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-full"
+            onClick={logout}
+          >
+            <CiLogout /> <span>Logout</span>
           </button>
       </div>
     </div>

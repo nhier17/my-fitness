@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Nutrition from './Nutrition'
-import {  Signup, Login, Dashboard,UserProfile } from '../components'
+import {  Signup, Login, UserProfile } from '../components'
 import Home from './Home';
 import Recipe from "./Recipe"
 import Community from './Community';
@@ -22,7 +22,6 @@ const Pages = () => {
        <Route path="/login" element={<Login />} /> 
        <Route path="/user-profile" element={<UserProfile/>} /> 
        <Route path="/about" element={<About/>} /> 
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/nutrition" element={<Nutrition />} />
       <Route path="/recipe/:name" element={<Recipe/>} />
       <Route path="/community" element={<Community/>} />
