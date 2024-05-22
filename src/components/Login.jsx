@@ -1,15 +1,17 @@
-import React, { useState } from 'react'
-import { MdEmail } from 'react-icons/md'
-import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa'
-import { Link,useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { MdEmail } from 'react-icons/md';
+import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from "axios"
 import { toast } from 'sonner';
 import { GoogleLogin } from '@react-oauth/google';
-import { login } from '../assets'
-import { base_url } from '../utils/api'
+import { login } from '../assets';
+import { base_url } from '../utils/api';
+import { useStateContext } from '../contexts/ContextProvider';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { setUserInfo } = useStateContext();
     const [formData, setFormData] = useState({
         email: '',
         password: "",
@@ -19,23 +21,24 @@ const Login = () => {
       const submitHandler = async (e) => {
         e.preventDefault();
         try {
-          const response = await axios.post(`${base_url}/api/auth/login`, formData) 
+          const response = await axios.post(`${base_url}/api/auth/login`, formData, {withCredentials: true}); 
           if(response.data) {
-            const userName = response.data.user.name;
-            const token = response.data.user.userId;
-            localStorage.setItem('userName', userName);
-            localStorage.setItem('token', token);
+            const user = response.data.user;
+            localStorage.setItem('userId', user.userId)
+            setUserInfo(user);
+
+            // fetch user data after successful login
+            const userDataRes = await axios.get(`${base_url}/api/user/${user.userId}`, {withCredentials: true});
+            const updatedUser = userDataRes.data.user;
+          
+            setUserInfo(updatedUser);
+
             navigate('/');
-            toast.success(`Eat,Train Sleep! ${userName}`);
+            toast.success(`Eat,Train Sleep! ${user.name}`);
             setFormData({ email: '', password: '', showPassword: false });
           }
         } catch (error) {
-          if(error.response) {
-            toast.error('Error logging in: ' + error.response.data.error)
-          } else {
-            toast.error('Error logging in')
-            console.error(error)
-          }
+         toast.error(error.response ? `Error logging in: ${error.response.data.error}` : 'Error logging in');
           console.error(error)
         }
       }
@@ -65,7 +68,12 @@ const handleSuccess = (credentialResponse) => {
   return (
 <div
  className="m-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] p-8"
- style={{ backgroundImage: `url(${login})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+ style={{ 
+  backgroundImage: `url(${login})`, 
+  backgroundPosition: 'center', 
+  backgroundSize: 'cover', 
+  backgroundRepeat: 'no-repeat' 
+}}
  >
     <form className="mt-8 flex items-center justify-center flex-col" onSubmit={submitHandler}>
      <div className="relative w-full">

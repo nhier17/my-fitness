@@ -2,17 +2,20 @@ import { BsBoxSeam } from 'react-icons/bs';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FiBarChart } from 'react-icons/fi';
+import {  FaRunning, FaDumbbell } from "react-icons/fa";
+import { GrYoga } from "react-icons/gr";
+import { trainer, yogee,pilates } from '../assets'
 
 export const userData = [
     {
         userId: 1,
         date: "2024-05-01",
-        weight: 150, // in pounds
-        bodyFatPercentage: 20, // in percentage
+        weight: 150, 
+        bodyFatPercentage: 20, 
         bmi: 24.5,
-        chest: 40, // in inches
-        waist: 32, // in inches
-        hips: 38, // in inches
+        chest: 40, 
+        waist: 32, 
+        hips: 38, 
       },
       {
         userId: 2,
@@ -143,5 +146,128 @@ export const chartData = [
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
+  },
+];
+// data/dummy.js
+
+export const fitnessBranding = {
+  data: [
+    {
+      icon: <img src={trainer} alt="Trainer 1" className="rounded-full w-10 h-10" />,
+      iconBg: '#03C9D7',
+      title: 'John Doe',
+      desc: 'Certified Personal Trainer',
+    },
+    {
+      icon: <img src={yogee} alt="Trainer 2" className="rounded-full w-10 h-10" />,
+      iconBg: '#FB9678',
+      title: 'Jane Smith',
+      desc: 'Yoga Instructor',
+    },
+    {
+      icon: <img src={pilates} alt="Trainer 3" className="rounded-full w-10 h-10" />,
+      iconBg: '#FF5C8E',
+      title: 'Emily Johnson',
+      desc: 'Pilates Expert',
+    },
+  ],
+};
+
+export const recentActivities = [
+  {
+    icon: <FaRunning className="w-8 h-8" />,
+    iconBg: '#03C9D7',
+    title: 'Morning Run',
+    desc: '5 miles in 40 minutes',
+    amount: '300 cal',
+    pcColor: 'green-600',
+  },
+  {
+    icon: <GrYoga  className="w-8 h-8" />,
+    iconBg: '#FB9678',
+    title: 'Yoga Session',
+    desc: '1 hour session',
+    amount: '200 cal',
+    pcColor: 'red-600',
+  },
+  {
+    icon: <FaDumbbell className="w-8 h-8" />,
+    iconBg: '#FF5C8E',
+    title: 'Strength Training',
+    desc: '45 minutes workout',
+    amount: '400 cal',
+    pcColor: 'blue-600',
+  },
+];
+
+export const fitnessGoals = [
+  {
+    title: 'Weight Loss',
+    target: 'Lose 5 lbs',
+    progress: '2 lbs lost',
+    percentage: '40%',
+  },
+  {
+    title: 'Muscle Gain',
+    target: 'Gain 3 lbs',
+    progress: '1 lbs gained',
+    percentage: '33%',
+  },
+  {
+    title: 'Daily Steps',
+    target: '10,000 steps/day',
+    progress: '7,500 steps',
+    percentage: '75%',
+  },
+  {
+    title: 'Weekly Running',
+    target: 'Run 20 miles/week',
+    progress: '15 miles',
+    percentage: '75%',
+  },
+  {
+    title: 'Hydration',
+    target: 'Drink 3L water/day',
+    progress: '2L',
+    percentage: '67%',
+  },
+];
+
+export const workoutData = [
+  {
+    title: 'Cardio',
+    amount: '20 hrs',
+    percentage: '75%',
+    icon: <img src="path/to/cardio.jpg" alt="Cardio" className="w-8 h-8" />,
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+    pcColor: 'green-600',
+  },
+  {
+    title: 'Strength Training',
+    amount: '15 hrs',
+    percentage: '60%',
+    icon: <img src="path/to/strength.jpg" alt="Strength" className="w-8 h-8" />,
+    iconColor: '#FB9678',
+    iconBg: '#FFF2E6',
+    pcColor: 'red-600',
+  },
+  {
+    title: 'Flexibility',
+    amount: '10 hrs',
+    percentage: '50%',
+    icon: <img src="path/to/flexibility.jpg" alt="Flexibility" className="w-8 h-8" />,
+    iconColor: '#FF5C8E',
+    iconBg: '#FFE8EF',
+    pcColor: 'blue-600',
+  },
+  {
+    title: 'Balance',
+    amount: '5 hrs',
+    percentage: '25%',
+    icon: <img src="path/to/balance.jpg" alt="Balance" className="w-8 h-8" />,
+    iconColor: '#8BE78B',
+    iconBg: '#E8FBE8',
+    pcColor: 'yellow-600',
   },
 ];

@@ -34,3 +34,5 @@ export { default as fitness5 } from './fitness5.jpeg';
 export { default as quotes } from './quotes.svg';
 export { default as user } from './user.jpeg';
 export { default as user1 } from './user1.jpeg';
+export { default as yogee } from './yogee.jpeg';
+export { default as pilates } from './pilates.jpeg';

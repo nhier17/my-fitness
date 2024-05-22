@@ -7,22 +7,26 @@ import { MdOutlineCloudUpload } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useStateContext } from '../contexts/ContextProvider';
 import Dashboard from '../pages/Dashboard';
+import { FaUser } from 'react-icons/fa'
 
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userInfo,profilePic, setProfilePic,fetchData } = useStateContext();
+  const { userInfo, setUserInfo, profilePic, setProfilePic,fetchData } = useStateContext();
+
 
   useEffect(() => {
+    if(userInfo?.userId) {
     fetchData();
-  }, [fetchData]);
+    }
+  }, [fetchData, userInfo?.userId]);
 
   const inputHandler = (e) => {
     setProfilePic(e.target.files[0]);
   }
   //upload image 
   const uploadImage = async () => {
-    const userId = userInfo._id
+    const userId = userInfo.userId;
     try {
       const formData = new FormData();
       formData.append("profilePicture", profilePic);
@@ -30,12 +34,13 @@ const UserProfile = () => {
       await axios.post(`${base_url}/api/auth/profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${userInfo._id}`
-        },
-      })
+          Authorization: `Bearer ${userId}`
+            },
+            withCredentials: true,
+      });
       toast.success("Profile picture updated successfully");
       // fetch updated profile
-      fetchData();
+       fetchData();
     } catch (error) {
       console.error(error);
       toast.error('Error updating profile picture');
@@ -44,12 +49,18 @@ const UserProfile = () => {
 
   //logout the user
   const logout = async () => {
-    const response = await axios.get(`${base_url}/api/auth/logout`) 
-    console.log(response)
-    toast.success('Logged out successfully');
-    navigate('/login');
-    window.location.reload();
-  }
+    try {
+      await axios.get(`${base_url}/api/auth/logout`, {withCredentials: true}); 
+      setUserInfo(null);
+      localStorage.removeItem('userId')
+      toast.success('Logged out successfully');
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout Error',error);
+      toast.error('Error logging out');
+    }
+  
+    }
 
   const randomImg = 'https://source.unsplash.com/1600x900/?fitness';
   
@@ -62,15 +73,18 @@ const UserProfile = () => {
             className="w-full h-370 2xl:h-510 shadow-lg object-cover"
             src={randomImg} 
             alt="user_pic" />
-            {userInfo && (
+            {userInfo?.profilePicture ? (
          <img
               className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
-              src={`${base_url}/${userInfo?.profilePicture}`}
+              src={`${base_url}${userInfo?.profilePicture}`}
               alt={userInfo?.name}
             />    
+          ) : (
+            <FaUser className="w-20 h-20 text-gray-400" />
           )}
+          
           <h2 className="font-bold text-3xl text-center mt-3">
-            {userInfo.name}
+            {userInfo?.name}
           </h2>
           </div>
         </div>
@@ -93,7 +107,7 @@ const UserProfile = () => {
       <div className="flex items-center justify-center">
 
       <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-full"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-md"
             onClick={logout}
           >
             <CiLogout /> <span>Logout</span>

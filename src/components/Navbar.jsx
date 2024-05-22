@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className="w-full bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
       <div className=" flex flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
-          <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="" />
+          <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="logo" />
         </Link>
       </div>
       <div className="flex lg:hidden">
@@ -36,13 +36,15 @@ const Navbar = () => {
         <NavLink to="/community" text="Community" />
         <NavLink to="/about" text="About" />
       </ul>
-      <Link to="/user-profile">
+      <Link to="/profile">
       <div className="hidden lg:flex gap-2 lg:flex-1 lg:justify-end">
         <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white">
-          {userInfo ? (
-          <img className="w-12 h-12 rounded-full object-cover"  src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
+          {userInfo?.profilePicture ? (
+          <img className="w-12 h-12 rounded-full object-cover"
+            src={`${base_url}${userInfo?.profilePicture}`}
+             alt={userInfo.name} />
           ) : (
-            <FaUser className="w-8 h-8 text-black" />
+            <FaUser className="w-8 h-8 text-gray-400" />
           )}
         </div>
         <p>
@@ -59,14 +61,14 @@ const Navbar = () => {
     <div className="lg:hidden" role="dialog" aria-modal="true">
       <div className="fixed inset-0 z-50"></div>
       <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-        <div className="flex items-center justify-between">
-        <Link to="/user-profile">
+        <div className="flex items-center justify-between" onClick={closeMenu}>
+        <Link to="/profile">
       <div className="flex lg:flex-1 lg:justify-end">
         <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
-          {userInfo ? (
-          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}/${userInfo?.profilePicture}`} alt={userInfo.name} />
+          {userInfo?.profilePicture ? (
+          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}${userInfo?.profilePicture}`} alt={userInfo.name} />
           ) : (
-            <FaUser className="w-16 h-16" />
+            <FaUser className="w-8 h-8 text-gray-400" />
           )}
         </div>
         <p>

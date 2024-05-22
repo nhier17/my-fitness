@@ -21,7 +21,7 @@ const Meal = ({ meal }) => {
     <div className="p-4">
       <h1 className="text-2xl font-semibold mb-2 text-white">{meal.title}</h1>
       <ul className="mb-2 list-none text-white">
-        <li>reparation time: {meal.readyInMinutes} minutes</li>
+        <li>Preparation time: {meal.readyInMinutes} minutes</li>
         <li>Number of servings: {meal.servings}</li>
       </ul>
     </div>

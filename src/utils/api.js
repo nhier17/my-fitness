@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+axios.defaults.withCredentials = true;
+
 export const base_url = 'https://my-fitness-api.onrender.com';
 //get exercise data
 export const getExerciseData = async (category) => {
@@ -54,14 +56,11 @@ export const startWorkoutData = async (selectedExercises) => {
 
 //fetch user data
 export const fetchUserData = async () => {
+    const userId = localStorage.getItem('userId');
     try {
-        const userId = localStorage.getItem('token')
-        const response = await axios.get(`${base_url}/api/user/${userId}`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
-            }
-        });
-        return response.data;
+        const response = await axios.get(`${base_url}/api/user/${userId}`, {withCredentials: true});
+        return response.data.user;
+        
     } catch (error) {
         console.error('Error fetching user data', error);
     }

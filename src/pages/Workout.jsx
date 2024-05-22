@@ -17,6 +17,7 @@ const Workout = () => {
       <h2 id="title" className="text-3xl md:text-4xl text-purple-700 text-start md:text-center p-2 md:p-4 opacity-0 translate-y-20 font-semibold">
         Our Training Programs
         </h2>
+        <p className="text-start md:text-center text-xl capitalize p-2 md:p-4">What are you working on today?</p>
       <div  id="workout" className="flex overflow-x-auto overflow-y-hidden  opacity-0 cursor-pointer"
       ref={containerRef}
        style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>

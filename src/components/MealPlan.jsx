@@ -24,7 +24,7 @@ const fetchMealData = async () => {
           <input
             id="calories"
             type="number"
-            className="w-3/4 px-3 py-2 border rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 text-black"
+            className="w-[100%] px-3 py-2 border rounded-md focus:outline-none focus:ring-purple-500 focus:border-purple-500 text-black"
             placeholder="Enter target calories (e.g., 2000)"
             value={calories}
             onChange={handleChange}

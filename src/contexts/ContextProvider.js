@@ -8,6 +8,8 @@ export const ContextProvider = ({ children }) => {
     //userprofile
   const [profilePic, setProfilePic] = useState(null)
   const [userInfo, setUserInfo] = useState({});
+  
+
   //signup and login
   const [formData, setFormData] = useState({
     name: '',
@@ -21,7 +23,7 @@ export const ContextProvider = ({ children }) => {
   const fetchData = useMemo(() => async () => {
     try {
      const userData = await fetchUserData();
-     setUserInfo(userData.user);
+     setUserInfo(userData);
     } catch (error) {
       console.error(error);
       toast.error('Error fetching user data');
