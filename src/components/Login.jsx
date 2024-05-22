@@ -31,6 +31,7 @@ const Login = () => {
             const userDataRes = await axios.get(`${base_url}/api/user/${user.userId}`, {withCredentials: true});
             const updatedUser = userDataRes.data.user;
           
+          
             setUserInfo(updatedUser);
 
             navigate('/');

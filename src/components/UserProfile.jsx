@@ -26,7 +26,8 @@ const UserProfile = () => {
   }
   //upload image 
   const uploadImage = async () => {
-    const userId = userInfo.userId;
+    const userId = userInfo._id;
+    console.log('uploading image', userId);
     try {
       const formData = new FormData();
       formData.append("profilePicture", profilePic);
