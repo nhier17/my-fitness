@@ -138,7 +138,7 @@ const UserProfile = () => {
           </div>
       </div>
       <Dashboard />
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center mt-4">
 
       <button
             className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-md"

@@ -10,6 +10,9 @@ export const ContextProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
   const [isUploading, setIsUploading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //exercises 
+  const [exercises, setExercises] = useState([])
+  const [selectedExercises, setSelectedExercises] = useState([]);
 
   //signup and login
   const [formData, setFormData] = useState({
@@ -46,6 +49,10 @@ export const ContextProvider = ({ children }) => {
          setIsUploading,
          isModalOpen,
          setIsModalOpen,
+         exercises,
+         setExercises,
+         selectedExercises,
+         setSelectedExercises,
           }}>
       {children}
     </StateContext.Provider>

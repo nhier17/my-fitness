@@ -4,11 +4,11 @@ import { toast } from 'sonner';
 import ExerciseCard from './ExerciseCard';
 import { useScrollAnime } from '../animation'
 import { getExerciseData, proceedToWorkoutData } from '../utils/api';
+import { useStateContext } from '../contexts/ContextProvider';
 
 const Exercise = ({ selectedCategory}) => {
     const navigate = useNavigate();
-    const [exercises, setExercises] = useState([])
-    const [selectedExercises, setSelectedExercises] = useState([]);
+    const {exercises, setExercises, selectedExercises, setSelectedExercises} = useStateContext();
 
     useScrollAnime();
 

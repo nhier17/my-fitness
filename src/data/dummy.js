@@ -2,7 +2,7 @@ import { BsBoxSeam } from 'react-icons/bs';
 import { MdOutlineSupervisorAccount } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { FiBarChart } from 'react-icons/fi';
-import {  FaRunning, FaDumbbell } from "react-icons/fa";
+import {  FaRunning, FaDumbbell, FaFire } from "react-icons/fa";
 import { GrYoga } from "react-icons/gr";
 import { trainer, yogee,pilates } from '../assets'
 
@@ -111,41 +111,33 @@ export const userData = [
 ]; 
 export const chartData = [
   {
-    icon: <MdOutlineSupervisorAccount />,
-    amount: '39,354',
-    percentage: '-4%',
-    title: 'Users',
-    iconColor: '#03C9D7',
-    iconBg: '#E5FAFB',
-    pcColor: 'red-600',
+    name: "Calories Burned",
+    icon: (
+      <FaFire style={{ color: 'inherit', fontSize: '26px'}} />
+    ),
+    desc: "Total calories burned today",
+    key: "totalCaloriesBurnt",
+    unit: "kcal",
+    color: "#eb9e34",
+    lightColor: "#FDF4EA",
   },
   {
-    icon: <BsBoxSeam />,
-    amount: '4,396',
-    percentage: '+23%',
-    title: 'Products',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
-    pcColor: 'green-600',
+    name: "Workouts",
+    icon: <FaDumbbell style={{ color: 'inherit', fontSize: '26px'}}  />,
+    desc: "Total no of workouts for today",
+    key: "totalWorkouts",
+    unit: "",
+    color: "#41C1A6",
+    lightColor: "#E8F6F3",
   },
   {
-    icon: <FiBarChart />,
-    amount: '423,39',
-    percentage: '+38%',
-    title: 'Sales',
-    iconColor: 'rgb(228, 106, 118)',
-    iconBg: 'rgb(255, 244, 229)',
-
-    pcColor: 'green-600',
-  },
-  {
-    icon: <HiOutlineRefresh />,
-    amount: '39,354',
-    percentage: '-12%',
-    title: 'Refunds',
-    iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
-    pcColor: 'red-600',
+    name: "Average  Calories Burned",
+    icon: <FiBarChart style={{ color: 'inherit', fontSize: '26px'}} />,
+    desc: "Average Calories Burned on each workout",
+    key: "avgCaloriesBurntPerWorkout",
+    unit: "kcal",
+    color: "#FF9AD5",
+    lightColor: "#FEF3F9",
   },
 ];
 // data/dummy.js
