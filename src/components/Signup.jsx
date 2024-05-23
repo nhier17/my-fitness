@@ -14,16 +14,18 @@ const Signup = () => {
     const navigate = useNavigate();
     useTitleAnime()
 
-  const {formData, setFormData } = useStateContext()
+  const {formData, setFormData, setUserInfo } = useStateContext()
  
 //register user
 const submitHandler = async (e) => {
   e.preventDefault();
   try {
-    const response = await axios.post(`${base_url}/api/auth/register`, formData)
+    const response = await axios.post(`${base_url}/api/auth/register`, formData, {withCredentials: true})
     if(response.data) {
-      const userName = response.data.user.name;
-      toast.success(`Welcome, ${userName}`)
+      const user = response.data.user;
+      setUserInfo(user)
+      localStorage.setItem('userId', user.userdId)
+      toast.success(`Welcome, ${user.name}!`);
       navigate('/')
     }
   } catch (error) {
