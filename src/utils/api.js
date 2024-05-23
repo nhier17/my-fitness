@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.withCredentials = true;
 
 export const base_url = 'https://my-fitness-api.onrender.com';
 //get exercise data

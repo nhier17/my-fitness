@@ -18,3 +18,4 @@ export { default as ExerciseLog } from './ExerciseLog';
 export { default as ShareWorkout } from './ShareWorkout';
 export { default as Testimonials } from './Testimonials';
 export { default as LineChart } from './charts/LineChart';
+export { default as Spinner } from './Spinner';

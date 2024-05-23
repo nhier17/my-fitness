@@ -35,7 +35,7 @@ const Login = () => {
             setUserInfo(updatedUser);
 
             navigate('/');
-            toast.success(`Eat,Train Sleep! ${user.name}`);
+            toast.success(`Eat,Train Sleep! ${user.name}👋`);
             setFormData({ email: '', password: '', showPassword: false });
           }
         } catch (error) {
@@ -68,7 +68,7 @@ const handleSuccess = (credentialResponse) => {
 
   return (
 <div
- className="m-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] p-8"
+ className="container mx-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] px-4 py-8"
  style={{ 
   backgroundImage: `url(${login})`, 
   backgroundPosition: 'center', 

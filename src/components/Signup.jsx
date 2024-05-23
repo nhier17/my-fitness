@@ -25,7 +25,7 @@ const submitHandler = async (e) => {
       const user = response.data.user;
       setUserInfo(user)
       localStorage.setItem('userId', user.userdId)
-      toast.success(`Welcome, ${user.name}!`);
+      toast.success(`Welcome, ${user.name}!👋`);
       navigate('/')
     }
   } catch (error) {
@@ -48,12 +48,12 @@ const handleError = () => {
 console.log('Failed to login')
 }
   return (
-    <div className="m-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] p-8"
+    <div className="container mx-auto mt-10 rounded-lg relative overflow-hidden w-full max-w-screen-md min-h-[480px] px-4 py-8"
     style={{ backgroundImage: `url(${login})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
     >
        <form className="flex flex-col items-center justify-center space-y-4" onSubmit={submitHandler}>
      <h1 id="title" className="text-3xl font-semibold text-white opacity-0 transalte-y-20">
-      Sign up
+      Welcome To My-Fitness 💪
       </h1>
      <div className="relative w-full">
         <FaUser className="absolute top-[50%] left-0 translate-x-full -translate-y-1/2 text-black" />

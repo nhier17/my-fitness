@@ -6,7 +6,7 @@ import { useTitleAnime } from '../animation'
 const Nutrition = () => {
     useTitleAnime();
   return (
-    <div className="mx-auto px-4 py-8 mt-10">
+    <div className="container mx-auto px-4 py-8 mt-10">
     <header className="text-center mb-8">
         <h1 id="title" className="text-4xl font-bold text-purple-800 opacity-0 translate-y-20">Your Nutrition Plan</h1>
         <p className="text-lg text-white mt-2">Plan your meals for a healthier lifestyle</p>

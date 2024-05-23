@@ -2,18 +2,29 @@ import React, {  useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import Modal from 'react-modal';
 import {  base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { useStateContext } from '../contexts/ContextProvider';
 import Dashboard from '../pages/Dashboard';
-import { FaUser } from 'react-icons/fa'
+import { FaUser } from 'react-icons/fa';
+import Spinner from './Spinner';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo, profilePic, setProfilePic,fetchData } = useStateContext();
-
+  const { userInfo, setUserInfo, profilePic, setProfilePic,fetchData,isModalOpen, setIsModalOpen, isUploading, setIsUploading } = useStateContext();
 
   useEffect(() => {
     if(userInfo?.userId) {
@@ -29,6 +40,7 @@ const UserProfile = () => {
     const userId = userInfo._id;
     console.log('uploading image', userId);
     try {
+      setIsUploading(true);
       const formData = new FormData();
       formData.append("profilePicture", profilePic);
       formData.append("userId", userId);
@@ -41,10 +53,13 @@ const UserProfile = () => {
       });
       toast.success("Profile picture updated successfully");
       // fetch updated profile
+      setIsModalOpen(false);
        fetchData();
     } catch (error) {
       console.error(error);
       toast.error('Error updating profile picture');
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -90,15 +105,33 @@ const UserProfile = () => {
           </div>
         </div>
           <div className="text-center mb-7">
-            <input
-              type="file"
-              accept="image/*"
-              className=""
-              onChange={inputHandler}
-            />
+          <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        ariaHideApp={false}
+        overlayClassName="overlay"
+        style={customStyles}
+        >
+          <div className="flex flex-col items-center">
+            <h2 className="text-2xl mb-4">Upload Profile Picture</h2>
+            <input 
+            type="file"
+            accept="image/*"
+            className="mb-4"
+            onChange={inputHandler}
+             />
+             <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
+              onClick={uploadImage}
+              disabled={isUploading}
+             >
+              {isUploading ? <Spinner /> :  'Upload'}
+             </button>
+          </div>
+        </Modal>  
             <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-            onClick={uploadImage}
+            onClick={() => setIsModalOpen(true)}
             >
               <MdOutlineCloudUpload />
             </button>
@@ -108,7 +141,7 @@ const UserProfile = () => {
       <div className="flex items-center justify-center">
 
       <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-md"
+            className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-md"
             onClick={logout}
           >
             <CiLogout /> <span>Logout</span>

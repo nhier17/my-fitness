@@ -6,9 +6,10 @@ const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
     //userprofile
-  const [profilePic, setProfilePic] = useState(null)
+  const [profilePic, setProfilePic] = useState(null);
   const [userInfo, setUserInfo] = useState({});
-  
+  const [isUploading, setIsUploading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //signup and login
   const [formData, setFormData] = useState({
@@ -41,6 +42,10 @@ export const ContextProvider = ({ children }) => {
          isMenuOpen, 
          setIsMenuOpen,
          fetchData,
+         isUploading,
+         setIsUploading,
+         isModalOpen,
+         setIsModalOpen,
           }}>
       {children}
     </StateContext.Provider>

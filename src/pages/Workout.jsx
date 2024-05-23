@@ -13,7 +13,7 @@ const Workout = () => {
   useScrollAnime();
 
   return (
-    <div className="md:mt-20 mt-10">
+    <div className="container mx-auto px-4 py-8 md:mt-20 mt-10">
       <h2 id="title" className="text-3xl md:text-4xl text-purple-700 text-start md:text-center p-2 md:p-4 opacity-0 translate-y-20 font-semibold">
         Our Training Programs
         </h2>

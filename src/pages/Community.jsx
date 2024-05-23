@@ -40,7 +40,7 @@ const Community = () => {
   };
 
   return (
-    <div className="mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8">
       <header className="text-center mb-8 animate-on-scroll">
         <h1 id="title" className="text-4xl font-bold text-purple-800 opacity-0 translate-y-20">Fitness Community</h1>
         <p className="text-lg text-[#ccc] mt-2">Connect with other fitness enthusiasts, share tips, and stay motivated!</p>
