@@ -72,4 +72,14 @@ try {
 } catch (error) {
     console.error('Error fetching workout summmary',error);
 }
+};
+
+//log out the user
+export const logoutUser = async () => {
+    try {
+     await axios.get(`${base_url}/api/auth/logout`, {withCredentials: true});
+   
+    } catch (error) {
+        console.error('Error logging out user', error);
+    }
 }

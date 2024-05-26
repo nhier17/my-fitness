@@ -1,27 +1,51 @@
-import React from 'react'
-import { Link, useLocation } from "react-router-dom"
+import React, { useState } from 'react'
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo (2).jpeg"
 import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
 import { FaUser } from 'react-icons/fa';
 import { MdClose } from "react-icons/md";
-import { base_url } from "../utils/api"
+import { CiLogout } from "react-icons/ci";
+import { toast } from 'sonner';
+import { base_url, logoutUser } from "../utils/api"
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useStateContext } from '../contexts/ContextProvider';
 
 
 const Navbar = () => {
-  const { isMenuOpen, setIsMenuOpen, userInfo } = useStateContext();
+  const navigate = useNavigate();
+  const { isMenuOpen, setIsMenuOpen, userInfo, setUserInfo } = useStateContext();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const closeMenu = () => {
     setIsMenuOpen(false);
   }
-  
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+    //logout the user
+    const logout = async () => {
+      try {
+        await logoutUser();
+        setUserInfo(null);
+        localStorage.removeItem('userId')
+        toast.success('Logged out successfully');
+        navigate('/login');
+      } catch (error) {
+        console.error('Logout Error',error);
+        toast.error('Error logging out');
+      }
+    
+      }
 
     return (
   <div className="w-full inset-x-0 top-0 z-50 sticky">
     <nav className="w-full bg-gray-900 flex items-center justify-between p-6" aria-label="Global">
-      <div className=" flex flex-1">
+      <div className="hidden md:flex flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
           <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="logo" />
         </Link>
@@ -36,8 +60,8 @@ const Navbar = () => {
         <NavLink to="/community" text="Community" />
         <NavLink to="/about" text="About" />
       </ul>
-      <Link to="/profile">
-      <div className="hidden lg:flex gap-2 lg:flex-1 lg:justify-end">
+      <div className="relative">
+      <div className="flex gap-2 lg:flex-1 lg:justify-end cursor-pointer" onClick={toggleDropdown}>
         <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white">
           {userInfo?.profilePicture ? (
           <img className="w-12 h-12 rounded-full object-cover"
@@ -55,31 +79,27 @@ const Navbar = () => {
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
       </div>
-      </Link>
+      {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1" onClick={closeDropdown}>
+              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+              <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Light Mode</button>
+              <button
+              onClick={logout}
+               className="flex items-center gap-1 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <CiLogout />
+                <span>Logout</span>
+                </button>
+            </div>
+          )}
+      </div>
     </nav>
     {isMenuOpen && (
     <div className="lg:hidden" role="dialog" aria-modal="true">
       <div className="fixed inset-0 z-50"></div>
       <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div className="flex items-center justify-between" onClick={closeMenu}>
-        <Link to="/profile">
-      <div className="flex lg:flex-1 lg:justify-end">
-        <div className="w-16 h-16 flex items-center justify-center rounded-full bg-white">
-          {userInfo?.profilePicture ? (
-          <img className="w-16 h-16 rounded-full object-cover" src={`${base_url}${userInfo?.profilePicture}`} alt={userInfo.name} />
-          ) : (
-            <FaUser className="w-8 h-8 text-gray-400" />
-          )}
-        </div>
-        <p>
-              <span className="text-gray-400 text-14">Hi,</span>{' '}
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                {userInfo?.name}
-              </span>
-            </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
-      </div>
-      </Link>
+        <img className="w-[48px] h-[48px] rounded-full object-cover" src={logo} alt="logo" />
             <MdClose className="h-6 w-6 cursor-pointer text-black" onClick={() => setIsMenuOpen(false)} />
         </div>
         <div className="mt-6 flow-root">

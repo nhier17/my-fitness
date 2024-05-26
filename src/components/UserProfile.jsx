@@ -5,7 +5,6 @@ import { toast } from 'sonner';
 import Modal from 'react-modal';
 import {  base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
 import { useStateContext } from '../contexts/ContextProvider';
 import Dashboard from '../pages/Dashboard';
 import { FaUser } from 'react-icons/fa';
@@ -63,20 +62,6 @@ const UserProfile = () => {
     }
   };
 
-  //logout the user
-  const logout = async () => {
-    try {
-      await axios.get(`${base_url}/api/auth/logout`, {withCredentials: true}); 
-      setUserInfo(null);
-      localStorage.removeItem('userId')
-      toast.success('Logged out successfully');
-      navigate('/login');
-    } catch (error) {
-      console.error('Logout Error',error);
-      toast.error('Error logging out');
-    }
-  
-    }
 
   const randomImg = 'https://source.unsplash.com/1600x900/?fitness';
   
@@ -138,15 +123,6 @@ const UserProfile = () => {
           </div>
       </div>
       <Dashboard />
-      <div className="flex items-center justify-center mt-4">
-
-      <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold px-2 py-2 flex justify-center items-center gap-2 rounded-md"
-            onClick={logout}
-          >
-            <CiLogout /> <span>Logout</span>
-          </button>
-      </div>
     </div>
   )
 }
