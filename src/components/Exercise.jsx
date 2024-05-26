@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner';
 import ExerciseCard from './ExerciseCard';
@@ -19,7 +19,7 @@ const Exercise = ({ selectedCategory}) => {
           setExercises(data.exercises)
         }
         fetchData();
-    }, [selectedCategory]);
+    }, [selectedCategory,setExercises]);
 
     //add to workout 
     const addToWorkout = (exercise) => {

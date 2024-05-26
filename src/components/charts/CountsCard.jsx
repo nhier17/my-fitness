@@ -8,7 +8,7 @@ const CountsCard = ({ item, data }) => {
                 {item.name}
             </h3>
             <div className="font-semibold text-4xl md:text-2xl flex items-end gap-2 text-gray-900 ">
-            {data && data[item.key].toFixed(2)}
+        
             <div className="text-sm mb-2">{item.unit}</div>
             <div className={`mb-2 font-medium text-base ${true ? 'text-green-500' : 'text-red-500'} md:text-xs`}>
             (+10%)

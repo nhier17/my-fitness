@@ -1,19 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { chartData, fitnessBranding, recentActivities, fitnessGoals } from '../data/dummy';
 import { LineChartData, CountsCard, BarChartData, WorkoutCard } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
+import { getDashboardData } from '../utils/api';
 
 const Dashboard = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const { selectedExercises } = useStateContext();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const dashboardData = async () => {
+      setLoading(true);
+      const response = await getDashboardData();
+      setData(response);
+      setLoading(false);
+    };
+    dashboardData();
+  }, []);
+
+
+
   return (
 <div className="flex-1 h-screen flex justify-center  py-6">
 <div className="flex-1 max-w-6xl flex flex-col gap-6 md:gap-3">
   <h2 className="text-2xl px-4 font-medium">DashBoard</h2>
   <div className="flex flex-wrap justify-between gap-6 md:gap-3 px-4">
-    {chartData.map((item,index) => (
-      <div key={index}>
-        <CountsCard key={index} item={item} data={data} />
+    {chartData.map((item) => (
+      <div key={item.id}>
+        <CountsCard key={item.id} item={item} data={data} />
       </div>
     ))}
   </div>

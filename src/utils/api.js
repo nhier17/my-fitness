@@ -23,12 +23,12 @@ export const proceedToWorkoutData = async (selectedExercises) => {
         if (selectedExercises.length > 0) {
             const exercisesWithIds = await Promise.all(
                 selectedExercises.map(async (exercise) => {
-                    const { data } = await axios.get(`${base_url}/api/exercise/exercise/${exercise._id}`);
+                    const { data } = await axios.get(`${base_url}/api/exercise/${exercise._id}`, {withCredentials: true});
                     return { ...exercise, exercise: data._id };
                 })
             );
 
-            const response = await axios.post(`${base_url}/api/workout`, { exercises: exercisesWithIds });
+            const response = await axios.post(`${base_url}/api/workout`, { exercises: exercisesWithIds }, {withCredentials: true});
 
             if (response.status === 201) {
                 return true;
@@ -44,7 +44,7 @@ export const proceedToWorkoutData = async (selectedExercises) => {
 // start the workout
 export const startWorkoutData = async (selectedExercises) => {
     try {
-        const response = await axios.post(`http://localhost:5000/api/workout/start-workout`, selectedExercises);
+        const response = await axios.post(`${base_url}/api/workout/start-workout`, selectedExercises, {withCredentials: true});
         console.log('Response status:', response.status);
         console.log('Response data:', response.data);
         return response.data
@@ -63,4 +63,13 @@ export const fetchUserData = async () => {
     } catch (error) {
         console.error('Error fetching user data', error);
     }
+};
+
+export const getDashboardData = async () => {
+try {
+    const response = await axios.get(`${base_url}/api/workout/dashboard`, {withCredentials: true});
+    return response.data;
+} catch (error) {
+    console.error('Error fetching workout summmary',error);
+}
 }

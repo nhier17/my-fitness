@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaDumbbell} from 'react-icons/fa';
 import {  MdTimelapse } from "react-icons/md";
-import { base_url } from '../../utils/api'
 
 const WorkoutCard = ({ workout }) => {
   return (
@@ -10,7 +9,6 @@ const WorkoutCard = ({ workout }) => {
             #{workout?.category}
         </div>
         <div className="text-xl text-gray-900 font-semibold">{workout?.name}</div>
-        <img className="w-1/2 object-cover" src={base_url+workout?.image} alt="" />
         <div className="text-base text-gray-500 font-medium flex gap-1.5">
         Count: {workout?.sets} sets X {workout?.reps} reps
       </div>

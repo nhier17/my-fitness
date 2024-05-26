@@ -1,16 +1,17 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { base_url } from '../utils/api';
-import { useScrollAnime } from '../animation'
+import { useScrollAnime } from '../animation';
+import { useStateContext } from '../contexts/ContextProvider';
 
-const StartWorkout = ({ location }) => {
+const StartWorkout = () => {
     const navigate = useNavigate();
     useScrollAnime();
     
-  const selectedExercises = location.state?.exercises || [];
+  const { selectedExercises } = useStateContext();
 
   const startWorkoutHandler = () => {
-        navigate('/begin-workout',{ state: {exercises: selectedExercises } })
+        navigate('/begin-workout',{exercises: selectedExercises } )
 
     };
     

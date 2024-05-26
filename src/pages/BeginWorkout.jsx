@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Timer, ExerciseLog } from "../components";
 import WorkoutSummary from "./WorkoutSummary";
 import { base_url } from "../utils/api";
+import { useStateContext } from '../contexts/ContextProvider';
 
-const BeginWorkout = ({ location }) => {
+const BeginWorkout = () => {
   const navigate = useNavigate();
-  const selectedExercises = location.state?.exercises || [];
+  const { selectedExercises } = useStateContext();
 
   const [weights, setWeights] = useState({});
   const [reps, setReps] = useState({});
