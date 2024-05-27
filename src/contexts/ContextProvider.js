@@ -9,7 +9,7 @@ export const ContextProvider = ({ children }) => {
   const [profilePic, setProfilePic] = useState(null);
   const [userInfo, setUserInfo] = useState({});
   const [isUploading, setIsUploading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   //exercises 
   const [exercises, setExercises] = useState([])
   const [selectedExercises, setSelectedExercises] = useState([]);
@@ -47,8 +47,6 @@ export const ContextProvider = ({ children }) => {
          fetchData,
          isUploading,
          setIsUploading,
-         isModalOpen,
-         setIsModalOpen,
          exercises,
          setExercises,
          selectedExercises,

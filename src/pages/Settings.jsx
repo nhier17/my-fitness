@@ -7,12 +7,10 @@ import { base_url, updatePassword, handle2FA } from '../utils/api';
 import { FaUser } from 'react-icons/fa';
 
 
-
 const Settings = () => {
-    const { userInfo, profilePic, setProfilePic, fetchData } = useStateContext();
+    const { userInfo, profilePic, setProfilePic, fetchData, isUploading, setIsUploading } = useStateContext();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [isUploading, setIsUploading] = useState(false);
     const [is2FAenabled, setIs2FAenabled] = useState(userInfo?.is2FAenabled || false);
     const fileInputRef = useRef(null);
 
@@ -120,7 +118,7 @@ const Settings = () => {
           <div className="flex items-center gap-10 mb-4">
           {userInfo?.profilePicture ? (
          <img
-              className="rounded-full w-8 h-8  object-cover"
+              className="rounded-full w-10 h-10  object-cover"
               src={`${base_url}${userInfo?.profilePicture}`}
               alt={userInfo?.name}
             />    

@@ -22,8 +22,8 @@ const Dashboard = () => {
 
 
   return (
-<div className="flex-1 h-screen flex justify-center  py-6">
-<div className="flex-1 max-w-6xl flex flex-col gap-6 md:gap-3">
+<div className="container flex-1 flex justify-center mx-auto px-4 py-8">
+<div className="flex-1 flex flex-col gap-6 md:gap-3">
   <h2 className="text-2xl px-4 font-medium">DashBoard</h2>
   <div className="flex flex-wrap justify-between gap-6 md:gap-3 px-4">
     {chartData.map((item) => (
