@@ -54,7 +54,6 @@ const Settings = () => {
       //upload image 
       const uploadImage = async () => {
         const userId = userInfo._id;
-        console.log('uploading image', userId);
         try {
           setIsUploading(true);
           const formData = new FormData();
@@ -121,7 +120,7 @@ const Settings = () => {
           <div className="flex items-center gap-10 mb-4">
           {userInfo?.profilePicture ? (
          <img
-              className="rounded-full w-8 h-8 -mt-10 shadow-xl object-cover"
+              className="rounded-full w-8 h-8  object-cover"
               src={`${base_url}${userInfo?.profilePicture}`}
               alt={userInfo?.name}
             />    

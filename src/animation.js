@@ -70,7 +70,7 @@ export const useScrollAnime = () => {
 
 export const useCategoryAnime = (containerRef, selectedCategory) => {
   useGSAP(() => {
-    console.log('useCategoryAnime hook triggered');
+   ;
     const container = containerRef.current;
 
     if (container) {
