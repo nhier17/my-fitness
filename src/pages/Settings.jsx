@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { useStateContext } from '../contexts/ContextProvider';
@@ -9,25 +8,13 @@ import { FaUser } from 'react-icons/fa';
 
 
 
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
-
-
 const Settings = () => {
     const { userInfo, profilePic, setProfilePic, fetchData } = useStateContext();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isUploading, setIsUploading] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [is2FAenabled, setIs2FAenabled] = useState(userInfo?.is2FAenabled || false);
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         if(userInfo?.userId) {
@@ -43,7 +30,7 @@ const Settings = () => {
             return;
         }
         try {
-            const data = await updatePassword();
+            const data = await updatePassword({ password });
             if(data.success) {
                 toast.success('Password updated successfully');
                 setPassword('');
@@ -57,7 +44,11 @@ const Settings = () => {
       }
 
     const inputHandler = (e) => {
-        setProfilePic(e.target.files[0]);
+        const file = (e.target.files[0]);
+        setProfilePic(file);
+        if(file) {
+          uploadImage(file);
+        }
       }
 
       //upload image 
@@ -78,7 +69,6 @@ const Settings = () => {
           });
           toast.success("Profile picture updated successfully");
           // fetch updated profile
-          setIsModalOpen(false);
            fetchData();
         } catch (error) {
           console.error(error);
@@ -103,6 +93,7 @@ const Settings = () => {
         }
       }
 
+
   return (
     <div className="container m-auto px-4 py-8 bg-white shadow-md rounded-lg w-full max-w-screen-md min-h-[480px] mt-10">
        <h3 className="text-3xl font-bold text-black">Your Settings</h3>
@@ -123,6 +114,7 @@ const Settings = () => {
             type="file"
             accept="image/*"
             className="hidden"
+            ref={fileInputRef}
             onChange={inputHandler}
             />
             </div>
@@ -137,10 +129,10 @@ const Settings = () => {
             <FaUser className="w-8 h-8 text-gray-400" />
           )}
             <button
-            type="submit"
-            onClick={inputHandler} 
+            type="button"
+            onClick={() => fileInputRef.current.click()} 
             className="bg-purple-700 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-md">
-               Update Avatar 
+               {isUploading ? <Spinner /> : 'Update Avatar'}
             </button>
           </div>
           <div className="">
@@ -175,30 +167,6 @@ const Settings = () => {
       >
         Update your settings
       </button>
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        ariaHideApp={false}
-        overlayClassName="overlay"
-        style={customStyles}
-      >
-        <div className="flex flex-col items-center">
-          <label>Avatar</label>
-          <input 
-            type="file"
-            accept="image/*"
-            className="mb-4"
-            onChange={inputHandler}
-          />
-          <button
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-            onClick={uploadImage}
-            disabled={isUploading}
-          >
-            {isUploading ? <Spinner /> : 'Upload'}
-          </button>
-        </div>
-      </Modal>
     </div>
   )
 }
