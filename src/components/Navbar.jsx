@@ -4,8 +4,9 @@ import logo from "../assets/logo (2).jpeg"
 import { motion } from "framer-motion"
 import { FcMenu } from "react-icons/fc";
 import { FaUser } from 'react-icons/fa';
+import { CgProfile } from "react-icons/cg";
 import { MdClose } from "react-icons/md";
-import { CiLogout } from "react-icons/ci";
+import { CiLogout, CiSettings, CiLight } from "react-icons/ci";
 import { toast } from 'sonner';
 import { base_url, logoutUser } from "../utils/api"
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -81,9 +82,18 @@ const Navbar = () => {
       </div>
       {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1" onClick={closeDropdown}>
-              <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
-              <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</Link>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Light Mode</button>
+              <Link to="/profile" className="flex items-center gap-1 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <CgProfile />
+                <span>Profile</span>
+                </Link>
+              <Link to="/settings" className="flex items-center gap-1 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <CiSettings />
+                <span>Settings</span>
+                </Link>
+              <button className="flex items-center gap-1 w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <CiLight />
+                Light Mode
+                </button>
               <button
               onClick={logout}
                className="flex items-center gap-1 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

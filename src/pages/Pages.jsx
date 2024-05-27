@@ -1,15 +1,9 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Nutrition from './Nutrition'
 import {  Signup, Login, UserProfile } from '../components'
-import Home from './Home';
-import Recipe from "./Recipe"
-import Community from './Community';
-import StartWorkout from './StartWorkout';
-import BeginWorkout from './BeginWorkout';
-import About from './About';
+import { Home, About, Nutrition, Workout, StartWorkout, BeginWorkout, Community, Recipe, Settings } from '.';
 import { motion, AnimatePresence } from 'framer-motion';
-import Workout from './Workout';
+
 
 const Pages = () => {
   const location = useLocation();
@@ -26,8 +20,9 @@ const Pages = () => {
       <Route path="/recipe/:name" element={<Recipe/>} />
       <Route path="/community" element={<Community/>} />
       <Route path="/workouts" element={<Workout/>} />
-      <Route path="/start-workout" element={<StartWorkout location={location}/>} />
-      <Route path="/begin-workout" element={<BeginWorkout location={location}/>} />
+      <Route path="/start-workout" element={<StartWorkout/>} />
+      <Route path="/begin-workout" element={<BeginWorkout/>} />
+      <Route path="/settings" element={<Settings />} />
       </Routes>
       </AnimatePresence>
     </motion.div>

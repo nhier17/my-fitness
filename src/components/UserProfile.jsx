@@ -2,13 +2,12 @@ import React, {  useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import Modal from 'react-modal';
 import {  base_url } from '../utils/api';
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { useStateContext } from '../contexts/ContextProvider';
 import Dashboard from '../pages/Dashboard';
 import { FaUser } from 'react-icons/fa';
-import Spinner from './Spinner';
+
 
 const customStyles = {
   content: {
@@ -23,7 +22,7 @@ const customStyles = {
 
 const UserProfile = () => {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo, profilePic, setProfilePic,fetchData,isModalOpen, setIsModalOpen, isUploading, setIsUploading } = useStateContext();
+  const { userInfo, setUserInfo,fetchData,isModalOpen, setIsModalOpen, isUploading, setIsUploading } = useStateContext();
 
   useEffect(() => {
     if(userInfo?.userId) {
@@ -31,36 +30,7 @@ const UserProfile = () => {
     }
   }, [fetchData, userInfo?.userId]);
 
-  const inputHandler = (e) => {
-    setProfilePic(e.target.files[0]);
-  }
-  //upload image 
-  const uploadImage = async () => {
-    const userId = userInfo._id;
-    console.log('uploading image', userId);
-    try {
-      setIsUploading(true);
-      const formData = new FormData();
-      formData.append("profilePicture", profilePic);
-      formData.append("userId", userId);
-      await axios.post(`${base_url}/api/auth/profile`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${userId}`
-            },
-            withCredentials: true,
-      });
-      toast.success("Profile picture updated successfully");
-      // fetch updated profile
-      setIsModalOpen(false);
-       fetchData();
-    } catch (error) {
-      console.error(error);
-      toast.error('Error updating profile picture');
-    } finally {
-      setIsUploading(false);
-    }
-  };
+  
 
 
   const randomImg = 'https://source.unsplash.com/1600x900/?fitness';
@@ -90,30 +60,7 @@ const UserProfile = () => {
           </div>
         </div>
           <div className="text-center mb-7">
-          <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        ariaHideApp={false}
-        overlayClassName="overlay"
-        style={customStyles}
-        >
-          <div className="flex flex-col items-center">
-            <h2 className="text-2xl mb-4">Upload Profile Picture</h2>
-            <input 
-            type="file"
-            accept="image/*"
-            className="mb-4"
-            onChange={inputHandler}
-             />
-             <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full"
-              onClick={uploadImage}
-              disabled={isUploading}
-             >
-              {isUploading ? <Spinner /> :  'Upload'}
-             </button>
-          </div>
-        </Modal>  
+
             <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
             onClick={() => setIsModalOpen(true)}

@@ -22,3 +22,4 @@ export { default as BarChartData } from './charts/BarChart';
 export { default as Spinner } from './Spinner';
 export { default as CountsCard } from './charts/CountsCard';
 export { default as WorkoutCard } from './charts/WorkoutCard';
+export { default as ToggleSwitch } from './ToggleSwitch';

@@ -83,3 +83,28 @@ export const logoutUser = async () => {
         console.error('Error logging out user', error);
     }
 }
+// update user passsword
+export const updatePassword = async () => {
+    try {
+       const userId = localStorage.getItem('userId');
+       const response = await axios.patch(`${base_url}/api/user/update-password`, {
+        headers: {
+            'Authorization': `Bearer ${userId}`
+        },
+        withCredentials: true,
+       });
+       return response.data;
+    } catch (error) {
+        console.error('Error updating user', error);
+    }
+}
+
+//handle 2fa auth
+export const handle2FA = async () => {
+    try {
+        const response = await axios.post(`${base_url}/api/auth/2fa/enable`)
+        return response.data;
+    } catch (error) {
+        console.error('Error enabling 2fa',error);
+    }
+}

@@ -1,0 +1,10 @@
+export { default as Community } from './Community';
+export { default as Home } from './Home';
+export { default as Dashboard } from './Dashboard';
+export { default as StartWorkout } from './StartWorkout';
+export { default as Workout } from './Workout';
+export { default as About } from './About';
+export { default as Nutrition } from './Nutrition';
+export { default as BeginWorkout } from './BeginWorkout';
+export { default as Settings } from './Settings';
+export { default as Recipe } from './Recipe';
