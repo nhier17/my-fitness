@@ -1,6 +1,3 @@
-import { BsBoxSeam } from 'react-icons/bs';
-import { MdOutlineSupervisorAccount } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
 import { FiBarChart } from 'react-icons/fi';
 import {  FaRunning, FaDumbbell, FaFire } from "react-icons/fa";
 import { GrYoga } from "react-icons/gr";
