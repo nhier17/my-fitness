@@ -44,12 +44,34 @@ export const proceedToWorkoutData = async (selectedExercises) => {
 // start the workout
 export const startWorkoutData = async (selectedExercises) => {
     try {
-        const response = await axios.post(`${base_url}/api/workout/start-workout`, selectedExercises, {withCredentials: true});
-        console.log('Response status:', response.status);
-        console.log('Response data:', response.data);
-        return response.data
+        if (selectedExercises.length > 0) {
+            const exercisesWithIds = await Promise.all(
+                selectedExercises.map(async (exercise) => {
+                    const { data } = await axios.get(`${base_url}/api/exercise/${exercise._id}`, {withCredentials: true});
+                    return { ...exercise, exercise: data._id };
+                })
+            );
+        
+            const response = await axios.post(`${base_url}/api/workout/start-workout`, { exercises: exercisesWithIds }, {withCredentials: true});
+
+            if (response.status === 201) {
+                return response.data.workoutId;
+            } else {
+                console.log('Failed to start workout');
+                return false;
+            }
+        }
     } catch (error) {
         console.error('Error starting workout:', error);
+    }
+};
+//complete workout
+export const completeWorkoutData = async (workoutId, exerciseDetails) => {
+    try {
+        const response = await axios.post(`${base_url}/api/workout/${workoutId}/complete-workout`, {workoutId, exerciseDetails}, {withCredentials: true});
+        return response.data
+    } catch (error) {
+        console.error('Error completing workout:', error);
     }
 };
 

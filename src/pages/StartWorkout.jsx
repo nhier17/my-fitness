@@ -9,8 +9,8 @@ const StartWorkout = () => {
     useScrollAnime();
     
   const { selectedExercises } = useStateContext();
-
-  const startWorkoutHandler = () => {
+//proceed to start your workout
+  const proceedToWorkout = () => {
         navigate('/begin-workout',{exercises: selectedExercises } )
 
     };
@@ -29,7 +29,7 @@ const StartWorkout = () => {
                         </div>
                     ))}
                 </div> 
-                <button className="mt-4 bg-purple-700 hover:bg-[#F5622B] text-white font-bold py-2 px-4 rounded" onClick={startWorkoutHandler}>
+                <button className="mt-4 bg-purple-700 hover:bg-[#F5622B] text-white font-bold py-2 px-4 rounded" onClick={proceedToWorkout}>
                     Start Workout
                 </button>
             </div>

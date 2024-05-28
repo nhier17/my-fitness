@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'sonner';
 import { Timer, ExerciseLog } from "../components";
-import WorkoutSummary from "./WorkoutSummary";
-import { base_url } from "../utils/api";
+import { base_url, startWorkoutData, completeWorkoutData } from "../utils/api";
 import { useStateContext } from '../contexts/ContextProvider';
 
 const BeginWorkout = () => {
@@ -12,77 +12,125 @@ const BeginWorkout = () => {
 
   const [weights, setWeights] = useState({});
   const [reps, setReps] = useState({});
-  const [completedSets, setCompletedSets] = useState(0);
+  const [completedSets, setCompletedSets] = useState({});
   const [exerciseLogs, setExerciseLogs] = useState([]);
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [workoutCompleted, setWorkoutCompleted] = useState(false);
+  const [isWorkoutStarted, setIsWorkoutStarted] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [workoutId, setWorkoutId] = useState(null);
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
 
-  const moveToNextExercise = () => {
-    if (selectedExercises.length > 0 && currentExerciseIndex < selectedExercises.length - 1) {
-      if (
-        weights[selectedExercises[currentExerciseIndex]._id]?.trim() !== "" &&
-        reps[selectedExercises[currentExerciseIndex]._id]?.trim() !== ""
-      ) {
-        setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
-        setSeconds(0);
+
+  useEffect(() => {
+    if (isActive) {
+      const timer = setInterval(() => {
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [isActive]);
+
+  const handleStartWorkout = async () => {
+    if (Object.keys(weights).length === 0 || Object.keys(reps).length === 0) {
+      toast.error('Please fill in all the fields');
+      return;
+    }
+
+    try {
+      const workoutData = await startWorkoutData(selectedExercises);
+
+      if (workoutData) {
+        setWorkoutId(workoutData);
+        setCompletedSets(prevSets => ({
+          ...prevSets,
+          [currentExercise?._id]: 1,
+        }))
+        setIsWorkoutStarted(true);
+        setIsActive(true);
+        toast.success('Workout started successfully');
       } else {
-        setWorkoutCompleted(true);
+        toast.error('Failed to start workout');
       }
-    } else {
-      setWorkoutCompleted(true);
+    } catch (error) {
+      console.error('Error starting workout:', error);
+      toast.error('Error starting workout');
     }
   };
 
-  //log workoutCompleted
-  const logExerciseCompletion = () => {
-    const currentExercise = selectedExercises[currentExerciseIndex];
-    const exerciseLog = {
-        name: currentExercise.name,
-        weight: weights[currentExercise._id],
-        reps: reps[currentExercise._id],
-        completedSets: completedSets,
-    };
-    setExerciseLogs((prevLogs) => [...prevLogs, exerciseLog]);
-    moveToNextExercise();
+  const handleNextSet = () => {
+    const exerciseId = selectedExercises[currentExerciseIndex]?._id;
+    if (!exerciseId) return;
+
+    const currentSets = completedSets[exerciseId] || 0;
+    const newSets = currentSets + 1;
+
+    if (newSets > 4) {
+      toast.error('You have already completed 4 sets for this exercise.');
+      return;
+    }
+
+    setCompletedSets(prev => ({
+      ...prev,
+      [exerciseId]: newSets
+    }));
+
+    setIsActive(false);
+    setSeconds(0);
+    setIsActive(true);
+
+    toast.success(`Completed set ${newSets} for ${selectedExercises[currentExerciseIndex]?.name}.`);
   };
 
-  //input change for  weight and reps
+  const handleWorkoutCompletion = async () => {
+    try {
+      if (workoutId) {
+        const exerciseDetails = selectedExercises.reduce((details, exercise) => {
+          details[exercise?._id] = {
+            weight: weights[exercise?._id],
+            reps: reps[exercise?._id],
+            sets: completedSets[exercise?._id] || 0,
+          };
+          return details;
+        }, {});
+        await completeWorkoutData(workoutId, exerciseDetails);
+        setIsWorkoutStarted(false);
+        setIsActive(false);
+        setCompletedSets({});
+        setWeights({});
+        setReps({});
+        toast.success('Workout completed successfully');
+        logExerciseCompletion();
+      }
+    } catch (error) {
+      console.error('Error completing workout', error);
+      toast.error('Failed to complete workout');
+    }
+  };
+
+  const logExerciseCompletion = () => {
+    selectedExercises.forEach((exercise) => {
+      const exerciseLog = {
+        name: exercise?.name,
+        weight: weights[exercise?._id],
+        reps: reps[exercise?._id],
+        sets: completedSets[exercise?._id] || 0,
+      };
+      setExerciseLogs((prevLogs) => [...prevLogs, exerciseLog]);
+    });
+  };
+
   const inputHandler = (exerciseId, setter) => (e) => {
     setter((prev) => ({ ...prev, [exerciseId]: e.target.value }));
   };
-  //begin workout
-  const beginWorkout = () => {
-    if (Object.keys(weights).length === 0 || Object.keys(reps).length === 0) {
-        alert("Please input both weight and reps.");
-    } else {
-      if (!isActive) {
-        setIsActive(true);
-        setWeights((prevWeights) => ({
-            ...prevWeights,
-            [selectedExercises[currentExerciseIndex]._id]: "",
-          }));
-          setReps((prevReps) => ({
-            ...prevReps,
-            [selectedExercises[currentExerciseIndex]._id]: "",
-          }));
-          setCompletedSets((prevSets) => prevSets + 1);
-          logExerciseCompletion()
-      } else {
-        setIsActive(false);
-      }
-    }
-    };
-  
 
   const resetWorkout = () => {
+    setIsWorkoutStarted(false);
     setIsActive(false);
-    setCompletedSets(0);
+    setCompletedSets({});
     setWeights({});
     setReps({});
     setSeconds(0);
-    setExerciseLogs([])
+    setExerciseLogs([]);
+    setWorkoutId(null);
   };
 
   const exerciseLogHandler = (exerciseLog) => {
@@ -93,9 +141,19 @@ const BeginWorkout = () => {
     navigate("/start-workout");
   };
 
-  const moveToPrevExercise = () => {
-    setCurrentExerciseIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  const nextExercise = () => {
+    if (currentExerciseIndex < selectedExercises.length - 1) {
+      setCurrentExerciseIndex(currentExerciseIndex + 1);
+    }
   };
+
+  const prevExercise = () => {
+    if (currentExerciseIndex > 0) {
+      setCurrentExerciseIndex(currentExerciseIndex - 1);
+    }
+  };
+
+  const currentExercise = selectedExercises[currentExerciseIndex];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -103,84 +161,94 @@ const BeginWorkout = () => {
         className="text-3xl text-[#ccc] mb-4 cursor-pointer"
         onClick={backHome}
       />
-      {workoutCompleted ? (
-        <div>
-          <h2 className="text-4xl text-center text-teal-400">
-            Workout Completed
-          </h2>
-          <WorkoutSummary exerciseLogs={exerciseLogs} />
+      <div className="max-w-md mx-auto bg-white rounded-md shadow-md p-6">
+        <div className="flex justify-between mb-4">
+          <button onClick={prevExercise} disabled={currentExerciseIndex === 0}>
+            <FaArrowLeft className="text-black" />
+          </button>
+          <button onClick={nextExercise} disabled={currentExerciseIndex === selectedExercises.length - 1}>
+            <FaArrowRight className="text-black" />
+          </button>
         </div>
-      ) : (
-        <div className="max-w-md mx-auto bg-white rounded-md shadow-md p-6">
-          <div className="flex justify-between mb-4">
-            <button onClick={moveToPrevExercise}>
-              <FaArrowLeft className="text-black" />
-            </button>
-            <button onClick={moveToNextExercise}>
-              <FaArrowRight className="text-black" />
-            </button>
-          </div>
-          <img
-            src={base_url + selectedExercises[currentExerciseIndex]?.image}
-            alt="workout"
-          />
-          <h2 className="text-black text-xl md:text-2xl">
-            {selectedExercises[currentExerciseIndex]?.name}
-          </h2>
-
-          <div className="flex items-center justify-center">
-            <Timer
-              onLogExercise={exerciseLogHandler}
-              exerciseId={selectedExercises.map((exercise) => exercise._id)}
-              isActive={isActive}
-              setIsActive={setIsActive}
-              seconds={seconds}
-              setSeconds={setSeconds}
-            />
-            <div className="w-12 h-12 bg-teal-400 rounded-full flex items-center justify-center text-white text-lg font-bold">
-              {completedSets}/4
+        {currentExercise && (
+          <>
+            <img src={base_url + currentExercise?.image} alt="workout" />
+            <h2 className="text-black text-xl md:text-2xl">
+              {currentExercise?.name}
+            </h2>
+            <div className="flex items-center justify-center">
+              <Timer
+                onLogExercise={exerciseLogHandler}
+                exerciseId={currentExercise?._id}
+                isActive={isActive}
+                setIsActive={setIsActive}
+                seconds={seconds}
+                setSeconds={setSeconds}
+              />
+              <div className="w-12 h-12 bg-teal-400 rounded-full flex items-center justify-center text-white text-lg font-bold">
+                {completedSets[currentExercise?._id] || 0}/4
+              </div>
+              <p className="text-black">sets</p>
             </div>
-            <p className="text-black">sets</p>
-          </div>
-
-          <div className="flex gap-2 mt-2">
-            <input
-              className="w-1/2 border rounded py-2 px-3 text-black"
-              value={weights[selectedExercises[currentExerciseIndex]._id] || ""}
-              type="number"
-              placeholder="Weight"
-              onChange={inputHandler(
-                selectedExercises[currentExerciseIndex]._id,
-                setWeights
-              )}
-            />
-            <input
-              className="w-1/2 border rounded py-2 px-3 text-black"
-              value={reps[selectedExercises[currentExerciseIndex]._id] || ""}
-              type="number"
-              placeholder="Reps"
-              onChange={inputHandler(
-                selectedExercises[currentExerciseIndex]._id,
-                setReps
-              )}
-            />
-          </div>
-          <div className="mt-4">
+            <div className="flex gap-2 mt-2">
+              <input
+                className="w-1/2 border rounded py-2 px-3 text-black"
+                value={weights[currentExercise?._id] || ""}
+                type="number"
+                placeholder="Weight"
+                onChange={inputHandler(
+                  currentExercise?._id,
+                  setWeights
+                )}
+              />
+              <input
+                className="w-1/2 border rounded py-2 px-3 text-black"
+                value={reps[currentExercise?._id] || ""}
+                type="number"
+                placeholder="Reps"
+                onChange={inputHandler(
+                  currentExercise?._id,
+                  setReps
+                )}
+              />
+                <button
+                className="bg-purple-700 hover:bg-orange-500 text-white px-4 py-2 rounded"
+                onClick={handleNextSet}
+              >
+                <FaPlus />
+              </button>
+            </div>
+            <div className="mt-4">
+            
+            </div>
+          </>
+        )}
+        <div className="mt-4">
+          {isWorkoutStarted ? (
+            <>
+              <button
+                className="bg-green-500 hover:bg-orange-500 text-white px-4 py-2 rounded mr-2"
+                onClick={handleWorkoutCompletion}
+              >
+                Complete Workout
+              </button>
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded"
+                onClick={resetWorkout}
+              >
+                Reset
+              </button>
+            </>
+          ) : (
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-              onClick={beginWorkout}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+              onClick={handleStartWorkout}
             >
-              Start
+              Start Workout
             </button>
-            <button
-              className="bg-red-500 text-white px-4 py-2 rounded"
-              onClick={resetWorkout}
-            >
-              Reset
-            </button>
-          </div>
+          )}
         </div>
-      )}
+      </div>
       <ExerciseLog exerciseLogs={exerciseLogs} />
     </div>
   );

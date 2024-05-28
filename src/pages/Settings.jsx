@@ -14,6 +14,8 @@ const Settings = () => {
     const [is2FAenabled, setIs2FAenabled] = useState(userInfo?.is2FAenabled || false);
     const fileInputRef = useRef(null);
 
+    console.log(userInfo)
+
     useEffect(() => {
         if(userInfo?.userId) {
         fetchData();
@@ -55,6 +57,7 @@ const Settings = () => {
         try {
           setIsUploading(true);
           const formData = new FormData();
+          console.log('form data:',formData);
           formData.append("profilePicture", profilePic);
           formData.append("userId", userId);
           await axios.post(`${base_url}/api/auth/profile`, formData, {
