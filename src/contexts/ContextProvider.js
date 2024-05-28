@@ -34,6 +34,18 @@ export const ContextProvider = ({ children }) => {
     }
   },[]);
 
+      //add to workout 
+      const addToWorkout = (exercise) => {
+        setSelectedExercises((prevSelectedExercises) => [...prevSelectedExercises, exercise])
+        toast.success(`${exercise.name} added to workout`)
+    };
+
+    //remove from workout
+    const removeFromWorkout = (exercise) => {
+        setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((e) => e._id!== exercise._id))
+        toast.success(`${exercise.name} removed from workout`)
+    };
+
   return (
     <StateContext.Provider value={{
          profilePic, 
@@ -51,6 +63,8 @@ export const ContextProvider = ({ children }) => {
          setExercises,
          selectedExercises,
          setSelectedExercises,
+         addToWorkout,
+         removeFromWorkout,
           }}>
       {children}
     </StateContext.Provider>

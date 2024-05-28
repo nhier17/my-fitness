@@ -8,7 +8,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 const Exercise = ({ selectedCategory}) => {
     const navigate = useNavigate();
-    const {exercises, setExercises, selectedExercises, setSelectedExercises} = useStateContext();
+    const {exercises, setExercises, selectedExercises} = useStateContext();
 
     useScrollAnime();
 
@@ -21,17 +21,6 @@ const Exercise = ({ selectedCategory}) => {
         fetchData();
     }, [selectedCategory,setExercises]);
 
-    //add to workout 
-    const addToWorkout = (exercise) => {
-        setSelectedExercises((prevSelectedExercises) => [...prevSelectedExercises, exercise])
-        toast.success(`${exercise.name} added to workout`)
-    };
-
-    //remove from workout
-    const removeFromWorkout = (exercise) => {
-        setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((e) => e._id!== exercise._id))
-        toast.success(`${exercise.name} removed from workout`)
-    };
 
     //proceed to workout
     const proceedToWorkout = async () => {
@@ -58,8 +47,6 @@ const Exercise = ({ selectedCategory}) => {
               <ExerciseCard 
               key={exercise._id} 
               exercise={exercise} 
-              addToWorkout={addToWorkout}
-              removeFromWorkout={removeFromWorkout}
                />
                 ))}
             </div>

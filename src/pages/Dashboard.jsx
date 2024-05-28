@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { chartData, fitnessBranding, recentActivities, fitnessGoals } from '../data/dummy';
+import { chartData } from '../data/dummy';
 import { LineChartData, CountsCard, BarChartData, WorkoutCard } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getDashboardData } from '../utils/api';
@@ -7,14 +7,11 @@ import { getDashboardData } from '../utils/api';
 const Dashboard = () => {
   const [data, setData] = useState({});
   const { selectedExercises } = useStateContext();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const dashboardData = async () => {
-      setLoading(true);
       const response = await getDashboardData();
       setData(response);
-      setLoading(false);
     };
     dashboardData();
   }, []);

@@ -9,6 +9,7 @@ export { default as Footer } from './Footer';
 export { default as Explore } from './Explore';
 export { default as MealPlan } from './MealPlan';
 export { default as Exercise } from './Exercise';
+export { default as ExerciseCard } from './ExerciseCard';
 export { default as Membership } from './Membership';
 export { default as Trainers } from './Trainers';
 export { default as Clients } from './Clients';

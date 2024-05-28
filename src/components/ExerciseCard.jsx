@@ -1,9 +1,11 @@
 import React,{ useState } from 'react'
 import { base_url } from '../utils/api'
 import { FaPlus,FaMinus } from "react-icons/fa";
+import { useStateContext } from '../contexts/ContextProvider';
 
-const ExerciseCard = ({ addToWorkout,removeFromWorkout,  exercise }) => {
+const ExerciseCard = ({  exercise }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { addToWorkout, removeFromWorkout } = useStateContext();
   
   return (
     <div className="container border rounded overflow-hidden shadow-lg animate-on-scroll">
