@@ -58,8 +58,31 @@ const Login = () => {
       }
 
       //google login success
-const handleSuccess = (credentialResponse) => {
-  navigate('/')
+  const decodeJWT = (token) => {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const decodedData = JSON.parse(window.atob(base64));
+    return decodedData;
+      }
+  const handleSuccess = async (credentialResponse) => {
+  const idToken = credentialResponse.credential;
+  const decodedToken = decodeJWT(idToken);
+
+  if(decodedToken) {
+   
+    try {
+      const response = await axios.post(`${base_url}/api/auth/google-login`, {idToken}, {withCredentials: true});
+      const { user } = response.data;
+    
+    
+      localStorage.setItem('userId', user.userId)
+      setUserInfo(user);
+      navigate('/');
+      toast.success(`Eat,Train Sleep! ${user.name}👋`);
+    } catch (error) {
+      console.error('Error during google login exchange',error);
+    }
+  }
   }
   
   const handleError = () => {
@@ -117,11 +140,11 @@ const handleSuccess = (credentialResponse) => {
       <div className="px-2 text-gray-200 text-sm">Or</div>
        <div className="flex-grow border-t border-gray-300"></div>
       </div>
-        <div className="w-1/2 m-auto mt-3  px-12 py-4">
+        <div className="w-1/2 m-auto mt-3  px-12 py-4 shadow-2xl">
         <GoogleLogin
-  onSuccess={handleSuccess}
-  onError={handleError}
-/>
+        onSuccess={handleSuccess}
+         onError={handleError}
+          />
  </div>
 </div>
   )

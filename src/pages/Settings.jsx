@@ -14,7 +14,6 @@ const Settings = () => {
     const [is2FAenabled, setIs2FAenabled] = useState(userInfo?.is2FAenabled || false);
     const fileInputRef = useRef(null);
 
-    console.log(userInfo)
 
     useEffect(() => {
         if(userInfo?.userId) {
@@ -57,7 +56,6 @@ const Settings = () => {
         try {
           setIsUploading(true);
           const formData = new FormData();
-          console.log('form data:',formData);
           formData.append("profilePicture", profilePic);
           formData.append("userId", userId);
           await axios.post(`${base_url}/api/auth/profile`, formData, {
@@ -119,15 +117,22 @@ const Settings = () => {
             />
             </div>
           <div className="flex items-center gap-10 mb-4">
-          {userInfo?.profilePicture ? (
-         <img
+          {userInfo?.isGoogleUser ? (
+            <img
+              className="rounded-full w-10 h-10  object-cover"
+              src={userInfo?.profilePicture}
+              alt={userInfo?.name}
+            />
+          ) : userInfo?.profilePicture? (
+            <img
               className="rounded-full w-10 h-10  object-cover"
               src={`${base_url}${userInfo?.profilePicture}`}
               alt={userInfo?.name}
-            />    
+            />
           ) : (
             <FaUser className="w-8 h-8 text-gray-400" />
           )}
+        
             <button
             type="button"
             onClick={() => fileInputRef.current.click()} 

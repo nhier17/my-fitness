@@ -2,6 +2,11 @@ import axios from 'axios'
 
 
 export const base_url = 'https://my-fitness-api.onrender.com';
+
+const axiosInstance = axios.create({
+    baseURL: base_url,
+    withCredentials: true,
+})
 //get exercise data
 export const getExerciseData = async (category) => {
     try {
@@ -23,12 +28,12 @@ export const proceedToWorkoutData = async (selectedExercises) => {
         if (selectedExercises.length > 0) {
             const exercisesWithIds = await Promise.all(
                 selectedExercises.map(async (exercise) => {
-                    const { data } = await axios.get(`${base_url}/api/exercise/${exercise._id}`, {withCredentials: true});
+                    const { data } = await axiosInstance.get(`/api/exercise/${exercise._id}`);
                     return { ...exercise, exercise: data._id };
                 })
             );
 
-            const response = await axios.post(`${base_url}/api/workout`, { exercises: exercisesWithIds }, {withCredentials: true});
+            const response = await axiosInstance.post(`/api/workout`, { exercises: exercisesWithIds });
 
             if (response.status === 201) {
                 return true;
@@ -47,12 +52,12 @@ export const startWorkoutData = async (selectedExercises) => {
         if (selectedExercises.length > 0) {
             const exercisesWithIds = await Promise.all(
                 selectedExercises.map(async (exercise) => {
-                    const { data } = await axios.get(`${base_url}/api/exercise/${exercise._id}`, {withCredentials: true});
+                    const { data } = await axiosInstance.get(`/api/exercise/${exercise._id}`);
                     return { ...exercise, exercise: data._id };
                 })
             );
         
-            const response = await axios.post(`${base_url}/api/workout/start-workout`, { exercises: exercisesWithIds }, {withCredentials: true});
+            const response = await axiosInstance.post(`/api/workout/start-workout`, { exercises: exercisesWithIds });
 
             if (response.status === 201) {
                 return response.data.workoutId;
@@ -68,7 +73,7 @@ export const startWorkoutData = async (selectedExercises) => {
 //complete workout
 export const completeWorkoutData = async (workoutId, exerciseDetails) => {
     try {
-        const response = await axios.post(`${base_url}/api/workout/${workoutId}/complete-workout`, {workoutId, exerciseDetails}, {withCredentials: true});
+        const response = await axiosInstance.post(`/api/workout/${workoutId}/complete-workout`, {workoutId, exerciseDetails});
         return response.data
     } catch (error) {
         console.error('Error completing workout:', error);
@@ -79,7 +84,7 @@ export const completeWorkoutData = async (workoutId, exerciseDetails) => {
 export const fetchUserData = async () => {
     const userId = localStorage.getItem('userId');
     try {
-        const response = await axios.get(`${base_url}/api/user/${userId}`, {withCredentials: true});
+        const response = await axiosInstance.get(`/api/user/${userId}`);
         return response.data.user;
         
     } catch (error) {
@@ -89,7 +94,7 @@ export const fetchUserData = async () => {
 
 export const getDashboardData = async () => {
 try {
-    const response = await axios.get(`${base_url}/api/workout/dashboard`, {withCredentials: true});
+    const response = await axiosInstance.get(`/api/workout/dashboard`);
     return response.data;
 } catch (error) {
     console.error('Error fetching workout summmary',error);
@@ -99,7 +104,7 @@ try {
 //log out the user
 export const logoutUser = async () => {
     try {
-     await axios.get(`${base_url}/api/auth/logout`, {withCredentials: true});
+     await axiosInstance.get(`/api/auth/logout`);
    
     } catch (error) {
         console.error('Error logging out user', error);
@@ -109,11 +114,10 @@ export const logoutUser = async () => {
 export const updatePassword = async () => {
     try {
        const userId = localStorage.getItem('userId');
-       const response = await axios.patch(`${base_url}/api/user/update-password`, {
+       const response = await axiosInstance.patch(`/api/user/update-password`, {
         headers: {
             'Authorization': `Bearer ${userId}`
         },
-        withCredentials: true,
        });
        return response.data;
     } catch (error) {
@@ -124,7 +128,7 @@ export const updatePassword = async () => {
 //handle 2fa auth
 export const handle2FA = async () => {
     try {
-        const response = await axios.post(`${base_url}/api/auth/2fa/enable`)
+        const response = await axiosInstance.post(`/api/auth/2fa/enable`)
         return response.data;
     } catch (error) {
         console.error('Error enabling 2fa',error);
