@@ -32,10 +32,10 @@ const Hero = () => {
           Or The day runs you!
         </p> 
         <div className="flex gap-2">
-          <Link to="/signup" className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
+          <Link to="/signup" className="bg-purple-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
             Signup
           </Link>
-          <Link className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
+          <Link className="bg-purple-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded inline-block transition duration-300">
             Explore
           </Link>
         </div>

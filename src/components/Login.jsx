@@ -123,7 +123,7 @@ const Login = () => {
               </div>
      </div>
      <button
-     className="bg-purple-700 hover:bg-purple-400 border-none my-2 px-12 py-4 text-white text-xs sm:text-sm rounded-lg w-1/2 focus:outline-none font-semibold tracking-wide uppercase cursor-pointer mt-6"
+     className="bg-purple-700 hover:bg-orange-500 border-none my-2 px-12 py-4 text-white text-xs sm:text-sm rounded-lg w-1/2 focus:outline-none font-semibold tracking-wide uppercase cursor-pointer mt-6"
      type="submit">
         Login
         </button>

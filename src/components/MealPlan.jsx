@@ -31,7 +31,7 @@ const fetchMealData = async () => {
           />
         </div>
         <button
-          className=" py-2 px-4 bg-purple-600 text-white border-none font-sans font-normal text-base transition duration-300 ease-in-out hover:bg-purple-700 rounded-md"
+          className=" py-2 px-4 bg-purple-600 hover:bg-orange-500 text-white border-none font-sans font-normal text-base transition duration-300 ease-in-out rounded-md"
           onClick={fetchMealData}
         >
           Get Daily Meal Plan
