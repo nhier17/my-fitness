@@ -25,7 +25,14 @@ const UserProfile = () => {
             className="w-full h-370 2xl:h-510 shadow-lg object-cover"
             src={randomImg} 
             alt="user_pic" />
-            {userInfo?.profilePicture ? (
+            {userInfo?.isGoogleUser ? (
+              <img
+                className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
+                src={userInfo?.profilePicture}
+                alt={userInfo?.name}
+              />
+            
+            ) : userInfo?.profilePicture ? (
          <img
               className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
               src={`${base_url}${userInfo?.profilePicture}`}

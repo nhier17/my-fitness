@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { Exercise } from '../components';
+import { Exercise, SearchExercises } from '../components';
 import { categories } from '../constants';
 import { useTitleAnime, useCardAnime, useCategoryAnime, useScrollAnime } from '../animation';
 
@@ -23,9 +23,9 @@ const Workout = () => {
        style={{'scrollbarWidth': 'none','::WebkitScrollbar': { 'display': 'none' }}}>
       {categories.map((category) =>(
         <div  className="flex-shrink-0 mx-4" key={category.id} onClick={() => setSelectedCategory(category.title)}>
-        <div className="rounded-md overflow-hidden shadow-md text-center transition duration-300 transform hover:scale-105" 
-        style={{ width: '300px', height: '400px' }}>
-          <img className="w-full h-[200px] object-cover" src={category.img} alt={category.alt} />
+        <div className="w-[300px] rounded-md overflow-hidden shadow-md text-center transition duration-300 transform hover:scale-105" 
+        >
+          <img className="w-full h-[300px] object-cover" src={category.img} alt={category.alt} />
           <div className={`bg-gray-800 text-white p-4 ${selectedCategory === category.title ? 'active' : ''}`}>
           <h3 className="text-white text-lg font-semibold">{category.title}</h3>
           <p className="text-white text-sm">{category.description}</p>  
@@ -33,6 +33,9 @@ const Workout = () => {
         </div>
         </div>
       ))}
+      </div>
+      <div className="mt-20">
+      <SearchExercises />
       </div>
         <Exercise selectedCategory={selectedCategory} />
     </div>

@@ -79,7 +79,7 @@ const BeginWorkout = () => {
 
     setIsActive(prev => ({
       ...prev,
-      [exerciseId]: false,
+      [exerciseId]: true,
     }));
     setSeconds(prev => ({
       ...prev,

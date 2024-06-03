@@ -91,7 +91,7 @@ export const fetchUserData = async () => {
         console.error('Error fetching user data', error);
     }
 };
-
+//workout summary
 export const getDashboardData = async () => {
 try {
     const response = await axiosInstance.get(`/api/workout/dashboard`);

@@ -27,7 +27,7 @@ const Exercise = ({ selectedCategory}) => {
        try {
         const success = await proceedToWorkoutData(selectedExercises)
         if (success) {
-            navigate('/start-workout' , { state: { exercises: selectedExercises } })
+            navigate('/start-workout' ,  { exercises: selectedExercises })
         } else {
             toast.error('Failed to start workout')
         }

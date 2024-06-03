@@ -1,55 +1,46 @@
 import React, { useState } from 'react'
+import axios from 'axios';
+import { ExerciseCard } from '.'
 import { FaSearch } from "react-icons/fa";
+import { base_url } from '../utils/api'
+import { useStateContext } from '../contexts/ContextProvider'
 
 const SearchExercises = () => {
     const [search, setSearch] = useState('')
-    const [exercises, setExercises] = useState([])
+    const {exercises, setExercises} = useStateContext();
 
     const submitHandler = async(e) => {
         e.preventDefault()
-        if(search) {
-            const exercisesData = await('https://exercisedb.p.rapidapi.com/exercises');
-            console.log('Search query:', search);
-            console.log('Exercise data:', exercisesData);
-            const searchedExercises = exercisesData.filter(
-              (exercise) =>
-                  exercise.name.toLowerCase().includes(search) ||
-                  exercise.target.toLowerCase().includes(search) ||
-                  exercise.equipment.toLowerCase().includes(search) ||
-                  exercise.bodyPart.toLowerCase().includes(search)
-          );
-            console.log(searchedExercises)
-              window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
-              setSearch('')
-              setExercises(searchedExercises);
+        try {
+         const response = await axios.get(`${base_url}/api/exercise`, {
+           params: {
+             search
+           }
+         });
+         setExercises(response.data.exercises)
+         setSearch('')
+        } catch (error) {
+          console.error('Error fetching exercises', error)
         }
-        
+
     }
+
   return (
-    <div className="flex flex-col items-center mt-[37px] justify-center p-5">
-       <p className="font-bold text-lg md:text-xl mb-8 text-center">
-        Explore exercises tailored <br />
-        to your fitness goals
-        </p> 
-        <form className="flex items-center w-full max-w-md bg-gradient-to-r from-gray-800 to-gray-600 text-white text-lg px-4 py-2 rounded-md" onSubmit={submitHandler}>
-            <FaSearch className="text-2xl text-white mr-4" />
+    <div className="container mx-auto">
+      <form className="flex items-center w-full max-w-md bg-gradient-to-r from-gray-200 to-gray-100 px-4 py-2 rounded-md" onSubmit={submitHandler}>
+            <FaSearch className="text-2xl text-gray-600 mr-4" />
             <input 
-            className="w-full bg-transparent focus:outline-none"
-            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            className="w-full text-base bg-transparent focus:outline-none text-black"
+            onChange={(e) => setSearch(e.target.value)}
             value={search}
             type="text" 
             placeholder="search for exercises" />                
         </form>
-      <div className="">
-      {exercises.map((exercise) => (
-        <div key={exercise.id} >
-          <img src={exercise.gifUrl} alt="exercise" />
-          <button>{exercise.bodyPart}</button>
-          <button>{exercise.target}</button>
-          <p className="text-white">{exercise.name}</p>
-          </div>
-      ))}
-     </div>
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {exercises.map((exercise) => (
+          <ExerciseCard key={exercise._id} exercise={exercise} />
+        ))}
+        </div>
     </div>
   )
 }
