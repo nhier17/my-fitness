@@ -32,7 +32,8 @@ const UserProfile = () => {
                 alt={userInfo?.name}
               />
             
-            ) : userInfo?.profilePicture ? (
+            ) : (
+             userInfo?.profilePicture ? (
          <img
               className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
               src={`${base_url}${userInfo?.profilePicture}`}
@@ -40,6 +41,7 @@ const UserProfile = () => {
             />    
           ) : (
             <FaUser className="w-20 h-20 text-gray-400" />
+          )
           )}
           
           <h2 className="font-bold text-3xl text-center mt-3">

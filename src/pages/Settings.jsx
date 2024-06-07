@@ -80,7 +80,8 @@ const Settings = () => {
       const enable2FA = async (newState) => {
         try {
             const data = await handle2FA();
-            if(data.success) {
+            console.log(data);
+            if(data) {
                 setIs2FAenabled(newState);
                 toast.success('2FA enabled successfully');
             } else {
@@ -93,7 +94,7 @@ const Settings = () => {
 
 
   return (
-    <div className="container m-auto px-4 py-8 bg-white shadow-md rounded-lg w-full max-w-screen-md min-h-[480px] mt-10">
+    <div className="container mx-auto px-4 py-8 bg-white shadow-md rounded-lg w-full max-w-screen-md min-h-[480px] mt-10">
        <h3 className="text-3xl font-bold text-black">Your Settings</h3>
        <p className="text-base font-semibold text-gray-500 mb-4">Update your acount settings</p>
         <form onSubmit={handlePasswordChange}>

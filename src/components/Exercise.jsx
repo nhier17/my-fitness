@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'sonner';
 import ExerciseCard from './ExerciseCard';
 import { useScrollAnime } from '../animation'
-import { getExerciseData, proceedToWorkoutData } from '../utils/api';
+import { getExerciseData } from '../utils/api';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Exercise = ({ selectedCategory}) => {
@@ -15,7 +14,6 @@ const Exercise = ({ selectedCategory}) => {
     useEffect(() => {
         const fetchData = async () => {
           const data = await getExerciseData(selectedCategory)
-
           setExercises(data.exercises)
         }
         fetchData();
@@ -24,16 +22,7 @@ const Exercise = ({ selectedCategory}) => {
 
     //proceed to workout
     const proceedToWorkout = async () => {
-       try {
-        const success = await proceedToWorkoutData(selectedExercises)
-        if (success) {
-            navigate('/start-workout' ,  { exercises: selectedExercises })
-        } else {
-            toast.error('Failed to start workout')
-        }
-       } catch (error) {
-        console.error('Error starting workout',error)
-       } 
+      navigate('/start-workout' ,  { exercises: selectedExercises })
     }
     //filter exercises based on category
     const filteredExercises = selectedCategory

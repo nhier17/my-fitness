@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { chartData, fitnessGoals } from '../data/dummy';
-import { LineChartData, CountsCard, BarChartData, WorkoutCard } from '../components';
+import React, { useState, useEffect } from 'react';
+import { fitnessGoals } from '../data/dummy';
+import { LineChartData, BarChartData, WorkoutCard, RecentWorkouts, Calendar } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getDashboardData } from '../utils/api';
+import WorkoutSummary from './WorkoutSummary';
 
 const Dashboard = () => {
   const [data, setData] = useState({});
@@ -12,59 +13,83 @@ const Dashboard = () => {
     const fetchSummary = async () => {
       try {
         const response = await getDashboardData();
-        console.log(response);
-      setData(response);
+        setData(response);
       } catch (error) {
         console.error('Error fetching dashboard data', error);
       }
-  
-    }
+    };
     fetchSummary();
   }, []);
-
+  //date change
+  const handleDateChange = (date) => {
+    console.log(date);
+  };
 
   return (
-<div className="container flex-1 flex justify-center mx-auto px-4 py-8">
-<div className="flex-1 flex flex-col gap-6 md:gap-3">
-  <h2 className="text-2xl px-4 font-medium">DashBoard</h2>
-  <div className="flex flex-wrap justify-between gap-6 md:gap-3 px-4">
-    {chartData.map((item) => (
-      <div key={item.id}>
-        <CountsCard key={item.id} item={item} data={data} />
+    <div className="container mx-auto px-4 py-8 mt-10">
+      <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg  rounded-md w-full p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+        <Calendar onDateChange={handleDateChange} />
       </div>
-    ))}
-  </div>
-<div className="flex flex-wrap justify-center gap-5 md:gap-3 mb-24">
-{fitnessGoals.map((goal, index) => (
-  <div key={index} className="bg-white shadow-md rounded-lg p-4 w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
-    <h3 className="font-semibold text-gray-500 text-base">{goal.title}</h3>
-    <p className="text-sm text-gray-500">{goal.target}</p>
-    <div className="w-full bg-gray-200 rounded-full h-4 mt-2">
-      <div 
-      className="bg-blue-600 h-4 rounded-full"
-      style={{ width: goal.percentage}}
-      ></div>
+
+      <div className="mb-10">
+        <WorkoutSummary data={data} />
+      </div>
+
+      <div className="flex gap-10 m-4 flex-wrap justify-center">
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-md w-full lg:w-1/3">
+          <div className="flex justify-between items-center gap-2">
+            <p className="text-xl font-semibold text-gray-700">Fitness Goals</p>
+          </div>
+          <div className="mt-10 w-72 md:w-400">
+            {fitnessGoals.map((item) => (
+              <div key={item.title} className="flex justify-between mt-4">
+                <div className="flex gap-4">
+                  <button
+                    type="button"
+                    style={{ color: item.iconColor, backgroundColor: item.iconBg }}
+                    className="text-2xl rounded-lg p-4 hover:drop-shadow-xl"
+                  >
+                    {item.icon}
+                  </button>
+                  <div>
+                    <p className="text-md font-semibold text-gray-500">{item.title}</p>
+                    <p className="text-sm text-gray-400">{item.target}</p>
+                  </div>
+                </div>
+                <p className="text-gray-400">{item.percentage}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-md w-96 md:w-760">
+          <div className="flex justify-between items-center gap-2 mb-10">
+            <p className="text-xl font-semibold text-gray-600">Progressive Overload</p>
+          </div>
+          <div className="md:w-full overflow-auto">
+            <BarChartData data={data} />
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-lg mb-10">
+        <LineChartData data={data} />
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-lg mb-10">
+        <h3 className="text-2xl font-medium mb-6">Today's Workout</h3>
+        <div className="flex flex-wrap justify-center gap-5">
+          {selectedExercises.map((workout) => (
+            <WorkoutCard key={workout._id} workout={workout} />
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-2xl shadow-lg mb-10">
+        <RecentWorkouts data={data} />
+      </div>
     </div>
-  </div>
-))}
-</div>
+  );
+};
 
-  <div className="bg-white flex flex-wrap justify-between gap-6 md:gap-3 px-4">
-    <BarChartData data={data} />
-    <LineChartData data={data} />
-  </div>
-
-  <div className="bg-white flex flex-col gap-6 md:gap-3 px-4">
-    <h3 className="text-2xl font-medium">Today's Workout</h3>
-    <div className="flex flex-wrap justify-center gap-5 md:gap-3 mb-24">
-      {selectedExercises.map((workout, index) => (
-        <WorkoutCard key={index} workout={workout}  />
-      ))}
-    </div>
-  </div>
-</div>
-</div>
-  )
-}
-
-export default Dashboard
+export default Dashboard;

@@ -1,40 +1,11 @@
-import { FiBarChart } from 'react-icons/fi';
-import {  FaRunning, FaDumbbell, FaFire } from "react-icons/fa";
+import { FaRunning, FaDumbbell, FaHeartbeat } from "react-icons/fa";
 import { GrYoga } from "react-icons/gr";
-import { trainer, yogee,pilates } from '../assets'
+import { IoWaterOutline } from "react-icons/io5";
+import { IoFootsteps } from "react-icons/io5";
+import { GiBiceps } from "react-icons/gi";
+import { trainer, yogee,pilates } from '../assets';
 
 
-export const chartData = [
-  {
-    name: "Calories Burned",
-    icon: (
-      <FaFire style={{ color: 'inherit', fontSize: '26px'}} />
-    ),
-    desc: "Total calories burned today",
-    key: "totalCaloriesBurnt",
-    unit: "kcal",
-    color: "#eb9e34",
-    lightColor: "#FDF4EA",
-  },
-  {
-    name: "Workouts",
-    icon: <FaDumbbell style={{ color: 'inherit', fontSize: '26px'}}  />,
-    desc: "Total no of workouts for today",
-    key: "totalWorkouts",
-    unit: "",
-    color: "#41C1A6",
-    lightColor: "#E8F6F3",
-  },
-  {
-    name: "Average  Calories Burned",
-    icon: <FiBarChart style={{ color: 'inherit', fontSize: '26px'}} />,
-    desc: "Average Calories Burned on each workout",
-    key: "avgCaloriesBurntPerWorkout",
-    unit: "kcal",
-    color: "#FF9AD5",
-    lightColor: "#FEF3F9",
-  },
-];
 
 export const fitnessBranding = {
   data: [
@@ -88,34 +59,54 @@ export const recentActivities = [
 
 export const fitnessGoals = [
   {
+    icon: <FaHeartbeat />,
     title: 'Weight Loss',
     target: 'Lose 5 lbs',
     progress: '2 lbs lost',
     percentage: '40%',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+    pcColor: 'green-600',
   },
   {
+    icon: <GiBiceps />,
     title: 'Muscle Gain',
     target: 'Gain 3 lbs',
     progress: '1 lbs gained',
     percentage: '33%',
+    iconColor: '#0ef',
+    iconBg: '#000000',
+    pcColor: 'green-600',
   },
   {
+    icon: <IoFootsteps />,
     title: 'Daily Steps',
     target: '10,000 steps/day',
     progress: '7,500 steps',
     percentage: '75%',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+    pcColor: 'green-600',
   },
   {
+    icon: <FaRunning />,
     title: 'Weekly Running',
     target: 'Run 20 miles/week',
     progress: '15 miles',
     percentage: '75%',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+    pcColor: 'green-600',
   },
   {
+    icon: <IoWaterOutline />,
     title: 'Hydration',
     target: 'Drink 3L water/day',
     progress: '2L',
     percentage: '67%',
+    iconColor: 'rgb(24, 118, 211)',
+    iconBg: 'rgb(235, 250, 242)',
+    pcColor: 'green-600',
   },
 ];
 

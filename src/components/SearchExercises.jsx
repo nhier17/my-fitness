@@ -12,11 +12,7 @@ const SearchExercises = () => {
     const submitHandler = async(e) => {
         e.preventDefault()
         try {
-         const response = await axios.get(`${base_url}/api/exercise`, {
-           params: {
-             search
-           }
-         });
+         const response = await axios.get(`${base_url}/api/exercise?search=${search}`);
          setExercises(response.data.exercises)
          setSearch('')
         } catch (error) {

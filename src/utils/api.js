@@ -26,12 +26,13 @@ export const getExerciseData = async (category) => {
 export const proceedToWorkoutData = async (selectedExercises) => {
     try {
         if (selectedExercises.length > 0) {
-            const exercisesWithIds = await Promise.all(
-                selectedExercises.map(async (exercise) => {
-                    const { data } = await axiosInstance.get(`/api/exercise/${exercise._id}`);
-                    return { ...exercise, exercise: data._id };
-                })
-            );
+            const exercisesWithIds = selectedExercises.map((exercise) => ({
+                exercise: exercise._id,
+                sets: exercise.sets,
+                reps: exercise.reps,
+                weight: exercise.weight,
+                caloriesBurnt: exercise.caloriesBurnt,
+            }));
 
             const response = await axiosInstance.post(`/api/workout`, { exercises: exercisesWithIds });
 
@@ -47,29 +48,20 @@ export const proceedToWorkoutData = async (selectedExercises) => {
     }
 };
 // start the workout
-export const startWorkoutData = async (selectedExercises) => {
+export const startWorkoutData = async (exercise) => {
     try {
-        if (selectedExercises.length > 0) {
-            const exercisesWithIds = await Promise.all(
-                selectedExercises.map(async (exercise) => {
-                    const { data } = await axiosInstance.get(`/api/exercise/${exercise._id}`);
-                    return { ...exercise, exercise: data._id };
-                })
-            );
-        
-            const response = await axiosInstance.post(`/api/workout/start-workout`, { exercises: exercisesWithIds });
-
-            if (response.status === 201) {
-                return response.data.workoutId;
-            } else {
-                console.log('Failed to start workout');
-                return false;
-            }
-        }
+      const response = await axiosInstance.post(`/api/workout/start-workout`, { exercises: [exercise] });
+  
+      if (response.status === 201) {
+        return response.data.workoutId;
+      } else {
+        console.log('Failed to start workout');
+        return false;
+      }
     } catch (error) {
-        console.error('Error starting workout:', error);
+      console.error('Error starting workout:', error);
     }
-};
+  };
 //complete workout
 export const completeWorkoutData = async (workoutId, exerciseDetails) => {
     try {
@@ -79,6 +71,26 @@ export const completeWorkoutData = async (workoutId, exerciseDetails) => {
         console.error('Error completing workout:', error);
     }
 };
+
+//workout summary
+export const getDashboardData = async () => {
+try {
+    const response = await axiosInstance.get(`/api/workout/dashboard`);
+    return response.data;
+} catch (error) {
+    console.error('Error fetching workout summmary',error);
+}
+};
+
+//get workout data
+export const getWorkoutData = async () => {
+    try {
+        const response = await axiosInstance.get(`/api/workout`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching workout data', error);
+    }
+}
 
 //fetch user data
 export const fetchUserData = async () => {
@@ -90,15 +102,6 @@ export const fetchUserData = async () => {
     } catch (error) {
         console.error('Error fetching user data', error);
     }
-};
-//workout summary
-export const getDashboardData = async () => {
-try {
-    const response = await axiosInstance.get(`/api/workout/dashboard`);
-    return response.data;
-} catch (error) {
-    console.error('Error fetching workout summmary',error);
-}
 };
 
 //log out the user
@@ -134,3 +137,4 @@ export const handle2FA = async () => {
         console.error('Error enabling 2fa',error);
     }
 }
+

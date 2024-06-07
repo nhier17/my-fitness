@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Stack = () => {
+const PieChartData = () => {
   return (
     <div>
-      
+        
     </div>
   )
 }
 
-export default Stack
+export default PieChartData

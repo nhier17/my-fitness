@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FaArrowLeft, FaPlus } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'sonner';
 import { Timer, ExerciseLog } from "../components";
@@ -10,7 +10,7 @@ import '@splidejs/react-splide/css/skyblue';
 
 const BeginWorkout = () => {
   const navigate = useNavigate();
-  const { selectedExercises } = useStateContext();
+  const { selectedExercises, setSelectedExercises } = useStateContext();
 
   const [weights, setWeights] = useState({});
   const [reps, setReps] = useState({});
@@ -21,18 +21,45 @@ const BeginWorkout = () => {
   const [seconds, setSeconds] = useState({});
   const [workoutId, setWorkoutId] = useState(null);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
+  const [isWorkoutCompleted, setIsWorkoutCompleted] = useState(false);
 
   const currentExercise = selectedExercises[currentExerciseIndex];
   const exerciseId = currentExercise?._id;
 
+  const calculateCaloriesBurnt = (weight,reps,sets) => {
+    return (weight * reps * sets) / 100;
+  }
+
+  //check if all exercises are completed
+  useEffect(() => {
+    if(selectedExercises.length > 0 && Object.keys(isWorkoutStarted).length > 0) {
+      const allCompletd = selectedExercises.every (
+        (exercise) => !isWorkoutStarted[exercise._id]
+      );
+      if(allCompletd) {
+        setIsWorkoutCompleted(true);
+      }
+    }
+  },[isWorkoutStarted, selectedExercises]);
+
+  // start the workout
   const handleStartWorkout = async () => {
     if (!exerciseId || !weights[exerciseId] || !reps[exerciseId]) {
       alert('Please add the weight and desired reps');
       return;
     }
-
+     const caloriesBurnt = calculateCaloriesBurnt(weights[exerciseId], reps[exerciseId],completedSets[exerciseId] || 1);
+    const exerciseData = {
+      exercise: exerciseId,
+      name: currentExercise.name,
+      weight: weights[exerciseId],
+      sets: completedSets[exerciseId] || 1,
+      reps: reps[exerciseId],
+      caloriesBurnt,
+    };
+    
     try {
-      const workoutData = await startWorkoutData(selectedExercises);
+      const workoutData = await startWorkoutData(exerciseData);
       if (workoutData) {
         setWorkoutId(workoutData);
         setCompletedSets(prevSets => ({
@@ -60,7 +87,7 @@ const BeginWorkout = () => {
       toast.error('Error starting workout');
     }
   };
-
+  //sets change
   const handleNextSet = () => {
     if (!exerciseId) return;
 
@@ -85,50 +112,51 @@ const BeginWorkout = () => {
       ...prev,
       [exerciseId]: 0,
     }));
-
     toast.success(`Completed set ${newSets} for ${selectedExercises[currentExerciseIndex]?.name}.`);
   };
 
+  //complete workout
   const handleWorkoutCompletion = async () => {
     if (!exerciseId) return;
 
     try {
       if (workoutId) {
-        const exerciseDetails = selectedExercises.reduce((details, exercise) => {
-          details[exercise?._id] = {
-            weight: weights[exercise?._id],
-            reps: reps[exercise?._id],
-            sets: completedSets[exercise?._id] || 0,
-          };
-          return details;
-        }, {});
-        await completeWorkoutData(workoutId, { [exerciseId]: exerciseDetails });
-        setIsWorkoutStarted(prev => ({
-          ...prev,
-          [exerciseId]: false,
-        }));
-        setIsActive(prev => ({
-          ...prev,
-          [exerciseId]: false,
-        }));
-        setCompletedSets(prev => ({
-          ...prev,
-          [exerciseId]: 0,
-        }));
-        setWeights(prev => ({
-          ...prev,
-          [exerciseId]: '',
-        }));
-        setReps(prev => ({
-          ...prev,
-          [exerciseId]: '',
-        }));
-        setSeconds(prev => ({
-          ...prev,
-          [exerciseId]: 0,
-        }));
-        toast.success('Workout completed successfully');
-        logExerciseCompletion(exerciseId);
+       const caloriesBurnt = calculateCaloriesBurnt(weights[exerciseId], reps[exerciseId],completedSets[exerciseId] || 1);  
+       const exerciseDetails = {
+     [exerciseId]: {
+       weight: weights[exerciseId],
+       reps: reps[exerciseId],
+       sets: completedSets[exerciseId] || 0,
+       caloriesBurnt,
+     }
+   };
+ await completeWorkoutData(workoutId, exerciseDetails);
+   setIsWorkoutStarted(prev => ({
+     ...prev,
+     [exerciseId]: false,
+   }));
+   setIsActive(prev => ({
+     ...prev,
+     [exerciseId]: false,
+   }));
+   setCompletedSets(prev => ({
+     ...prev,
+     [exerciseId]: 0,
+   }));
+   setWeights(prev => ({
+     ...prev,
+     [exerciseId]: '',
+   }));
+   setReps(prev => ({
+     ...prev,
+     [exerciseId]: '',
+   }));
+   setSeconds(prev => ({
+     ...prev,
+     [exerciseId]: 0,
+   }));
+    logExerciseCompletion(exerciseId, caloriesBurnt);
+        toast.success('Exercise completed successfully');
       }
     } catch (error) {
       console.error('Error completing workout', error);
@@ -136,14 +164,15 @@ const BeginWorkout = () => {
     }
   };
 
-  const logExerciseCompletion = (exerciseId) => {
+  //exercise logs
+  const logExerciseCompletion = (exerciseId,caloriesBurnt) => {
     const exercise = selectedExercises.find(e => e._id === exerciseId);
     const exerciseLog = {
       name: exercise?.name,
       weight: weights[exerciseId],
       reps: reps[exerciseId],
       sets: completedSets[exerciseId] || 0,
-      caloriesBurnt: exercise?.caloriesBurnt,
+      caloriesBurnt,
     };
     setExerciseLogs((prevLogs) => [...prevLogs, exerciseLog]);
   };
@@ -151,32 +180,14 @@ const BeginWorkout = () => {
   const inputHandler = (exerciseId, setter) => (e) => {
     setter((prev) => ({ ...prev, [exerciseId]: e.target.value }));
   };
-
+  //reset workout
   const resetWorkout = () => {
-    setIsWorkoutStarted(prev => ({
-      ...prev,
-      [exerciseId]: false,
-    }));
-    setIsActive(prev => ({
-      ...prev,
-      [exerciseId]: false,
-    }));
-    setCompletedSets(prev => ({
-      ...prev,
-      [exerciseId]: 0,
-    }));
-    setWeights(prev => ({
-      ...prev,
-      [exerciseId]: '',
-    }));
-    setReps(prev => ({
-      ...prev,
-      [exerciseId]: '',
-    }));
-    setSeconds(prev => ({
-      ...prev,
-      [exerciseId]: 0,
-    }));
+    setIsWorkoutStarted({});
+    setIsActive({});
+    setCompletedSets({});
+    setWeights({});
+    setReps({});
+    setSeconds({});
     setExerciseLogs([]);
     setWorkoutId(null);
   };
@@ -186,6 +197,8 @@ const BeginWorkout = () => {
   };
 
   const backHome = () => {
+    resetWorkout();
+    setSelectedExercises([]);
     navigate("/workouts");
   };
 
@@ -201,10 +214,6 @@ const BeginWorkout = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <FaArrowLeft
-        className="text-3xl text-[#ccc] mb-14 cursor-pointer "
-        onClick={backHome}
-      />
       <div className="max-w-md mx-auto bg-white rounded-md shadow-md p-6">
         <Splide
           options={splideOptions}
@@ -281,7 +290,26 @@ const BeginWorkout = () => {
           )}
         </div>
       </div>
-      <ExerciseLog exerciseLogs={exerciseLogs} />
+      {isWorkoutCompleted && (
+        <div className="max-w-md mx-auto bg-white rounded-md shadow-md p-6 mt-6">
+          <h2 className="text-black text-2xl">Workout Summary</h2>
+          <ExerciseLog exerciseLogs={exerciseLogs} />
+          <div className="flex gap-2 items-center">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md mt-4"
+            onClick={() => navigate('/profile')}
+          >
+            View Workout History
+          </button>
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-md mt-4"
+            onClick={backHome}
+          >
+            Back to Home
+          </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

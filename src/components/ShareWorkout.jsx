@@ -16,8 +16,7 @@ const ShareWorkout = () => {
     const shareUrl = 'https://my-fitness17.netlify.app'
     const title = 'Check out my workout achievement!'
   return (
-    <div className="container flex justify-center items-center mx-auto px-4 py-8">
-      <div className="flex flex-col gap-4">
+    <div className="container flex items-center gap-4 mx-auto px-4 py-8">
         <FacebookShareButton url={shareUrl} quote={title}>
            <FacebookIcon size={32} round={true} />
         </FacebookShareButton>
@@ -33,7 +32,6 @@ const ShareWorkout = () => {
         <PinterestShareButton url={shareUrl} title={title} className="bg-red-400 text-white px-4 py-2 rounded-md">
           <PinterestIcon size={32} round={true} />
         </PinterestShareButton>
-      </div>
     </div>
   )
 }
