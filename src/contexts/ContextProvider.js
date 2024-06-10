@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo } from 'react';
+import React, { createContext, useContext, useState, useMemo, useEffect } from 'react';
 import { fetchUserData } from '../utils/api';
 import { toast } from 'sonner';
 
@@ -28,6 +28,7 @@ export const ContextProvider = ({ children }) => {
     try {
      const userData = await fetchUserData();
      setUserInfo(userData);
+     localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error(error);
       toast.error('Error fetching user data');
@@ -45,6 +46,25 @@ export const ContextProvider = ({ children }) => {
         setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((e) => e._id!== exercise._id))
         toast.success(`${exercise.name} removed from workout`)
     };
+
+    //load user infoon initial render
+    useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if(storedUser && storedUser !== 'undefined') {
+        try {
+          const parsedUser = JSON.parse(storedUser);
+          setUserInfo(parsedUser);
+        } catch (error) {
+          console.error('Error parsing user info', error);
+        }
+      }
+    },[]);
+    //save user to local storage whemever it changes
+    useEffect(() => {
+      if (userInfo && Object.keys(userInfo).length > 0) {
+        localStorage.setItem('user', JSON.stringify(userInfo));
+      }
+    }, [userInfo]);
 
   return (
     <StateContext.Provider value={{

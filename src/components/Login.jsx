@@ -24,14 +24,14 @@ const Login = () => {
           const response = await axios.post(`${base_url}/api/auth/login`, formData, {withCredentials: true}); 
           if(response.data) {
             const user = response.data.user;
-            localStorage.setItem('userId', user.userId)
+            localStorage.setItem('user', JSON.stringify(user));
             setUserInfo(user);
 
             // fetch user data after successful login
             const userDataRes = await axios.get(`${base_url}/api/user/${user.userId}`, {withCredentials: true});
             const updatedUser = userDataRes.data.user;
-          
-          
+      
+          localStorage.setItem('user', JSON.stringify(updatedUser));
             setUserInfo(updatedUser);
 
             navigate('/');
@@ -69,16 +69,15 @@ const Login = () => {
   const decodedToken = decodeJWT(idToken);
 
   if(decodedToken) {
-   
     try {
       const response = await axios.post(`${base_url}/api/auth/google-login`, {idToken}, {withCredentials: true});
       const { user } = response.data;
     
     
-      localStorage.setItem('userId', user.userId)
+      localStorage.setItem('user', JSON.stringify(user));
       setUserInfo(user);
       navigate('/');
-      toast.success(`Eat,Train Sleep! ${user.name}👋`);
+      toast.success(`Eat,Train, Sleep! ${user.name}👋`);
     } catch (error) {
       console.error('Error during google login exchange',error);
     }

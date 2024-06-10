@@ -94,7 +94,16 @@ export const getWorkoutData = async () => {
 
 //fetch user data
 export const fetchUserData = async () => {
-    const userId = localStorage.getItem('userId');
+  const storedUser = localStorage.getItem('user');
+   
+  let userId;
+  try {
+    const parsedUser = JSON.parse(storedUser);
+    userId = parsedUser.userId;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
     try {
         const response = await axiosInstance.get(`/api/user/${userId}`);
         return response.data.user;
@@ -115,8 +124,17 @@ export const logoutUser = async () => {
 }
 // update user passsword
 export const updatePassword = async () => {
+    const storedUser = localStorage.getItem('user');
+   
+    let userId;
     try {
-       const userId = localStorage.getItem('userId');
+      const parsedUser = JSON.parse(storedUser);
+      userId = parsedUser.userId;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+    try {
        const response = await axiosInstance.patch(`/api/user/update-password`, {
         headers: {
             'Authorization': `Bearer ${userId}`

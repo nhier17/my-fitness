@@ -34,7 +34,7 @@ const Navbar = () => {
       try {
         await logoutUser();
         setUserInfo(null);
-        localStorage.removeItem('userId')
+        localStorage.removeItem('user')
         toast.success('Logged out successfully');
         navigate('/login');
       } catch (error) {
