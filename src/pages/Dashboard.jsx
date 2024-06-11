@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
 import { fitnessGoals } from '../data/dummy';
 import { LineChartData, BarChartData, WorkoutCard, RecentWorkouts, Calendar } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
@@ -7,6 +8,7 @@ import WorkoutSummary from './WorkoutSummary';
 
 const Dashboard = () => {
   const [data, setData] = useState({});
+  const [selectedDates, setSelectedDates] = useState([])
   const { selectedExercises } = useStateContext();
 
   useEffect(() => {
@@ -22,13 +24,24 @@ const Dashboard = () => {
   }, []);
   //date change
   const handleDateChange = (date) => {
-    console.log(date);
+    setSelectedDates((prevDates) => {
+      const dateExists = prevDates.some((selectedDate) =>
+        dayjs(selectedDate).isSame(date, 'day')
+      );
+      if (dateExists) {
+        return prevDates.filter(
+          (selectedDate) => !dayjs(selectedDate).isSame(date, 'day')
+        );
+      } else {
+        return [...prevDates, date];
+      }
+    });
   };
 
   return (
     <div className="container mx-auto px-4 py-8 mt-10">
       <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg  rounded-md w-full p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
-        <Calendar onDateChange={handleDateChange} />
+        <Calendar onDateChange={handleDateChange} selectedDates={selectedDates} />
       </div>
 
       <div className="mb-10">

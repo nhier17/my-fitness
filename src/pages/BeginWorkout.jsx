@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'sonner';
@@ -43,7 +43,7 @@ const BeginWorkout = () => {
   },[isWorkoutStarted, selectedExercises]);
 
   // start the workout
-  const handleStartWorkout = async () => {
+  const handleStartWorkout = useCallback(async () => {
     if (!exerciseId || !weights[exerciseId] || !reps[exerciseId]) {
       alert('Please add the weight and desired reps');
       return;
@@ -86,7 +86,7 @@ const BeginWorkout = () => {
       console.error('Error starting workout:', error);
       toast.error('Error starting workout');
     }
-  };
+  }, [exerciseId, weights, reps, completedSets, currentExercise.name]);
   //sets change
   const handleNextSet = () => {
     if (!exerciseId) return;
