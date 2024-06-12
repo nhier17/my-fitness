@@ -6,7 +6,7 @@ import { StaticDatePicker, PickersDay } from '@mui/x-date-pickers';
 
 const Calendar = ({ selectedDates, onDateChange }) => {
   const [date, setDate] = useState(dayjs());
-  console.log(selectedDates)
+  
   const handleDateChange = (newDate) => {
     setDate(newDate);
     if (onDateChange) {
