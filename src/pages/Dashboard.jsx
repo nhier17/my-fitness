@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { fitnessGoals } from '../data/dummy';
-import { LineChartData, BarChartData, WorkoutCard, RecentWorkouts, Calendar } from '../components';
+import { PieChartData, BarChartData, WorkoutCard, RecentWorkouts, Calendar } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
 import { getDashboardData } from '../utils/api';
 import WorkoutSummary from './WorkoutSummary';
@@ -86,7 +86,7 @@ const Dashboard = () => {
       </div>
 
       <div className="bg-white p-6 rounded-2xl shadow-lg mb-10">
-        <LineChartData data={data} />
+        <PieChartData selectedExercises={selectedExercises} />
       </div>
 
       <div className="bg-white p-6 rounded-2xl shadow-lg mb-10">

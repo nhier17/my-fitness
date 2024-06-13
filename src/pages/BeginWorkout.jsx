@@ -51,7 +51,6 @@ const BeginWorkout = () => {
      const caloriesBurnt = calculateCaloriesBurnt(weights[exerciseId], reps[exerciseId],completedSets[exerciseId] || 1);
     const exerciseData = {
       exercise: exerciseId,
-      name: currentExercise.name,
       weight: weights[exerciseId],
       sets: completedSets[exerciseId] || 1,
       reps: reps[exerciseId],
@@ -86,7 +85,7 @@ const BeginWorkout = () => {
       console.error('Error starting workout:', error);
       toast.error('Error starting workout');
     }
-  }, [exerciseId, weights, reps, completedSets, currentExercise.name]);
+  }, [exerciseId, weights, reps, completedSets]);
   //sets change
   const handleNextSet = () => {
     if (!exerciseId) return;

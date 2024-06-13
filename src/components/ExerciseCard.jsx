@@ -17,6 +17,7 @@ const ExerciseCard = ({  exercise }) => {
          className="w-full h-[360px] object-cover transition-transform duration-300 ease-in-out"
           src={base_url+exercise.image}
           alt={exercise.name}
+          loading="lazy"
            />
          {isHovered && (
           <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50">
