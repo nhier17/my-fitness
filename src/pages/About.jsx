@@ -33,7 +33,7 @@ const About = () => {
   return (
     <div className="container mx-auto px-4 py-8 animate-on-scroll overflow-x-hidden">
       <h1 id="title" className="md:text-3xl text-2xl font-bold mb-8 md:text-center text-start text-purple-700 opacity-0 translate-y-20">
-        Welcome to FitFusion: <br /> Your Ultimate Fitness Companion
+        Welcome to MyFitness: <br /> Your Ultimate Fitness Companion
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-on-scroll">
       {aboutContents.map((content) => (
@@ -57,12 +57,12 @@ const About = () => {
       <div className="animate-on-scroll mt-8">
         <h2 className="text-2xl font-bold mb-4 text-purple-700">Meet the Team</h2>
         <p className="text-lg leading-relaxed mb-8">
-          At FitFusion, we're passionate about health and fitness. Our team is
+          At MyFitness, we're passionate about health and fitness. Our team is
           comprised of dedicated professionals who are committed to helping you
           reach your full potential.
         </p>
         <h2 className="text-2xl font-bold mb-4 text-purple-700">
-          Join the FitFusion Community
+          Join MyFitness Community
         </h2>
         <p className="md:text-lg text-base leading-relaxed mb-8">
           Fitness is more fun when you do it together. Join our vibrant
@@ -79,7 +79,6 @@ const About = () => {
             </Splide>
           </div>
           <div className="mx-auto my-8 animate-on-scroll">
-            <h2 className="text-2xl font-bold text-purple-700">Testimonials</h2>
             <div>
               <Testimonials />
             </div>
