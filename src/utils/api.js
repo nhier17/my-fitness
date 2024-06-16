@@ -99,7 +99,7 @@ export const fetchUserData = async () => {
   let userId;
   try {
     const parsedUser = JSON.parse(storedUser);
-    userId = parsedUser.userId;
+    userId = parsedUser._id;
   } catch (error) {
     console.error(error);
     return null;
@@ -123,23 +123,9 @@ export const logoutUser = async () => {
     }
 }
 // update user passsword
-export const updatePassword = async () => {
-    const storedUser = localStorage.getItem('user');
-   
-    let userId;
+export const updatePassword = async (oldPassword, newPassword) => {
     try {
-      const parsedUser = JSON.parse(storedUser);
-      userId = parsedUser.userId;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-    try {
-       const response = await axiosInstance.patch(`/api/user/update-password`, {
-        headers: {
-            'Authorization': `Bearer ${userId}`
-        },
-       });
+       const response = await axiosInstance.patch(`/api/user/update-password`, {oldPassword, newPassword});
        return response.data;
     } catch (error) {
         console.error('Error updating user', error);
@@ -147,12 +133,14 @@ export const updatePassword = async () => {
 }
 
 //handle 2fa auth
-export const handle2FA = async () => {
+export const handle2FA = async (isEnabled) => {
+    const endpoint = isEnabled ? '/api/auth/2fa/disable' : '/api/auth/2fa/enable';
     try {
-        const response = await axiosInstance.post(`/api/auth/2fa/enable`)
+        const response = await axiosInstance.post(endpoint);
         return response.data;
     } catch (error) {
-        console.error('Error enabling 2fa',error);
+        console.error(`Error ${isEnabled ? 'disabling' : 'enabling'} 2fa`, error);
+        throw new Error(`Error ${isEnabled ? 'disabling' : 'enabling'} 2fa`);
     }
-}
+};
 
