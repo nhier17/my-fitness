@@ -1,6 +1,7 @@
 import React from 'react'
 import { aboutContents } from '../constants';
 import { FaUser, FaHeart, FaDumbbell } from 'react-icons/fa';
+import { FaBowlFood } from "react-icons/fa6";
 import { apple, google, fitness2, fitness, fitness1,fitness3, fitness4, fitness5 } from '../assets';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/skyblue';
@@ -41,6 +42,9 @@ const About = () => {
           <div className="flex items-center justify-center mb-4">
             {content.icon === FaDumbbell && (
               <FaDumbbell className="text-4xl text-blue-500" />
+            )}
+            {content.icon === FaBowlFood && (
+              <FaBowlFood className="text-4xl text-yellow-500" />
             )}
             {content.icon === FaHeart && (
               <FaHeart className="text-4xl text-red-500" />

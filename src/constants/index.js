@@ -1,4 +1,5 @@
 import { FaInstagram, FaLinkedinIn, FaTiktok } from "react-icons/fa";
+import { FaBowlFood } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import heart from '../assets/heart1.png';
 import nutrition from '../assets/nutrition.png';
@@ -312,7 +313,7 @@ export const aboutContents = [
   id: 2,
   title: 'Nutrition Guidance',
   description: 'Unlock your full potential with expert nutrition guidance, personalized meal plans, and sustainable lifestyle changes for optimal health and performance.',
-  icon: FaHeart,
+  icon: FaBowlFood,
   alt: 'heart'
 },
 {
