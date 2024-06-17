@@ -1,4 +1,5 @@
 # My Fitness
+![Home Page](https://github.com/nhier17/my-fitness/blob/main/src/assets/home.png)
 
 ## Description
 My fitness is a comprehensive fitness application developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It provides users with tools for planning and tracking their workouts, accessing meal plans, and connecting with other fitness enthusiasts.
