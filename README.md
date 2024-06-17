@@ -16,6 +16,7 @@ To get started with my fitness, you can visit our website to sign up and create 
     Access a library of exercises with detailed instructions and videos.
     
 ### 2. Meal Plan
+![Meal plan](https://github.com/nhier17/my-fitness/blob/main/src/assets/meal.png)
     Generate personalized meal plans based on dietary preferences and fitness goals.
     Browse recipes and nutritional information for each meal.
     Track your daily calorie intake and macronutrient distribution.
