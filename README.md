@@ -10,6 +10,7 @@ To get started with my fitness, you can visit our website to sign up and create 
 
 ## Features
 ### 1. Workouts
+![Workouts](https://github.com/nhier17/my-fitness/blob/main/src/assets/workouts.png)
     Create custom workout plans tailored to your fitness goals.
     Track your progress and performance over time.
     Access a library of exercises with detailed instructions and videos.
