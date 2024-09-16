@@ -7,7 +7,7 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     //userprofile
   const [profilePic, setProfilePic] = useState(null);
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   //exercises 
